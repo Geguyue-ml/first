@@ -1,7 +1,7 @@
 <template>
     <div id="goodsDetails">
         <div class="nav_center">
-          <llBanner :bannerVal="['首页', 'sdfwe分为三等分', 'efl', '你好', '商品详情']"/>
+          <llBanner :bannerVal="['首页', '商品详情']"/>
           <div class="detailsModel">
             <div class="subModel">
               <div class="imgFrm">

@@ -3,36 +3,19 @@
     <!-- caiwu 123456q -->
     <llHeader />
     <llSearch />
-    <div class="banner">
+    <div class="rowMenu">
       <div class="nav_center">
-        <div class="CATEGORY">
-          <span>热门试用分类</span>
-          <img src="./assets/list.png">
-          <div class="CATEGORY-infoFrm">
-            <ul>
-              <li>潮流女装</li>
-              <li>时尚男装</li>
-              <li>美食特产</li>
-              <li>家纺家装</li>
-              <li>数码家电</li>
-              <li>母婴用品</li>
-              <li>日用百货</li>
-              <li>鞋类箱包</li>
-              <li>精品配饰</li>
-              <li>护肤彩妆</li>
-              <li>内衣内裤</li>
-              <li>车品车饰</li>
-              <li>户外运动</li>
-              <li>医疗保险</li>
-            </ul>
-          </div>
-        </div>
-        <ul class="nav-index">
-          <router-link tag="li" :to="{name: 'homeLink'}">首页</router-link>
-          <router-link tag="li" :to="{name: 'betterNum'}">提高申请人数</router-link>
-          <router-link tag="li" :to="{name: 'advertisement'}">广告位服务</router-link>
-          <router-link tag="li" :to="{name: 'storeReaderLink'}">商家必读</router-link>
-        </ul>
+        <el-menu class="el-menu-demo" text-color="#000" :active-text-color="onColor"
+        :default-active="activeIndex"
+        router
+        mode="horizontal"
+        @select="handleSelect">
+          <el-menu-item v-for="item in unChildTab" :key="item.path" :index="item.path">{{ item.name }}</el-menu-item>
+          <el-submenu v-for="(item, key) in childTab" :key="key" :index="String(key)">
+            <template slot="title">{{ item.name }}</template>
+            <el-menu-item v-for="(subItem, subKey) in item.child" :key="subKey" class="nav-subItem-width">{{ subItem.name }}</el-menu-item>
+          </el-submenu>  
+        </el-menu>
       </div>
     </div>
     <router-view></router-view>
@@ -47,9 +30,64 @@ import Footer from "./components/Footer"
 
 export default {
   name: 'App',  
-  data(){
+  data() {
     return {
-      
+      activeIndex: '1',
+      activeIndex2: '1',
+      activeIndex: "/",
+      onColor: "#ff366f",
+      navList:[
+        {path:'/', name:'首页'},
+        {path:'/storeReader', name:'商家必读'},
+        {path:'/betterNum', name:'提高申请人数'},
+        {path:'/advertisement', name:'广告位服务'},
+        {path:'/personal', name:'个人中心'},
+        {name:'热门试用分类', child: [
+          {path:'/', name:'潮流女装'},
+          {path:'/', name:'时尚男装'},
+          {path:'/', name:'美食特产'},
+          {path:'/', name:'家纺家装'},
+          {path:'/', name:'数码家电'},
+          {path:'/', name:'母婴用品'},
+          {path:'/', name:'日用百货'},
+          {path:'/', name:'鞋类箱包'},
+          {path:'/', name:'精品配饰'},
+          {path:'/', name:'护肤彩妆'},
+          {path:'/', name:'内衣内裤'},
+          {path:'/', name:'车品车饰'},
+          {path:'/', name:'户外运动'},
+          {path:'/', name:'医疗保险'}
+        ]}
+      ]
+    };
+  },
+  watch: {
+    $route(){
+      this.handleSelect(this.activeIndex)
+    }
+  },
+  mounted(){
+    this.activeIndex = this.$route.matched[0].path || '/'
+
+    let itemArr = document.getElementsByClassName("nav-subItem-width");
+    for(let item of itemArr){
+      item.style.height = "32px"
+      item.style.lineHeight = "32px"
+    }
+    itemArr[0].parentNode.style.minWidth = "140px"
+    itemArr[0].parentNode.style.padding = "0 15px"
+  },
+  methods: {
+    handleSelect(index){
+      this.activeIndex = index
+    }
+  },
+  computed: {
+    childTab: function(){
+      return this.navList.filter(item => item.child);
+    },
+    unChildTab: function(){
+      return this.navList.filter(item => !item.child);
     }
   },
   components: {
@@ -119,51 +157,7 @@ ul{
   color: var(--on-color);
   border-bottom: 2px solid #ff366f !important;
 }
-.CATEGORY{
-  vertical-align: middle;
-  display: inline-block;
-  padding: 10px 20px;
-  position: relative;
-  cursor: pointer;
-  background: #333;
-  color: #fff;
-}
-.CATEGORY:hover .CATEGORY-infoFrm{
-  display: block;
-}
-.CATEGORY span,.CATEGORY img{
-  vertical-align: middle;
-}
-.CATEGORY img{
-  margin-left: 10px;
-}
-.CATEGORY-infoFrm{
-  display: none;
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  left: 0;
-  top: 100%;
-  background: #fff;
-  padding: 5px 10px;
-  color: #000;
-  overflow-y: scroll;
-  height: 500px;
-}
-.CATEGORY-infoFrm.show{
-  display: block;
-}
-.CATEGORY-infoFrm::-webkit-scrollbar {
-  display:none
-}
-.CATEGORY-infoFrm li{
-  padding: 8px 10px;
-  background: #fff url('./assets/arrow_right_b.png') no-repeat 110px center;
-  background-size: 15%;
-}
-.CATEGORY-infoFrm li:hover{
-  color: var(--on-color);
-  background: url('./assets/arrow_right_p.png') no-repeat 110px center;
-  background-size: 15%;
+.rowMenu{
+  background-color: #fff;
 }
 </style>

@@ -4,7 +4,7 @@
             <h3>{{title}}</h3>
             <div class="swiper-container" :id="typeId">
                 <ul class="swiper-wrapper">
-                    <router-link tag="li" :to="{name : 'goodsDetailsLink'}" class="swiper-slide">
+                    <router-link tag="li" :to="{name : 'goodsDetails'}" class="swiper-slide">
                         <div class="list_img_a">
                             <img src="http://cdn.static.linlang.com/upload_test/trade/20191101/c37c8f38fbb8d1b73e43d3a2dc9a8106.jpg?imageView2/2/w/300">
                         </div>
@@ -15,7 +15,7 @@
                         </div>
                         <div class="list_a">免费试用</div>
                     </router-link>
-                    <router-link tag="li" :to="{name : 'goodsDetailsLink'}" class="swiper-slide">
+                    <router-link tag="li" :to="{name : 'goodsDetails'}" class="swiper-slide">
                         <div class="list_img_a">
                             <img src="http://cdn.static.linlang.com/upload_test/trade/20191031/68d88533be15b5bfd69171407568bb1a.jpg?imageView2/2/w/300">
                         </div>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="list_a">免费试用</div>
                     </router-link>
-                    <router-link tag="li" :to="{name : 'goodsDetailsLink'}" class="swiper-slide">
+                    <router-link tag="li" :to="{name : 'goodsDetails'}" class="swiper-slide">
                         <div class="list_img_a">
                             <img src="http://cdn.static.linlang.com/upload_test/trade/20191031/68d88533be15b5bfd69171407568bb1a.jpg?imageView2/2/w/300">
                         </div>

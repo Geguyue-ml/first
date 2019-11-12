@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 #banner{
-    padding: 20px 0;
+    padding: 20px;
 }
 #banner span{
   vertical-align: top;
