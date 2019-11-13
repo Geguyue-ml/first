@@ -1,6 +1,6 @@
 <template>
   <el-col :span="20" id="basicInfo">
-    <el-col :span="12">
+    <el-col :span="16">
       <div class="grid-content bg-purple-light">
         <div class="title">账号信息</div>
         <div>
@@ -47,20 +47,16 @@
         </div>
       </div>
     </el-col>
-    <el-col :span="12">
+    <el-col :span="8">
       <div class="grid-content bg-purple-light">
         <div class="title">我的资金</div>
-        <div class="clearfix">
-          <div class="modelB L">
-            <div class="moneyInfo">
-              <span>我的可用金豆：10293.39</span>
-            </div>
-            <input class="goBtn" type="button" value="发布试用任务">
-          </div>
-          <div class="modelB R">
-            <img class="moneyIcon" src="../../assets/money.png" alt="金豆充值">
-            <div class="moneyTxt">金豆充值</div>
-          </div>
+        <div class="modelB">
+          <img class="moneyIcon" src="../../assets/money.png" alt="金豆充值"><br/>
+          <span class="moneyTxt">金豆充值</span>
+        </div>
+        <div class="moneyInfo">
+          <span>我的可用金豆：10293.39</span>
+          <input class="goBtn" type="button" value="发布试用任务">
         </div>
       </div>
     </el-col>
@@ -137,34 +133,24 @@ tr{
   cursor: pointer;
 }
 .moneyInfo{
-  padding: 15px 0;
   font-weight: bold;
   color: var(--on-color);
+  text-align: center;
 }
 .modelB{
-  display: inline-block;
   vertical-align: middle;
-}
-.modelB.L{
-  float: left;
-  margin-left: 35px;
-}
-.modelB.R{
-  float: right;
-  cursor: pointer;
-  margin-right: 35px;
+  margin: 15px auto 25px;
+  text-align: center;
 }
 .moneyIcon{
   height: 80px;
   width: 80px;
+  cursor: pointer;
 }
 .moneyTxt{
-  text-align: center;
   font-weight: bold;
   color: var(--on-color);
-}
-.maxH-gfgg::-webkit-scrollbar{
-  width: 0;
+  cursor: pointer;
 }
 .maxH-gfgg li{
   padding: 10px 0;

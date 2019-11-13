@@ -66,9 +66,11 @@ export default {
   },
   mounted(){
     this.activeIndex = this.$route.matched[1].path || '/'
-    this.openTab = this.$route.matched[0].instances.default.openTab
-    // this.navList.filter(item => console.log(item.child.filter(subItem => subItem.path == this.activeIndex) ))
-    this.navList.find(item => console.log(item.child.find(subItem => subItem.path == this.activeIndex)))
+    this.navList.find((item, key) => {
+      if(item.child.filter(subItem => subItem.path == this.activeIndex).length != 0){
+        this.openTab = String(key)
+      }
+    })
   },
   methods: {
     handleSelect(index){

@@ -144,7 +144,7 @@ ul{
     padding: 0 15px 15px;
 }
 .bg-purple-light {
-  background: #f1f1f9;
+  background: #fafafa;
   padding: 15px;
 }
 .grid-content {
