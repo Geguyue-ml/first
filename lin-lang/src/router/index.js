@@ -17,6 +17,7 @@ import CheckedOrder from '../components/perssonal/CheckedOrder'
 import NewsManage from '../components/perssonal/NewsManage'
 import ProlongateTime from '../components/perssonal/ProlongateTime'
 import PushGold from '../components/perssonal/PushGold'
+import TaskManagement from '../components/perssonal/TaskManagement'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -44,6 +45,7 @@ export default new Router({
       {path: "/personal/checkedOrder", name: "checkedOrder", component: CheckedOrder},
       {path: "/personal/newsManage", name: "newsManage", component: NewsManage},
       {path: "/personal/prolongateTime", name: "prolongateTime", component: ProlongateTime},
+      {path: "/personal/taskManagement", name: "taskManagement", component: TaskManagement},
       {path: "/personal/pushGold", name: "pushGold", component: PushGold}
     ]},
   ],

@@ -108,7 +108,7 @@ export default {
 .clearfix{
   zoom: 1;
 }
-.clearfix::after{
+.clearfix:after{
   content: "\20";
   display: block;
   height: 0;
@@ -139,6 +139,30 @@ a{
 ul{
   list-style: none;
 }
+.el-col {
+    border-radius: 4px;
+    padding: 0 15px 15px;
+}
+.bg-purple-light {
+  background: #f1f1f9;
+  padding: 15px;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.bg-purple-light .title{
+  height: 40px;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  border-bottom: 1px solid #b9b9b9;
+}
+
 .nav-index{
   display: inline-block;
   vertical-align: middle;

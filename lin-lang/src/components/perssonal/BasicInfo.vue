@@ -1,6 +1,6 @@
 <template>
   <el-col :span="20" id="basicInfo">
-    <el-col :span="12" class="blockModel">
+    <el-col :span="12">
       <div class="grid-content bg-purple-light">
         <div class="title">账号信息</div>
         <div>
@@ -47,36 +47,35 @@
         </div>
       </div>
     </el-col>
-    <el-col :span="12" class="blockModel">
+    <el-col :span="12">
       <div class="grid-content bg-purple-light">
         <div class="title">我的资金</div>
-        <div>
-          <div class="modelB">
+        <div class="clearfix">
+          <div class="modelB L">
             <div class="moneyInfo">
               <span>我的可用金豆：10293.39</span>
             </div>
             <input class="goBtn" type="button" value="发布试用任务">
           </div>
-          <div class="modelB pointer">
+          <div class="modelB R">
             <img class="moneyIcon" src="../../assets/money.png" alt="金豆充值">
             <div class="moneyTxt">金豆充值</div>
           </div>
         </div>
       </div>
     </el-col>
-    <el-col :span="12" class="blockModel">
+    <el-col :span="24">
       <div class="grid-content bg-purple-light">
         <div class="title">官方公告</div>
-        <div>
-          123
-        </div>
-      </div>
-    </el-col>
-    <el-col :span="12" class="blockModel">
-      <div class="grid-content bg-purple-light">
-        <div class="title">任务进展</div>
-        <div>
-          123
+        <div class="maxH-gfgg">
+          <ul>
+            <li><span>公告第一条：i的分解飞机飞机你覅姐姐菲菲姐都v路v率积分是东京附魔vi哦热i据哦ii而据哦</span></li>
+            <li><span>公告第二条：i的分解飞机飞机你覅姐姐圣诞节佛哦玩具哦i恶剧欸菊科菊哦欸率菲菲姐都v路v率积分</span></li>
+            <li><span>公告第三条：i的分解飞机飞机你覅姐姐菲菲姐都v路v率积分</span></li>
+            <li><span>公告第四条：i的分解飞机收到vv方法v让他给他人飞机你覅姐姐菲菲姐都v路v率积分</span></li>
+            <li><span>公告第五条：i的分解对方的vv让他把日本飞机飞机你覅姐姐菲菲姐都v路v率积分</span></li>
+            <li><span>公告第六条：i的分解飞机飞机你覅姐姐菲菲姐都v路v率积分</span></li>
+          </ul>
         </div>
       </div>
     </el-col>
@@ -98,29 +97,6 @@ export default {
 #basicInfo{
   float: left;
   padding: 0 20px;
-}
-.el-col {
-    border-radius: 4px;
-    padding: 15px;
-}
-.bg-purple-light {
-  background: #f0eeee;
-  padding: 15px;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
-.title{
-  height: 40px;
-  line-height: 40px;
-  font-weight: bold;
-  font-size: 16px;
-  border-bottom: 1px solid #b9b9b9;
 }
 table{
   width: 100%;
@@ -167,11 +143,16 @@ tr{
 }
 .modelB{
   display: inline-block;
-  margin-right: 35px;
   vertical-align: middle;
 }
-.modelB.pointer{
+.modelB.L{
+  float: left;
+  margin-left: 35px;
+}
+.modelB.R{
+  float: right;
   cursor: pointer;
+  margin-right: 35px;
 }
 .moneyIcon{
   height: 80px;
@@ -179,5 +160,30 @@ tr{
 }
 .moneyTxt{
   text-align: center;
+  font-weight: bold;
+  color: var(--on-color);
+}
+.maxH-gfgg::-webkit-scrollbar{
+  width: 0;
+}
+.maxH-gfgg li{
+  padding: 10px 0;
+  cursor: pointer;
+  background: url('../../assets/arrow_right_b.png') no-repeat 0 11px;
+  background-size: 2.4%;
+}
+.maxH-gfgg li:hover{
+  color: var(--on-color);
+  background: url('../../assets/arrow_right_p.png') no-repeat 0 11px;
+  background-size: 2.4%;
+}
+.maxH-gfgg span{
+  padding-left: 25px;
+  vertical-align: middle;
+  white-space: nowrap;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

@@ -6,8 +6,9 @@
           <el-col :span="4" class="tacFrm">
             <el-menu background-color="#fff" text-color="#000" :active-text-color="onColor"
             :default-active="activeIndex"
-            :default-openeds="['0']"
+            :default-openeds="[openTab]"
             router
+            @open="getTab"
             @select="handleSelect">
               <el-submenu v-for="(item, i) in navList" :key="i" :index="String(i)">
                 <template slot="title">
@@ -32,6 +33,7 @@ export default {
     return {
       onColor: "#ff366f",
       activeIndex: "/",
+      openTab: "0",
       navList: [
         {name: "个人中心", classN: "el-icon-s-custom", child: [
           {path: '/personal/basicInfo', name: "基本信息"},
@@ -39,9 +41,7 @@ export default {
           {path: "/personal/newsManage", name: "消息管理"}
         ]},
         {name: "任务管理", classN: "el-icon-tickets", child: [
-          {path: "/", name: "淘宝任务"},
-          {path: "/", name: "天猫任务"},
-          {path: "/", name: "京东任务"},
+          {path: "/personal/taskManagement", name: "试用任务进展"},
           {path: "/personal/checkedOrder", name: "查询试客订单"}
         ]},
         {name: "店铺管理", classN: "el-icon-takeaway-box", child: [
@@ -61,14 +61,21 @@ export default {
   watch: {
     $route(){
       this.handleSelect(this.activeIndex)
+      this.getTab(this.openTab)
     }
   },
   mounted(){
     this.activeIndex = this.$route.matched[1].path || '/'
+    this.openTab = this.$route.matched[0].instances.default.openTab
+    // this.navList.filter(item => console.log(item.child.filter(subItem => subItem.path == this.activeIndex) ))
+    this.navList.find(item => console.log(item.child.find(subItem => subItem.path == this.activeIndex)))
   },
   methods: {
     handleSelect(index){
       this.activeIndex = index
+    },
+    getTab(index){
+      this.openTab = index
     }
   }
 }
