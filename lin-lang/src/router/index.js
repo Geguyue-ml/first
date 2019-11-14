@@ -55,15 +55,14 @@ export default new Router({
       {path: "/personal/taskManagement", name: "taskManagement", component: TaskManagement},
       {path: "/personal/pushGold", name: "pushGold", component: PushGold}
     ]},
-    {path: '/releaseTask', name: 'releaseTask', components: {
-      default: ReleaseTask,
-      'flowPath1': FlowPath1,
-      'flowPath2': FlowPath2,
-      'flowPath3': FlowPath3,
-      'flowPath4': FlowPath4,
-      'flowPath5': FlowPath5,
-      'flowPath6': FlowPath6
-    }},
+    {path: '/releaseTask', name: 'releaseTask', component: ReleaseTask, redirect: '/releaseTask/flowPath1', children: [
+      {path: '/releaseTask/flowPath1', name: 'flowPath1', component: FlowPath1},
+      {path: '/releaseTask/flowPath2', name: 'flowPath2', component: FlowPath2},
+      {path: '/releaseTask/flowPath3', name: 'flowPath3', component: FlowPath3},
+      {path: '/releaseTask/flowPath4', name: 'flowPath4', component: FlowPath4},
+      {path: '/releaseTask/flowPath5', name: 'flowPath5', component: FlowPath5},
+      {path: '/releaseTask/flowPath6', name: 'flowPath6', component: FlowPath6}
+    ]},
   ],
   mode: 'history'
 })

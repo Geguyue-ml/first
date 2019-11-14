@@ -3,61 +3,56 @@
       <div class="releaseTitle">
         <span class="txt">发布任务流程</span>
         <div class="progressTask">
-            <div class="subFrm show">
+            <router-link class="subFrm show" tag="div" :to="{name: 'flowPath1'}">
                 <div class="subFrmTitle lef">选平台</div>
                 <div class="circleFrm">
                     <div class="subCircle">1</div>
                     <div class="subline r"></div>
                 </div>
-            </div>
-            <div class="subFrm">
+            </router-link>
+            <router-link class="subFrm" tag="div" :to="{name: 'flowPath2'}">
                 <div class="subFrmTitle cent">填写商品信息</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle">2</div>
                     <div class="subline r"></div>
                 </div>
-            </div>
-            <div class="subFrm">
+            </router-link>
+            <router-link class="subFrm" tag="div" :to="{name: 'flowPath3'}">
                 <div class="subFrmTitle cent">设置投放计划</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle">3</div>
                     <div class="subline r"></div>
                 </div>
-            </div>
-            <div class="subFrm">
+            </router-link>
+            <router-link class="subFrm" tag="div" :to="{name: 'flowPath4'}">
                 <div class="subFrmTitle cent">增值服务</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle">4</div>
                     <div class="subline r"></div>
                 </div>
-            </div>
-            <div class="subFrm">
+            </router-link>
+            <router-link class="subFrm" tag="div" :to="{name: 'flowPath5'}">
                 <div class="subFrmTitle cent">支付</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle">5</div>
                     <div class="subline r"></div>
                 </div>
-            </div>
-            <div class="subFrm">
+            </router-link>
+            <router-link class="subFrm" tag="div" :to="{name: 'flowPath6'}">
                 <div class="subFrmTitle rig">发布成功</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle">6</div>
                 </div>
-            </div>
+            </router-link>
         </div>
       </div>
       <div class="releaseBody">
-          <router-view name="flowPath1"></router-view>
-          <router-view name="flowPath2"></router-view>
-          <router-view name="flowPath3"></router-view>
-          <router-view name="flowPath4"></router-view>
-          <router-view name="flowPath5"></router-view>
-          <router-view name="flowPath6"></router-view>
+          <router-view></router-view>
       </div>
   </div>
 </template>
@@ -80,7 +75,6 @@ export default {
 .releaseTitle{
     padding-bottom: 30px;
     text-align: center;
-    border-bottom: 1px solid #e9e9e9;
 }
 .releaseTitle .txt{
     font-size: 20px;
@@ -152,5 +146,9 @@ export default {
 }
 .subline.r{
     margin-left: -0.6px;
+}
+.releaseBody >>>.el-collapse-item__header{
+    font-size: 16px;
+    font-weight: bold;
 }
 </style>

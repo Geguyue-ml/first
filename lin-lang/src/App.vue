@@ -64,7 +64,6 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$route.matched[0]);
     this.activeIndex = this.$route.matched[0].path || '/'
 
     let itemArr = document.getElementsByClassName("nav-subItem-width");
@@ -80,7 +79,7 @@ export default {
       this.activeIndex = index
     },
     unActive(){
-      console.log($(".rowMenu").find(".is-active").addClass("unActive"));
+      $(".rowMenu").find(".is-active").addClass("unActive")
     }
   },
   computed: {
