@@ -1,6 +1,6 @@
 <template>
   <div id="allTask">
-    所有任务
+    {{ queryData.name }}
   </div>
 </template>
 
@@ -11,6 +11,15 @@ export default {
     return {
       
     }
+  },
+  props: {
+    queryData: {
+      type: String,
+      required : true
+    }
+  },
+  methods: {
+
   }
 }
 </script>

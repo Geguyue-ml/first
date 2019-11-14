@@ -18,6 +18,13 @@ import NewsManage from '../components/perssonal/NewsManage'
 import ProlongateTime from '../components/perssonal/ProlongateTime'
 import PushGold from '../components/perssonal/PushGold'
 import TaskManagement from '../components/perssonal/TaskManagement'
+import ReleaseTask from '../components/ReleaseTask'
+import FlowPath1 from '../components/flow/FlowPath1'
+import FlowPath2 from '../components/flow/FlowPath2'
+import FlowPath3 from '../components/flow/FlowPath3'
+import FlowPath4 from '../components/flow/FlowPath4'
+import FlowPath5 from '../components/flow/FlowPath5'
+import FlowPath6 from '../components/flow/FlowPath6'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -48,6 +55,15 @@ export default new Router({
       {path: "/personal/taskManagement", name: "taskManagement", component: TaskManagement},
       {path: "/personal/pushGold", name: "pushGold", component: PushGold}
     ]},
+    {path: '/releaseTask', name: 'releaseTask', components: {
+      default: ReleaseTask,
+      'flowPath1': FlowPath1,
+      'flowPath2': FlowPath2,
+      'flowPath3': FlowPath3,
+      'flowPath4': FlowPath4,
+      'flowPath5': FlowPath5,
+      'flowPath6': FlowPath6
+    }},
   ],
   mode: 'history'
 })

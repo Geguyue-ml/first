@@ -23,7 +23,7 @@
 
     <div class="navigation">
       <div class="btnFrm">
-        <input class="goBtn" type="button" value="发布试用任务">
+        <router-link tag="a" :to="{name: 'releaseTask'}" class="goBtn">发布试用任务</router-link>
       </div>
       <div class="infoTitle">商家公告</div>
       <div class="infoFrm">
@@ -122,6 +122,7 @@ export default {
   text-align: center;
 }
 .goBtn{
+  display: inline-block;
   margin: 20px 0;
   padding: 10px 30px;
   border-radius: 5px;

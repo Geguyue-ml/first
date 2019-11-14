@@ -42,13 +42,15 @@
               </el-form>
             </div>
             <div class="taskBody">
-              这里是个table，然后请求数据
+              <llTask :queryData="this.queryData"></llTask>
             </div>
         </div>
     </el-col>
 </template>
 
 <script>
+import Task from '../AllTask'
+
 export default {
   name: 'TaskManagement',
   data () {
@@ -63,8 +65,12 @@ export default {
         {path: "/personal/taskManagement", name: "暂停的任务", value: 12},
         {path: "/personal/taskManagement", name: "未支付的任务", value: 0},
         {path: "/personal/taskManagement", name: "删除的任务", value: 12}
-      ]
+      ],
+      queryData: {name: "abc"}
     }
+  },
+  components: {
+    "llTask" : Task
   },
   watch: {
     $route(){

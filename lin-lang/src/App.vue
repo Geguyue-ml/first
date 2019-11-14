@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- caiwu 123456q -->
-    <llHeader />
+    <llHeader @unActiveEmit="unActive"/>
     <llSearch />
     <div class="rowMenu">
       <div class="nav_center">
@@ -13,7 +13,7 @@
           <el-menu-item v-for="item in unChildTab" :key="item.path" :index="item.path">{{ item.name }}</el-menu-item>
           <el-submenu v-for="(item, key) in childTab" :key="key" :index="String(key)">
             <template slot="title">{{ item.name }}</template>
-            <el-menu-item v-for="(subItem, subKey) in item.child" :key="subKey" class="nav-subItem-width">{{ subItem.name }}</el-menu-item>
+            <el-menu-item v-for="(subItem, subKey) in item.child" :key="subKey" :index="subItem.path" class="nav-subItem-width">{{ subItem.name }}</el-menu-item>
           </el-submenu>  
         </el-menu>
       </div>
@@ -33,30 +33,27 @@ export default {
   data() {
     return {
       activeIndex: '1',
-      activeIndex2: '1',
-      activeIndex: "/",
       onColor: "#ff366f",
       navList:[
         {path:'/', name:'首页'},
         {path:'/storeReader', name:'商家必读'},
         {path:'/betterNum', name:'提高申请人数'},
         {path:'/advertisement', name:'广告位服务'},
-        {path:'/personal', name:'个人中心'},
         {name:'热门试用分类', child: [
-          {path:'/', name:'潮流女装'},
-          {path:'/', name:'时尚男装'},
-          {path:'/', name:'美食特产'},
-          {path:'/', name:'家纺家装'},
-          {path:'/', name:'数码家电'},
-          {path:'/', name:'母婴用品'},
-          {path:'/', name:'日用百货'},
-          {path:'/', name:'鞋类箱包'},
-          {path:'/', name:'精品配饰'},
-          {path:'/', name:'护肤彩妆'},
-          {path:'/', name:'内衣内裤'},
-          {path:'/', name:'车品车饰'},
-          {path:'/', name:'户外运动'},
-          {path:'/', name:'医疗保险'}
+          {path:'/a', name:'潮流女装'},
+          {path:'/b', name:'时尚男装'},
+          {path:'/c', name:'美食特产'},
+          {path:'/d', name:'家纺家装'},
+          {path:'/e', name:'数码家电'},
+          {path:'/f', name:'母婴用品'},
+          {path:'/g', name:'日用百货'},
+          {path:'/gg', name:'鞋类箱包'},
+          {path:'/g', name:'精品配饰'},
+          {path:'/g', name:'护肤彩妆'},
+          {path:'/g', name:'内衣内裤'},
+          {path:'/g', name:'车品车饰'},
+          {path:'/g', name:'户外运动'},
+          {path:'/g', name:'医疗保险'}
         ]}
       ]
     };
@@ -67,6 +64,7 @@ export default {
     }
   },
   mounted(){
+    console.log(this.$route.matched[0]);
     this.activeIndex = this.$route.matched[0].path || '/'
 
     let itemArr = document.getElementsByClassName("nav-subItem-width");
@@ -80,6 +78,9 @@ export default {
   methods: {
     handleSelect(index){
       this.activeIndex = index
+    },
+    unActive(){
+      console.log($(".rowMenu").find(".is-active").addClass("unActive"));
     }
   },
   computed: {
@@ -183,5 +184,9 @@ ul{
 }
 .rowMenu{
   background-color: #fff;
+}
+.unActive{
+    color: #303133 !important;
+    border-bottom-color: transparent !important;
 }
 </style>

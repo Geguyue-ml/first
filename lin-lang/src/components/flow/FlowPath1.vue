@@ -1,12 +1,12 @@
 <template>
-  <div id="allTask">
-    所有任务
+  <div id="path1">
+    选择平台
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AllTask',
+  name: 'FlowPath1',
   data () {
     return {
       

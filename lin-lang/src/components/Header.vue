@@ -2,7 +2,7 @@
     <header class="web_nav" id="llHeader">
         <div class="nav_center clearfix">
             <div class="myfl">
-                <router-link tag="a" :to="{name: 'personal'}">个人中心</router-link>
+                <router-link tag="a" :to="{name: 'personal'}" @click.native="unActive()">个人中心</router-link>
                 <i>|</i>
                 <a href="#">我的金豆：个[充值金豆]</a>
                 <i>|</i>
@@ -30,6 +30,11 @@ export default {
     return {
       
     }
+  },
+  methods: {
+      unActive: function(){
+          this.$emit('unActiveEmit');
+      }
   }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
-  <div id="overTask">
-    已完成的任务
+  <div id="path6">
+    试用任务发布成功
   </div>
 </template>
 
 <script>
 export default {
-  name: 'OverTask',
+  name: 'FlowPath6',
   data () {
     return {
       
