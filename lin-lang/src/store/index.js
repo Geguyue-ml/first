@@ -3,15 +3,13 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-let bannerVal = new Set();
-bannerVal.add("首页");
 const store = new Vuex.Store({
     state:{
-        bannerVal : bannerVal
+        taskVal : 1
     },
     mutations:{
-        updateBannerVal(val){
-            state.bannerVal.push(val)
+        taskOk(state, val){
+            state.taskVal = val;
         }
     }
 })

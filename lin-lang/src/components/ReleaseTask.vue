@@ -3,52 +3,52 @@
       <div class="releaseTitle">
         <span class="txt">发布任务流程</span>
         <div class="progressTask">
-            <router-link class="subFrm show" tag="div" :to="{name: 'flowPath1'}">
+            <div class="subFrm show">
                 <div class="subFrmTitle lef">选平台</div>
                 <div class="circleFrm">
-                    <div class="subCircle">1</div>
+                    <div class="subCircle" onselectstart="return false">1</div>
                     <div class="subline r"></div>
                 </div>
-            </router-link>
-            <router-link class="subFrm" tag="div" :to="{name: 'flowPath2'}">
+            </div>
+            <div class="subFrm">
                 <div class="subFrmTitle cent">填写商品信息</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
-                    <div class="subCircle">2</div>
+                    <div class="subCircle" onselectstart="return false">2</div>
                     <div class="subline r"></div>
                 </div>
-            </router-link>
-            <router-link class="subFrm" tag="div" :to="{name: 'flowPath3'}">
+            </div>
+            <div class="subFrm">
                 <div class="subFrmTitle cent">设置投放计划</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
-                    <div class="subCircle">3</div>
+                    <div class="subCircle" onselectstart="return false">3</div>
                     <div class="subline r"></div>
                 </div>
-            </router-link>
-            <router-link class="subFrm" tag="div" :to="{name: 'flowPath4'}">
+            </div>
+            <div class="subFrm">
                 <div class="subFrmTitle cent">增值服务</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
-                    <div class="subCircle">4</div>
+                    <div class="subCircle" onselectstart="return false">4</div>
                     <div class="subline r"></div>
                 </div>
-            </router-link>
-            <router-link class="subFrm" tag="div" :to="{name: 'flowPath5'}">
+            </div>
+            <div class="subFrm">
                 <div class="subFrmTitle cent">支付</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
-                    <div class="subCircle">5</div>
+                    <div class="subCircle" onselectstart="return false">5</div>
                     <div class="subline r"></div>
                 </div>
-            </router-link>
-            <router-link class="subFrm" tag="div" :to="{name: 'flowPath6'}">
+            </div>
+            <div class="subFrm">
                 <div class="subFrmTitle rig">发布成功</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
-                    <div class="subCircle">6</div>
+                    <div class="subCircle" onselectstart="return false">6</div>
                 </div>
-            </router-link>
+            </div>
         </div>
       </div>
       <div class="releaseBody">
@@ -58,12 +58,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'ReleaseTask',
-  data () {
-    return {
-      
-    }
+  watch: {
+      "$store.state.taskVal": function(){
+          this.computed.shows();
+      }
+  },
+  computed: {
+      shows: function(){
+          cnsole.log("123");
+          console.log(mapState(["taskVal"]));
+      }
   }
 }
 </script>
