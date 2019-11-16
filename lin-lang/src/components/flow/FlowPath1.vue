@@ -1,7 +1,7 @@
 <template>
   <div id="path1">
     <el-collapse @change="handleChange" :value="['1', '2']">
-      <el-collapse-item title="第一步、选择平台和店铺" name="1" class="pathTitle">
+      <el-collapse-item title="1、选择平台和店铺" name="1" class="pathTitle">
         <div class="modelBox">
           <div class="modelItem">
             <div class="modelPage">
@@ -35,7 +35,7 @@
           </div>
         </div>
       </el-collapse-item>
-      <el-collapse-item title="第二步、选择任务类型" name="2">
+      <el-collapse-item title="2、选择任务类型" name="2">
         <div class="modelBox">
           <div class="clickBox active" @click="clickBoxFunc($event)" name="task1">打造爆款试用</div>
           <div class="clickBox" @click="clickBoxFunc($event)" name="task2">提升权重试用</div>
@@ -135,10 +135,10 @@
           </div>
         </div>
       </el-collapse-item>
-      <div class="modelBox">
-        <router-link class="nextGo" tag="div" :to="{name: 'flowPath2'}" @click.native="taskOk(2)"></router-link>
-      </div>
     </el-collapse>
+    <div class="modelBox Btn">
+      <router-link class="npBtn next" tag="div" :to="{name: 'flowPath2'}" @click.native="taskOk(2)"></router-link>
+    </div>
   </div>
 </template>
 
@@ -176,6 +176,9 @@ export default {
   align-items: center;
   padding: 25px 0;
   border-bottom: 1px solid #EBEEF5;
+}
+.modelBox.Btn{
+  justify-content: center;
 }
 .modelItem{
   width: 300px;
@@ -236,14 +239,6 @@ export default {
 .clickBox.active{
   background-color: var(--on-color);
   color: #fff;
-}
-.nextGo{
-  height: 50px;
-  width: 50px;
-  background: var(--on-color) url(../../assets/go-to-link.png) no-repeat;
-  background-size: 100%;
-  border-radius: 100%;
-  cursor: pointer;
 }
 .document{
   display: none;

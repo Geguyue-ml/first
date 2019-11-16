@@ -58,20 +58,33 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'ReleaseTask',
   watch: {
-      "$store.state.taskVal": function(){
-          this.computed.shows();
-      }
-  },
-  computed: {
-      shows: function(){
-          cnsole.log("123");
-          console.log(mapState(["taskVal"]));
-      }
+    "$store.state.taskVal": function(){
+        switch (this.$store.state.taskVal) {
+            case 1:
+                $(".subFrm").eq("0").addClass("show");
+                break;
+            case 2:
+                $(".subFrm").eq("1").addClass("show");
+                break;
+            case 3:
+                $(".subFrm").eq("2").addClass("show");
+                break;
+            case 4:
+                $(".subFrm").eq("3").addClass("show");
+                break;
+            case 5:
+                $(".subFrm").eq("4").addClass("show");
+                break;
+            case 6:
+                $(".subFrm").eq("5").addClass("show");
+                break;
+            default:
+                break;
+        }
+    }
   }
 }
 </script>

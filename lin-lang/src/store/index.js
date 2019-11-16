@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     mutations:{
         taskOk(state, val){
             state.taskVal = val;
+            // console.log(state.taskVal);
         }
     }
 })

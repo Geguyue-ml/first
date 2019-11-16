@@ -162,6 +162,22 @@ ul{
   font-size: 16px;
   border-bottom: 1px solid #b9b9b9;
 }
+.npBtn{
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  cursor: pointer;
+  display: inline-block;
+}
+.npBtn.next{
+  background: var(--on-color) url(./assets/go-to-link.png) no-repeat;
+  background-size: 100%;
+}
+.npBtn.prev{
+  background: var(--on-color) url(./assets/go-prev-link.png) no-repeat;
+  background-size: 100%;
+  margin-right: 20px;
+}
 
 .nav-index{
   display: inline-block;
