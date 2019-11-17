@@ -172,4 +172,80 @@ export default {
     font-size: 16px;
     font-weight: bold;
 }
+#releaseTask >>>.modelBox{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 25px;
+}
+#releaseTask >>>.modelBox.Btn{
+  justify-content: center;
+}
+
+/**element-ui选中样式，统一修改 */
+/**选中的input框 */
+#releaseTask >>>.el-input.is-focus .el-input__inner{
+  border-color: var(--on-color);
+}
+#releaseTask >>>.el-input__inner:focus{
+  border-color: var(--on-color);
+}
+/**选中的textarea框 */
+#releaseTask >>>.el-textarea__inner:focus{
+  border-color: var(--on-color);
+}
+/**上传图片框 */
+#releaseTask >>>.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+#releaseTask >>>.avatar-uploader .el-upload:hover {
+  border-color: var(--on-color);
+}
+#releaseTask >>>.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 98px;
+  height: 98px;
+  line-height: 98px;
+  text-align: center;
+}
+#releaseTask >>>.avatar {
+  width: 98px;
+  height: 98px;
+  display: block;
+}
+/**单选框样式 */
+#releaseTask >>>.el-radio{
+  margin-right: 0;
+  width: 50%;
+  padding: 15px 0;
+  text-align: center;
+}
+#releaseTask >>>.is-checked .el-radio__inner {
+  border-color: var(--on-color);
+  background: var(--on-color);
+}
+#releaseTask >>>.is-checked .el-radio__label{
+    color: var(--on-color);
+}
+/**复选框样式 */
+#releaseTask >>>.el-checkbox__input.is-checked .el-checkbox__inner{
+    background-color: var(--on-color);
+    border-color: var(--on-color);
+}
+#releaseTask >>>.el-checkbox__input.is-checked+.el-checkbox__label{
+    color: var(--on-color);
+}
+#releaseTask >>>.el-checkbox__input.is-focus .el-checkbox__inner{
+    border-color: var(--on-color);
+}
+#releaseTask >>>.el-checkbox__inner:hover{
+    border-color: var(--on-color);
+}
 </style>

@@ -202,25 +202,6 @@ export default {
 .modelbody::-webkit-scrollbar{
   width: 0;
 }
-.modelbody .el-radio{
-  margin-right: 0;
-  width: 50%;
-  padding: 15px 0;
-  text-align: center;
-}
-.modelbody >>>.is-checked .el-radio__inner {
-  border-color: var(--on-color);
-  background-color: var(--on-color);
-}
-.modelbody >>>.is-checked .el-radio__label{
-  color: var(--on-color);
-}
-.modelbody .el-radio__inner:hover {
-  border: 1px solid var(--on-color);
-}
-.modelbody .el-radio__label {
-  color: var(--on-color);
-}
 .addBtn{
   padding: 15px;
   text-align: center;

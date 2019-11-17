@@ -204,4 +204,9 @@ ul{
     color: #303133 !important;
     border-bottom-color: transparent !important;
 }
+
+/**由于element-ui组件中的下拉框是全局的，所以放在这里 */
+.el-select-dropdown__item.selected{
+  color: var(--on-color);
+}
 </style>
