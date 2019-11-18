@@ -248,4 +248,7 @@ export default {
 #releaseTask >>>.el-checkbox__inner:hover{
     border-color: var(--on-color);
 }
+#releaseTask >>>.el-checkbox__label{
+    vertical-align: middle;
+}
 </style>
