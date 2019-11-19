@@ -1,42 +1,77 @@
 <template>
   <div id="setCheckGoods">
     <div class="modelFrm">
-      <el-checkbox v-model="checkedPC" @change="isSow(checkedPC, '#PC', PCH)">设置试客从PC端淘宝自然搜索找商品</el-checkbox>
-      <div class="model" id="PC">
-        <table>
-          <tr>
-            <td class="title" style="width:150px;">商品主图：</td>
-            <td colspan="2">
-              <el-upload
-                class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3">设置让试客在淘宝中搜索的关键字：</td>
-          </tr>
-          <tr v-for="(item, key) in wordVal" :key="key">
-            <td class="title">设置关键词{{key + 1}}：</td>
-            <td style="width:250px;">
-              <el-input v-model="wordVal[key]" placeholder="请输入商品关键词" maxlength="10" show-word-limit></el-input>
-            </td>
-            <td>
-              <i class="el-icon-circle-plus-outline inputBtn" title="最多添加十个关键词" @click="addLine"></i>
-              <i class="el-icon-remove-outline inputBtn" title="删除当前关键词" @click="removeLine($event)" :data-wordNum="key"></i>
-            </td>
-          </tr>
-        </table>
+      <div style="margin-bottom:15px;">
+          <el-checkbox v-model="checkedPC" @change="isSow(checkedPC, '#PC', PCH)">设置试客从PC端淘宝自然搜索找商品</el-checkbox>
+          <div class="model" id="PC">
+            <table>
+              <tr>
+                <td class="title" style="width:150px;">商品主图：</td>
+                <td colspan="2">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">设置让试客在淘宝中搜索的关键字：</td>
+              </tr>
+              <tr v-for="(item, key) in wordVal" :key="key">
+                <td class="title">设置关键词{{key + 1}}：</td>
+                <td style="width:250px;">
+                  <el-input v-model="wordVal[key]" placeholder="请输入商品关键词" maxlength="10" show-word-limit></el-input>
+                </td>
+                <td>
+                  <i class="el-icon-circle-plus-outline inputBtn" title="最多添加十个关键词" @click="addLine"></i>
+                  <i class="el-icon-remove-outline inputBtn" title="删除当前关键词" @click="removeLine($event)" :data-wordNum="key"></i>
+                </td>
+              </tr>
+            </table>
+          </div>
       </div>
-
-      <el-checkbox v-model="checkedMo" @change="isSow(checkedMo, '#Mo', MoH)">设置试客从手机淘宝App入店</el-checkbox>
-      <div class="model" id="Mo">
-        123
+      <div>
+        <el-checkbox v-model="checkedMo" @change="isSow(checkedMo, '#Mo', MoH)">设置试客从手机淘宝App入店</el-checkbox>
+        <div class="model" id="Mo">
+          <table>
+            <tr>
+              <td class="title" style="width:150px;">淘宝APP商品主图：</td>
+              <td colspan="2">
+                <el-upload
+                  class="avatar-uploader"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                  :before-upload="beforeAvatarUpload">
+                  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+                <div class="selectItem" :class="{'show': pcTrue}" @click="pcTrue = !pcTrue" :v-model="pcTrue">强制试客PC端申请服务</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">淘口令：</td>
+              <td colspan="2">
+                <el-input type="textarea" autosize placeholder="通过手机淘宝APP淘口令核对商品" v-model="textarea1"></el-input>
+              </td>
+            </tr>
+            <tr v-for="(item, key) in wordVal" :key="key">
+              <td class="title">设置关键词{{key + 1}}：</td>
+              <td style="width:250px;">
+                <el-input v-model="wordVal[key]" placeholder="请输入商品关键词" maxlength="10" show-word-limit></el-input>
+              </td>
+              <td>
+                <i class="el-icon-circle-plus-outline inputBtn" title="最多添加十个关键词" @click="addLine"></i>
+                <i class="el-icon-remove-outline inputBtn" title="删除当前关键词" @click="removeLine($event)" :data-wordNum="key"></i>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <div class="modelFrm">
@@ -146,7 +181,9 @@ export default {
       es: false,
       zpbz: false,
       selectRq: '',
-      selectFhd: ''
+      selectFhd: '',
+      textarea1: '',
+      pcTrue: true,
     }
   },
   mounted(){
@@ -219,7 +256,7 @@ table .point{
   color: var(--off-color);
 }
 table td{
-  padding: 20px 20px 20px 0;
+  padding: 20px 0 20px 20px;
 }
 .modelVal table .title{
   text-align: right;
@@ -254,5 +291,10 @@ table td{
 }
 .modelFrm::-webkit-scrollbar{
   width: 0;
+}
+.avatar-uploader{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
 }
 </style>
