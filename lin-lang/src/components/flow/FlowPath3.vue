@@ -12,7 +12,7 @@
                 type="date"
                 placeholder="请选择任务上线的日期"
                 format="yyyy 年 MM 月 dd 日"
-                value-format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd"
                 @change="getTime">
               </el-date-picker>
               <el-date-picker
@@ -43,56 +43,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <em>19</em>
-                  <p>
-                    <span>
-                      投放数量
-                      <el-input-number
-                      v-model="num1"
-                      @change="handleChange"
-                      :min="0"
-                      :max="999"
-                      label="描述文字"
-                      size='mini'></el-input-number>
-                    </span>
-                  </p>
-                  <p>
-                    <span>
-                      日转化率
-                      <el-input size="mini" placeholder="转化率" v-model="input1"></el-input>
-                      %
-                    </span>
-                  </p>
-                  <p>
-                    <span>限制进店人数{{personNum1}}</span>
-                  </p>
+              <tr v-for="(item, key) in arrangeDate" :key="key">
+                <td v-for="(subItem, subKey) in item" :key="subKey">
+                  <template v-if="subItem != ''">
+                    <em>{{ subItem.date.substring(subItem.date.length, subItem.date.length-2) }}</em>
+                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini'></el-input-number></span></p>
+                    <p><span>日转化率<el-input size="mini" placeholder="转化率" v-model="subItem.percent"></el-input>%</span></p>
+                    <p><span>限制进店人数{{ Math.ceil(subItem.num / subItem.percent) }}</span></p>
+                  </template>
                 </td>
-                <td><em>20</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>21</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>22</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>23</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>24</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>25</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-              </tr>
-              <tr>
-                <td><em>19</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>20</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>21</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>22</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>23</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>24</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>25</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-              </tr>
-              <tr>
-                <td><em>19</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>20</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>21</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>22</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>23</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>24</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
-                <td><em>25</em><p><span>投放数量</span></p><p><span>日转化率</span></p><p><span>限制进店人数</span></p></td>
               </tr>
             </tbody>
         </table>
@@ -117,30 +76,28 @@ export default {
       upDate: new Date(),
       nowDate: new Date(),
       upDateStr: '',
-      num1: 0,
-      input1: '',
-      personNum1: '',
-      dateData: {
-        "2019-11-29": {"num": 10, "percent": 30,},
-        "2019-11-30": {"num": 10, "percent": 30,},
-        "2019-12-01": {"num": 10, "percent": 30,},
-        "2019-12-02": {"num": 10, "percent": 30,},
-        "2019-12-03": {"num": 10, "percent": 30,},
-        "2019-12-04": {"num": 10, "percent": 30,},
-        "2019-12-05": {"num": 10, "percent": 30,},
-        "2019-12-06": {"num": 10, "percent": 30,},
-        "2019-12-07": {"num": 10, "percent": 30,},
-        "2019-12-08": {"num": 10, "percent": 30,},
-        "2019-12-09": {"num": 10, "percent": 30,},
-        "2019-12-10": {"num": 10, "percent": 30,},
-        "2019-12-11": {"num": 10, "percent": 30,},
-        "2019-12-12": {"num": 10, "percent": 30,}
-      },
+      arrangeDate: [],
+      dateData: [
+        {"date": '2019-11-29', "num": 10, "percent": 10},
+        {"date": '2019-11-30', "num": 20, "percent": 50},
+        {"date": '2019-12-01', "num": 60, "percent": 80},
+        {"date": '2019-12-02', "num": 70, "percent": 90},
+        {"date": '2019-12-03', "num": 80, "percent": 100},
+        {"date": '2019-12-04', "num": 90, "percent": 60},
+        {"date": '2019-12-05', "num": 95, "percent": 55},
+        {"date": '2019-12-06', "num": 85, "percent": 15},
+        {"date": '2019-12-07', "num": 75, "percent": 25},
+        {"date": '2019-12-08', "num": 65, "percent": 30},
+        {"date": '2019-12-09', "num": 55, "percent": 88},
+        {"date": '2019-12-10', "num": 55, "percent": 88},
+        {"date": '2019-12-11', "num": 55, "percent": 88},
+        {"date": '2019-12-12', "num": 55, "percent": 88}
+      ]
     }
   },
   mounted(){
     this.getTimeStr();
-    this.plan();
+    this.arrangeFunc(this.dateData[0].date, false);
   },
   methods: {
     ...mapMutations(["taskOk"]),
@@ -156,66 +113,77 @@ export default {
         this.upDate = val;
         this.upDateStr = val;
         $(".errorInfo").hide();
+
+        //当用户改变日期后，根据选择的日期，整理arrangeDate数据，所有num及precent默认都为0
+        this.arrangeFunc(val, true);
       }
     },
-    plan(){
-      var plandate  = new Date();               //今天日期
-      var plan_date = this.upDate;              //日期栏选择的日期
-
-      plan_date.getDay();
-
-
-      var days = 0;
-      var planval = 0;
-      if(plandate.getMonth() == plan_date.getMonth() && plandate.getDate() == plan_date.getDate()){
-        if( plandate.getHours()>17 ){
-          var week = plan_date.getDay()+1; //周几
-          if( plan_date.getDay() == 8){
-            week = 0;
-          }
-          var plandate_day = plan_date.getDate()+1;  //当前的日期
-        }else{
-          var week = plan_date.getDay(); //周几
-          if( plan_date.getDay() == 7){
-            week = 0;
-          }
-          var plandate_day = plan_date.getDate();  //当前的日期
+    arrangeFunc(val, isChange){
+      //获取数据中起始日期是星期几
+      let weekDay = new Date(val).getDay();
+      
+      //整理三周的数据
+      let num = 0;
+      switch (weekDay) {
+        case 0:
+          num = 7
+          break;
+        case 1:
+          num = 6
+          break;
+        case 2:
+          num = 5
+          break;
+        case 3:
+          num = 4
+          break;
+        case 4:
+          num = 3
+          break;
+        case 5:
+          num = 2
+          break;
+        case 6:
+          num = 1
+          break;
+        default:
+          break;
+      }
+      let firstWeekArr = [];
+      let secondWeekArr = [];
+      let thirdWeekArr = [];
+      let dateData = [];
+      if(isChange){
+        for(let i = 0; i < 14; i++){
+          dateData.push({"date": '2019-12-12', "num": 0, "percent": 0});
         }
       }else{
-        var week = plan_date.getDay(); //周几
-        if( plan_date.getDay() == 7){
-          week = 0;
-        }
-        var plandate_day = plan_date.getDate();  //当前的日期
+        dateData = this.dateData;
       }
-  
-      //计算每月天数
-      var plan_month = plan_date.getMonth()+1;
-      var year       = plan_date.getYear();
-      if (plan_month == 2) {
-        days = year % 4 == 0 ? 29 : 28;
-      }else if (plan_month == 1 || plan_month == 3 || plan_month == 5 || plan_month == 7 || plan_month == 8 || plan_month == 10 || plan_month == 12) {
-        days = 31;
-      }else {
-        days = 30;
+      for(let i = 0; i < weekDay; i++){
+        firstWeekArr.push("");
       }
-      
-	    planval = 1;
-      var tmp_idx = week;
-      var tmp_idx1 = 0 + week;
-    
-      if(plandate_day > days){
-        plandate_day = plandate_day - days;
+      for(let i = 0; i < num; i++){
+        firstWeekArr.push(dateData[i]);
       }
-      $(".plan_table").find("td").eq(tmp_idx1).html('<div class="plan_box3"><em>'+plandate_day+'</em><div class="plan_single"><span>投放数量</span><a href="javascript:;" val="1"></a><input type="text" name="day_num[]" onKeyUp="javascript:this.value=this.value.replace(/[^\\d]/g,\'\');if(this.value<0){this.value=0}" value="0" planval="1" class="day_num" /><a href="javascript:;" val="2"></a></div>'+
-      '<div class="day_rate"><span>日转化率</span><input type="text" name="rate_num[]" onKeyUp="javascript:this.value=this.value.replace(/[^\\d]/g,\'\');if(this.value<0){this.value=0}" value="" class="rate_num" placeholder="不限制" /><span>%</span></div>'+
-      '<div class="visitor">限制进店人数<span>不限制</span>人</div>'+
-      '</div>');
-      plandate_day++;
-      if(plandate_day > days){
-        plandate_day = plandate_day - days;
+      for(let i = num; i < num+7; i++){
+        secondWeekArr.push(dateData[i]);
       }
-      var tmp_idx = week;
+      for(let i = num+7; i < dateData.length; i++){
+        thirdWeekArr.push(dateData[i]);
+      }
+      for(let i = 0; i < num; i++){
+        thirdWeekArr.push("");
+      }
+      if(isChange){
+        this.arrangeDate[0] = firstWeekArr;
+        this.arrangeDate[1] = secondWeekArr;
+        this.arrangeDate[2] = thirdWeekArr;
+      }else{
+        this.arrangeDate.push(firstWeekArr);
+        this.arrangeDate.push(secondWeekArr);
+        this.arrangeDate.push(thirdWeekArr);
+      }
     },
     handleChange(){
 
@@ -264,9 +232,11 @@ tbody p{
   text-align: left;
 }
 .el-input-number--mini{
-  width: 96px;
+  width: 93px;
+  margin-left: 8px;
 }
 .el-input--mini{
   width: 70px;
+  margin: 0 8px;
 }
 </style>
