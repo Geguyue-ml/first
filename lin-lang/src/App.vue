@@ -55,7 +55,8 @@ export default {
           {path:'/g', name:'户外运动'},
           {path:'/g', name:'医疗保险'}
         ]}
-      ]
+      ],
+      numq:7
     };
   },
   watch: {

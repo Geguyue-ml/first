@@ -47,7 +47,7 @@
                 <td v-for="(subItem, subKey) in item" :key="subKey">
                   <template v-if="subItem != ''">
                     <em>{{ subItem.date.substring(subItem.date.length, subItem.date.length-2) }}</em>
-                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini' @change="handleChange(val)" class="numEvent"></el-input-number></span></p>
+                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini'></el-input-number></span></p>
                     <p><span>进店比列<el-input size="mini" placeholder="进店率" v-model="subItem.percent"></el-input>%</span></p>
                     <p><span>限制进店人数{{ Math.ceil(subItem.num / subItem.percent) || '最大化' }}</span></p>
                   </template>
@@ -182,7 +182,7 @@ export default {
       if(thirdWeekArr[0] == ""){
         this.arrangeDate[2] = ""
       }else{
-      this.arrangeDate[2] = thirdWeekArr;
+        this.arrangeDate[2] = thirdWeekArr;
       }
     },
     addDate(date){
@@ -197,9 +197,32 @@ export default {
         day = '0' + day;
       }
       return year + '-' + month + '-' + day;
-    },
-    handleChange(val){
-      console.log(val);
+    }
+  },
+  computed: {
+    test: function(){
+      console.log("123");
+    }
+  },
+  watch: {
+    arrangeDate: {
+      handler(val){
+        let isChangeZero = false;     //是否将后面所有天的投放数量归零
+        for(let item of val){
+          for(let subItem of item){
+            if(typeof subItem == "object"){
+              if(!isChangeZero){
+                if(subItem.num == 0){
+                  isChangeZero = true;
+                }
+              }else{
+                subItem.num = 0;
+              }
+            }
+          }
+        }
+      },
+      deep: true
     }
   }
 }
