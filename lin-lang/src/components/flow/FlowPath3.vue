@@ -47,7 +47,7 @@
                 <td v-for="(subItem, subKey) in item" :key="subKey">
                   <template v-if="subItem != ''">
                     <em>{{ subItem.date.substring(subItem.date.length, subItem.date.length-2) }}</em>
-                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini'></el-input-number></span></p>
+                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini' @change="val => beforeData(val, key, subKey)"></el-input-number></span></p>
                     <p><span>进店比列<el-input size="mini" placeholder="进店率" v-model="subItem.percent"></el-input>%</span></p>
                     <p><span>限制进店人数{{ Math.ceil(subItem.num / subItem.percent) || '最大化' }}</span></p>
                   </template>
@@ -59,8 +59,8 @@
     </el-collapse>
     <div class="modelBox Btn">
       <div>
-        <router-link class="npBtn prev" tag="div" :to="{name: 'flowPath1'}" @click.native="taskOk(2)"></router-link>
-        <router-link class="npBtn next" tag="div" :to="{name: 'flowPath3'}" @click.native="taskOk(4)"></router-link>
+        <router-link class="npBtn prev" tag="div" :to="{name: 'flowPath2'}" @click.native="taskOk(2)"></router-link>
+        <router-link class="npBtn next" tag="div" :to="{name: 'flowPath4'}" @click.native="taskOk(4)"></router-link>
       </div>
     </div>
   </div>
@@ -156,7 +156,7 @@ export default {
       if(isChange){
         let now = val;
         for(let i = 0; i < 14; i++){
-          dateData.push({"date": now, "num": 12, "percent": 10});
+          dateData.push({"date": now, "num": 0, "percent": 10});
           now = this.addDate(now);
         }
       }else{
@@ -197,11 +197,49 @@ export default {
         day = '0' + day;
       }
       return year + '-' + month + '-' + day;
-    }
-  },
-  computed: {
-    test: function(){
-      console.log("123");
+    },
+    beforeData(val, key, subKey){
+      var arrangeDate = this.arrangeDate;
+      if(arrangeDate[key][subKey].num != 0){
+        changeData(key, subKey);
+      }
+      this.arrangeDate = arrangeDate;
+      function changeData(key, subKey){
+        if(key == 0){
+          for(let index in arrangeDate[0]){
+            if(index >= subKey && arrangeDate[0][index].num == 0){
+              arrangeDate[0][index].num = 1
+            }
+          }
+        }else if(key == 1){
+          for(let index in arrangeDate[0]){
+            if(typeof arrangeDate[0][index] == "object" && arrangeDate[0][index].num == 0){
+              arrangeDate[0][index].num = 1
+            }
+          }
+          for(let index in arrangeDate[1]){
+            if(index <= subKey && arrangeDate[1][index].num == 0){
+              arrangeDate[1][index].num = 1
+            }
+          }
+        }else{
+          for(let index in arrangeDate){
+            if(index<2){
+              for(let subIndex in arrangeDate[index]){
+                if(typeof arrangeDate[index][subIndex] == "object" && arrangeDate[index][subIndex].num == 0){
+                  arrangeDate[index][subIndex].num = 1
+                }
+              }
+            }else{
+              for(let index in arrangeDate[2]){
+                if(index <= subKey && arrangeDate[2][index].num == 0){
+                  arrangeDate[2][index].num = 1
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   watch: {
