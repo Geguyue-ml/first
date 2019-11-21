@@ -19,8 +19,8 @@
                 id="hideDate"
                 v-model="nowDate"
                 type="date"
-                format="yyyy 年 MM 月 dd 日"
-                value-format="yyyy 年 MM 月 dd 日">
+                format="yyyy-MM-dd"
+                value-format="yyyy-MM-dd">
               </el-date-picker>
               <span class="errorInfo">设置计划日期不可在当前日期之前</span>
             </td>
@@ -30,7 +30,7 @@
         <table class="dateInfo">
             <thead>
               <tr>
-                <td colspan="7">{{ upDateStr }}</td>
+                <td colspan="7" class="title">{{ upDateStr }}</td>
               </tr>
               <tr class="week">
                 <td>日</td>
@@ -47,9 +47,9 @@
                 <td v-for="(subItem, subKey) in item" :key="subKey">
                   <template v-if="subItem != ''">
                     <em>{{ subItem.date.substring(subItem.date.length, subItem.date.length-2) }}</em>
-                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini'></el-input-number></span></p>
-                    <p><span>日转化率<el-input size="mini" placeholder="转化率" v-model="subItem.percent"></el-input>%</span></p>
-                    <p><span>限制进店人数{{ Math.ceil(subItem.num / subItem.percent) }}</span></p>
+                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini' @change="handleChange(val)" class="numEvent"></el-input-number></span></p>
+                    <p><span>进店比列<el-input size="mini" placeholder="进店率" v-model="subItem.percent"></el-input>%</span></p>
+                    <p><span>限制进店人数{{ Math.ceil(subItem.num / subItem.percent) || '最大化' }}</span></p>
                   </template>
                 </td>
               </tr>
@@ -154,8 +154,10 @@ export default {
       let thirdWeekArr = [];
       let dateData = [];
       if(isChange){
+        let now = val;
         for(let i = 0; i < 14; i++){
-          dateData.push({"date": '2019-12-12', "num": 0, "percent": 0});
+          dateData.push({"date": now, "num": 12, "percent": 10});
+          now = this.addDate(now);
         }
       }else{
         dateData = this.dateData;
@@ -175,18 +177,29 @@ export default {
       for(let i = 0; i < num; i++){
         thirdWeekArr.push("");
       }
-      if(isChange){
-        this.arrangeDate[0] = firstWeekArr;
-        this.arrangeDate[1] = secondWeekArr;
-        this.arrangeDate[2] = thirdWeekArr;
+      this.$set(this.arrangeDate, 0, firstWeekArr);
+      this.arrangeDate[1] = secondWeekArr;
+      if(thirdWeekArr[0] == ""){
+        this.arrangeDate[2] = ""
       }else{
-        this.arrangeDate.push(firstWeekArr);
-        this.arrangeDate.push(secondWeekArr);
-        this.arrangeDate.push(thirdWeekArr);
+      this.arrangeDate[2] = thirdWeekArr;
       }
     },
-    handleChange(){
-
+    addDate(date){
+      let newDay = new Date(new Date(date).getTime() + 1*24*60*60*1000);
+      let year = newDay.getFullYear();
+      let month = newDay.getMonth()+1;
+      if(month < 10){
+        month = '0' + month;
+      }
+      let day = newDay.getDate();
+      if(day < 10){
+        day = '0' + day;
+      }
+      return year + '-' + month + '-' + day;
+    },
+    handleChange(val){
+      console.log(val);
     }
   }
 }
@@ -197,9 +210,13 @@ export default {
   width: 100%;
 }
 .dateInfo{
-  margin-top: 20px;
   border-collapse:collapse;
   width: 99.9%;
+}
+.dateInfo thead .title{
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 0;
 }
 .dateInfo thead td{
   text-align: center;
@@ -226,6 +243,7 @@ tbody em{
 tbody td{
   padding-left: 10px;
   width: 14.2%;
+  height: 145px;
 }
 tbody p{
   padding-bottom: 10px;

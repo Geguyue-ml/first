@@ -251,4 +251,11 @@ export default {
 #releaseTask >>>.el-checkbox__label{
     vertical-align: middle;
 }
+#releaseTask >>>.el-input-number__decrease:hover, #releaseTask >>>.el-input-number__increase:hover{
+    color: var(--on-color);
+}
+#releaseTask >>>.el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),
+#releaseTask >>>.el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled){
+    border-color: var(--on-color);
+}
 </style>
