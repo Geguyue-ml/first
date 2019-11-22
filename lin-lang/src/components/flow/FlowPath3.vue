@@ -57,17 +57,12 @@
         </table>
       </el-collapse-item>
     </el-collapse>
-    <div class="modelBox Btn">
-      <div>
-        <router-link class="npBtn prev" tag="div" :to="{name: 'flowPath2'}" @click.native="taskOk(2)"></router-link>
-        <router-link class="npBtn next" tag="div" :to="{name: 'flowPath4'}" @click.native="taskOk(4)"></router-link>
-      </div>
-    </div>
+    <llTaskModel :next="4" :prev="2"></llTaskModel>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import TaskModel from '../TaskModel'
 
 export default {
   name: 'FlowPath3',
@@ -95,12 +90,14 @@ export default {
       ]
     }
   },
+  components: {
+    "llTaskModel": TaskModel,
+  },
   mounted(){
     this.getTimeStr();
     this.arrangeFunc(this.dateData[0].date, false);
   },
   methods: {
-    ...mapMutations(["taskOk"]),
     getTimeStr(){
       this.upDateStr = $('#showDate').val()
       this.nowDate = $('#hideDate').val()

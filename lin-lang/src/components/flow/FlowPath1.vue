@@ -1,6 +1,6 @@
 <template>
   <div id="path1">
-    <el-collapse @change="handleChange" :value="['1', '2']">
+    <el-collapse :value="['1', '2']">
       <el-collapse-item title="1、选择平台和店铺" name="1" class="pathTitle">
         <div class="modelBox">
           <div class="modelItem">
@@ -37,8 +37,8 @@
       </el-collapse-item>
       <el-collapse-item title="2、选择任务类型" name="2">
         <div class="modelBox">
-          <div class="clickBox active" @click="clickBoxFunc($event)" name="task1">打造爆款试用</div>
-          <div class="clickBox" @click="clickBoxFunc($event)" name="task2">提升权重试用</div>
+          <div class="clickBox active" @click="clickBoxFunc($event)" name="task1">人气权重爆款试用</div>
+          <div class="clickBox" @click="clickBoxFunc($event)" name="task2">下单返现</div>
         </div>
         <div class="document active" id="task1">
           <div class="tableFrm">
@@ -136,14 +136,12 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <div class="modelBox Btn">
-      <router-link class="npBtn next" tag="div" :to="{name: 'flowPath2'}" @click.native="taskOk(2)"></router-link>
-    </div>
+    <llTaskModel :next="2"></llTaskModel>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import TaskModel from '../TaskModel'
 
 export default {
   name: 'FlowPath1',
@@ -152,17 +150,21 @@ export default {
       radio: '1'
     }
   },
+  components: {
+    "llTaskModel": TaskModel,
+  },
   methods: {
-    handleChange(){
-
-    },
     clickBoxFunc(event){
+      //任务类型选择：样式控制
       $(".clickBox").removeClass("active");
       $(".document").removeClass("active");
       $(event.currentTarget).addClass("active");
       $("#" + $(event.currentTarget).attr("name")).addClass("active");
-    },
-    ...mapMutations(["taskOk"])
+    }
+  },
+  beforeRouteLeave(to, from, next){
+    this.$store.commit("changeTask", $(".clickBox.active").attr("name"));
+    next();
   }
 }
 </script>

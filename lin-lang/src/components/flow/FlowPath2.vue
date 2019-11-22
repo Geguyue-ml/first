@@ -11,20 +11,15 @@
         <llTransportInfo></llTransportInfo>
       </el-collapse-item>
     </el-collapse>
-    <div class="modelBox Btn">
-      <div>
-        <router-link class="npBtn prev" tag="div" :to="{name: 'flowPath1'}" @click.native="taskOk(1)"></router-link>
-        <router-link class="npBtn next" tag="div" :to="{name: 'flowPath3'}" @click.native="taskOk(3)"></router-link>
-      </div>
-    </div>
+    <llTaskModel :next="3" :prev="1"></llTaskModel>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 import SetCheckGoods from './flowPath2/SetCheckGoods'
 import SetGoodsInfo from './flowPath2/SetGoodsInfo'
 import TransportInfo from './flowPath2/TransportInfo'
+import TaskModel from '../TaskModel'
 
 export default {
   name: 'FlowPath2',
@@ -32,9 +27,7 @@ export default {
     'llSetCheckGoods': SetCheckGoods,
     'llSetGoodsInfo': SetGoodsInfo,
     'llTransportInfo': TransportInfo,
-  },
-  methods: {
-    ...mapMutations(["taskOk"])
+    "llTaskModel": TaskModel,
   }
 }
 </script>
