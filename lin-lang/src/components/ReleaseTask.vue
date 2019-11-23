@@ -224,9 +224,9 @@ export default {
 #releaseTask >>>.el-radio{
   margin-right: 0;
   width: 50%;
-  padding: 15px 0;
   text-align: center;
 }
+/**padding: 15px 0;上面的选择器加入该行样式，在第四步：细化中将人群标签中乱了样式 */
 #releaseTask >>>.is-checked .el-radio__inner {
   border-color: var(--on-color);
   background: var(--on-color);
@@ -248,9 +248,11 @@ export default {
 #releaseTask >>>.el-checkbox__inner:hover{
     border-color: var(--on-color);
 }
-#releaseTask >>>.el-checkbox__label{
+/* #releaseTask >>>.el-checkbox__label{
     vertical-align: middle;
-}
+} 
+flow4中，第一给checkbox，加了该属性，反而不对齐
+*/
 #releaseTask >>>.el-input-number__decrease:hover, #releaseTask >>>.el-input-number__increase:hover{
     color: var(--on-color);
 }
