@@ -2,7 +2,29 @@
   <div id="path4">
     <div v-if="taskType == 'task1'">
       <el-collapse :value="task1">
-        <el-collapse-item title="1、免费增值服务" name="serve">
+        <el-collapse-item title="1、系统默认（必选）" name="defaultServe">
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <el-checkbox v-model="addServe.jztf">精准投放（20金豆）</el-checkbox>
+                <div class="infoFrm">
+                  <p class="point">选择此服务后，琳琅将根据地区、性别、年龄段、收入、职业筛选准确的人群通过试用审核</p>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <el-checkbox v-model="addServe.rwsh">试用任务审核（2金豆）</el-checkbox>
+                <div class="infoFrm">
+                  <p>9-24点发布的试用任务，琳琅会在30分钟内审核完毕，若任务发布有问题，系统会驳回让您修改，客服会第一时间与您联系。</p>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-collapse-item>
+        <el-collapse-item title="2、免费增值服务" name="serve">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -18,50 +40,8 @@
               </div>
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.yjfh">押金直接返还</el-checkbox>
-                <div class="infoFrm">
-                  <p class="point">选择此服务，试客完成试用后，平台将直接使用押金为您操作返款，商家无需耗费时间、人力处理退款，减少押款周期</p>
-                  <p>中级商家每单收取试用商品金额的2%做为平台退款服务费，费用：10单 x 499元 x 2% = 99.8金豆。</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.xtcj">系统抽奖（3金豆/单）</el-checkbox>
-                <div class="infoFrm">
-                  <p class="point">系统将自动为商家抽选出更适合商家商品品类的试客，节约商家运营成本和时间，同时有利于试客中奖分布更广泛</p>
-                  <p>本次试用共计发布：10单，需支付：10单 x 3金豆 = 30金豆。</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.rwsh">试用任务审核（0金豆）</el-checkbox>
-                <div class="infoFrm">
-                  <p>9-24点发布的试用任务，琳琅会在30分钟内审核完毕，若任务发布有问题，系统会驳回让您修改，客服会第一时间与您联系。</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.jztf">精准投放（20金豆）</el-checkbox>
-                <div class="infoFrm">
-                  <p class="point">选择此服务后，琳琅将根据地区、性别、年龄段、收入、职业筛选准确的人群通过试用审核</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
         </el-collapse-item>
-        <el-collapse-item title="2、提升试客积极性" name="upPositive">
+        <el-collapse-item title="3、提升试客积极性" name="upPositive">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -101,7 +81,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="3、广告位投放" name="adsense">
+        <el-collapse-item title="4、广告位投放" name="adsense">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -116,7 +96,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="4、安全优化" name="safe">
+        <el-collapse-item title="5、安全优化" name="safe">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -157,7 +137,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="5、试客进店控制" name="intoControl">
+        <el-collapse-item title="6、试客进店控制" name="intoControl">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -195,7 +175,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="6、细化中奖人群标签" name="labelObj">
+        <el-collapse-item title="7、细化中奖人群标签" name="labelObj">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -261,14 +241,51 @@
             </el-col>
           </el-row>
         </el-collapse-item>
+        <el-collapse-item title="费用合计" name="costCount">
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <table class="costTable">
+                  <thead>
+                    <tr>
+                      <td style="width:110px;">分类</td>
+                      <td style="width:500px;">费用明细</td>
+                      <td style="width:300px;">小计</td>
+                      <td>合计</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>系统默认</td>
+                      <td>精准投放：20金豆</td>
+                      <td>20金豆</td>
+                      <td>20金豆</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3"></td>
+                      <td colspan="1">费用合计：20金豆</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </el-col>
+          </el-row>
+        </el-collapse-item>
       </el-collapse>
     </div>
     <div v-else-if="taskType == 'task2'">
       <el-collapse :value="task2">
-        <el-collapse-item title="1、免费增值服务" name="serve">
-          
-        </el-collapse-item>
-        <el-collapse-item title="2、口碑营销" name="market">
+        <el-collapse-item title="1、口碑营销" name="market">
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <span>返给用户佣金：</span>
+                <el-input v-model="goodWord.gold" placeholder="多少？" size="mini"></el-input>
+              </div>
+            </el-col>
+          </el-row>
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -338,6 +355,38 @@
             </el-col>
           </el-row>
         </el-collapse-item>
+        <el-collapse-item title="费用合计" name="costCount">
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <table class="costTable">
+                  <thead>
+                    <tr>
+                      <td style="width:110px;">分类</td>
+                      <td style="width:500px;">费用明细</td>
+                      <td style="width:300px;">小计</td>
+                      <td>合计</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>系统默认</td>
+                      <td>精准投放：20金豆</td>
+                      <td>20金豆</td>
+                      <td>20金豆</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3"></td>
+                      <td colspan="1">费用合计：20金豆</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </el-col>
+          </el-row>
+        </el-collapse-item>
       </el-collapse>
     </div>
     <llTaskModel :next="5" :prev="3"></llTaskModel>
@@ -352,8 +401,8 @@ export default {
   name: 'FlowPath4',
   data () {
     return {
-      task1: ['serve', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj'],
-      task2: ['serve', 'market'],
+      task1: ['defaultServe', 'serve', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj'],
+      task2: ['market'],
       taskType : '',
       addServe: {
         sydbj: true,
@@ -374,6 +423,7 @@ export default {
       },
       goodWord: {
         isGoodWord: true,
+        gold: '',
         imgGood: true,
         imgGoodNum: '',
         star: true,
@@ -483,5 +533,29 @@ export default {
 }
 .radioItem:not(:first-child){
   margin-right: 15px;
+}
+.el-input--mini{
+  display: inline-block;
+  width: 90px;
+}
+.costTable{
+  width: 100%;
+  border-collapse: collapse;
+}
+.costTable thead td{
+  padding-bottom: 15px;
+}
+.costTable tfoot td{
+  color: var(--on-color);
+}
+.costTable tbody td, .costTable tfoot td{
+  padding: 15px 0;
+}
+.costTable thead td, .costTable tfoot td{
+  font-size: 15px;
+  font-weight: bold;
+}
+.costTable thead td, .costTable tbody td{
+  border-bottom: 1px solid var(--off-color);
 }
 </style>
