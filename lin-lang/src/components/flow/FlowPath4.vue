@@ -1,8 +1,8 @@
 <template>
   <div id="path4">
     <div v-if="taskType == 'task1'">
-      <el-collapse :value="['2', '3', '4', '5', '6']">
-        <el-collapse-item title="1、免费增值服务" name="1">
+      <el-collapse :value="task1">
+        <el-collapse-item title="1、免费增值服务" name="serve">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -61,7 +61,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="2、提升试客积极性" name="2">
+        <el-collapse-item title="2、提升试客积极性" name="upPositive">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -101,11 +101,11 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="3、广告位投放" name="3">
+        <el-collapse-item title="3、广告位投放" name="adsense">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
-                <el-checkbox v-model="upPositive.ggwtf">我要上首页推荐，轮播展示，获得试客持续申请 (60金豆)</el-checkbox>
+                <el-checkbox v-model="adsense.ggwtf">我要上首页推荐，轮播展示，获得试客持续申请 (60金豆)</el-checkbox>
                 <div class="infoFrm">
                   <p class="point">选择此项服务后，您发布的试用商品将在任务上线后，每隔15分钟将轮播展示在琳琅首页【平台推荐】的位置，同时为您的宝贝打上"荐"的标签，提升你宝贝在平台的综合排名，直至试用活动结束</p>
                   <p class="point">选择此项服务后，您发布的试用商品将在第1天重新固定展示在琳琅首页或列表页【平台推荐】的位置继续展示4天</p>
@@ -116,7 +116,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="4、安全优化" name="4">
+        <el-collapse-item title="4、安全优化" name="safe">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -157,7 +157,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="5、试客进店控制" name="5">
+        <el-collapse-item title="5、试客进店控制" name="intoControl">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -195,7 +195,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="6、细化中奖人群标签" name="6">
+        <el-collapse-item title="6、细化中奖人群标签" name="labelObj">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -264,11 +264,11 @@
       </el-collapse>
     </div>
     <div v-else-if="taskType == 'task2'">
-      <el-collapse :value="['2']">
-        <el-collapse-item title="1、免费增值服务" name="1">
+      <el-collapse :value="task2">
+        <el-collapse-item title="1、免费增值服务" name="serve">
           
         </el-collapse-item>
-        <el-collapse-item title="2、口碑营销" name="2">
+        <el-collapse-item title="2、口碑营销" name="market">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -352,6 +352,8 @@ export default {
   name: 'FlowPath4',
   data () {
     return {
+      task1: ['serve', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj'],
+      task2: ['serve', 'market'],
       taskType : '',
       addServe: {
         sydbj: true,
@@ -365,8 +367,10 @@ export default {
         jdjl: false,
         people: "",
         gold: "",
-        ggwtf: true,
         hpgjz: true,
+      },
+      adsense: {
+        ggwtf: true,
       },
       goodWord: {
         isGoodWord: true,
