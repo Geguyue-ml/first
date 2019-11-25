@@ -1,7 +1,38 @@
 <template>
   <div id="path5">
     <el-collapse :value="showModel">
-      <el-collapse-item title="1、技术服务" name="artServe">
+      <el-collapse-item title="1、付款信息" name="payInfo">
+        <div class="grid-content bg-purple">
+          <table class="payInfoTable">
+            <tr>
+              <td style="width:70%">本次任务发布10单</td>
+              <td style="text-align:right;">金豆:154.80点</td>
+            </tr>
+          </table>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item title="2、支付方式" name="payType">
+        <el-row>
+          <el-col :span="24">
+            <div class="grid-content bg-purple">
+              <div class="itemPay active" @click="payTypeFunc($event)">
+                <img class="payImg" src="../../assets/gold_icon.png">
+                <span class="payTxt">金豆支付</span>
+                <span class="rightTxt" title="金豆充值">（可用金豆个）</span>
+              </div>
+              <div class="itemPay" @click="payTypeFunc($event)">
+                <img class="payImg" src="../../assets/vxin_icon.jpg">
+                <span class="payTxt">微信支付</span>
+              </div>
+              <div class="itemPay" @click="payTypeFunc($event)">
+                <img class="payImg" src="../../assets/alipay_icon.jpg">
+                <span class="payTxt">支付宝支付</span>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-collapse-item>
+      <el-collapse-item title="3、技术服务" name="artServe">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -51,24 +82,8 @@
             </div>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="24">
-            <div class="grid-content bg-purple">
-              
-            </div>
-          </el-col>
-        </el-row>
       </el-collapse-item>
     </el-collapse>
-    <el-collapse-item title="2、付款信息" name="payInfo">
-      <el-row>
-        <el-col :span="24">
-          <div class="grid-content bg-purple">
-            
-          </div>
-        </el-col>
-      </el-row>
-    </el-collapse-item>
     <llTaskModel :next="6" :prev="4"></llTaskModel>
   </div>
 </template>
@@ -80,7 +95,8 @@ export default {
   name: 'FlowPath5',
   data () {
     return {
-      showModel: ['artServe', 'payInfo'],
+      showModel: ['artServe', 'payInfo', 'payType'],
+      payType: '1',
     }
   },
   components: {
@@ -95,6 +111,11 @@ export default {
         $(".itemFrm").removeClass("active");
         _this.addClass("active");
       }
+    },
+    payTypeFunc(ele){
+      $(".itemPay").removeClass("active");
+      $(ele.target).parent(".itemPay").addClass("active");
+      $(ele.target).addClass("active");
     }
   }
 }
@@ -158,5 +179,51 @@ export default {
   color: var(--on-color);
   text-align: left;
   margin-bottom: 15px;
+}
+#path5 .el-radio{
+  width: auto;
+}
+.payInfoTable{
+  width: 98%;
+  margin: 0 30px 0 10px;
+  border-collapse: collapse;
+}
+.payInfoTable td{
+  padding: 15px 30px;
+  background-color: rgb(252, 233, 233);
+  font-size: 15px;
+}
+.itemPay{
+  border-radius: 5px;
+  border: 1px solid var(--on-color);
+  vertical-align: top;
+  cursor: pointer;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+.itemPay.active{
+  color: #fff;
+  background: var(--on-color);
+}
+.itemPay.active .rightTxt{
+  background: url(../../assets/money_w.png) 110px center no-repeat;
+  background-size: 15%;
+  color: #fff;
+}
+.payImg, .payTxt{
+  vertical-align: middle;
+  padding: 15px 0 15px 25px;
+}
+.payTxt{
+  padding-left: 10px;
+}
+.rightTxt{
+  float: right;
+  font-size: 15px;
+  line-height: 50px;
+  padding-right: 60px;
+  background: url(../../assets/money.png) 110px center no-repeat;
+  background-size: 15%;
+  color: var(--on-color);
 }
 </style>

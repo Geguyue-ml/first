@@ -39,14 +39,6 @@
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle" onselectstart="return false">5</div>
-                    <div class="subline r"></div>
-                </div>
-            </div>
-            <div class="subFrm">
-                <div class="subFrmTitle rig">发布成功</div>
-                <div class="circleFrm">
-                    <div class="subline l"></div>
-                    <div class="subCircle" onselectstart="return false">6</div>
                 </div>
             </div>
         </div>
