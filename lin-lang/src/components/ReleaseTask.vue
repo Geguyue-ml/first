@@ -54,29 +54,15 @@ export default {
   name: 'ReleaseTask',
   watch: {
     "$store.state.taskVal": function(){
-        switch (this.$store.state.taskVal) {
-            case 1:
-                $(".subFrm").eq("0").addClass("show");
-                break;
-            case 2:
-                $(".subFrm").eq("1").addClass("show");
-                break;
-            case 3:
-                $(".subFrm").eq("2").addClass("show");
-                break;
-            case 4:
-                $(".subFrm").eq("3").addClass("show");
-                break;
-            case 5:
-                $(".subFrm").eq("4").addClass("show");
-                break;
-            case 6:
-                $(".subFrm").eq("5").addClass("show");
-                break;
-            default:
-                break;
-        }
+        addShow(this.$store.state.taskVal)
     }
+  },
+  computed: {
+      addShow(num){
+        for(let i = 0; i < num; i++){
+            $(".subFrm").eq(i).addClass("show");
+        }
+      }
   }
 }
 </script>
@@ -217,6 +203,7 @@ export default {
   margin-right: 0;
   width: 50%;
   text-align: center;
+  padding: 15px 0;
 }
 /**padding: 15px 0;上面的选择器加入该行样式，在第四步：细化中将人群标签中乱了样式 */
 #releaseTask >>>.is-checked .el-radio__inner {

@@ -558,4 +558,7 @@ export default {
 .costTable thead td, .costTable tbody td{
   border-bottom: 1px solid var(--off-color);
 }
+#path4 >>>.el-radio{
+  padding: 0;
+}
 </style>
