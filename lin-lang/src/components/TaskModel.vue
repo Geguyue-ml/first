@@ -2,7 +2,8 @@
     <div class="modelBox Btn">
         <div>
             <router-link v-if="prev" class="npBtn prev" tag="div" :to="{name: 'flowPath' + prev}" @click.native="taskOk(prev)"></router-link>
-            <router-link v-if="next" class="npBtn next" tag="div" :to="{name: 'flowPath' + next}" @click.native="taskOk(next)"></router-link>
+            <router-link v-if="next && next != 6" class="npBtn next" tag="div" :to="{name: 'flowPath' + next}" @click.native="taskOk(next)"></router-link>
+            <div v-else class="npBtn next" @click="taskPay()"></div>
         </div>
     </div>
 </template>
@@ -26,7 +27,10 @@ export default {
     }
   },
   methods: {
-      ...mapMutations(["taskOk"])
+      ...mapMutations(["taskOk"]),
+      taskPay(){
+        this.$emit('showFlow');
+      }
   }
 }
 </script>

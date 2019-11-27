@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="subFrm">
-                <div class="subFrmTitle cent">支付</div>
+                <div class="subFrmTitle rig">支付</div>
                 <div class="circleFrm">
                     <div class="subline l"></div>
                     <div class="subCircle" onselectstart="return false">5</div>
@@ -44,26 +44,50 @@
         </div>
       </div>
       <div class="releaseBody">
-          <router-view></router-view>
+          <router-view @showTask="showAlert"></router-view>
       </div>
+
+    <!-- 支付提示弹框 -->
+    <el-dialog title="支付结果" :visible.sync="dialogVisible" width="30%">
+        <span class="payMessage">{{ message }}</span>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="oncePay">重新选择支付方式</el-button>
+            <el-button type="primary" @click="showTaskInfo">查看任务详情</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ReleaseTask',
-  watch: {
-    "$store.state.taskVal": function(){
-        addShow(this.$store.state.taskVal)
-    }
-  },
-  computed: {
-      addShow(num){
-        for(let i = 0; i < num; i++){
-            $(".subFrm").eq(i).addClass("show");
+    name: 'ReleaseTask',
+    data(){
+        return {
+            message: '支付成功，任务已发布等待客服审核',
+            dialogVisible: false,
         }
-      }
-  }
+    },
+    watch: {
+        "$store.state.taskVal": function(){
+            this.addShow(this.$store.state.taskVal);
+        }
+    },
+    methods: {
+        addShow(num){
+            for(let i = 0; i < num; i++){
+                $(".subFrm").eq(i).addClass("show");
+            }
+        },
+        oncePay(){
+            console.log("跳转至支付页第五步");
+        },
+        showTaskInfo(){
+            console.log("查看该任务详情");
+        },
+        showAlert(){
+            this.dialogVisible = true;
+        }
+    }
 }
 </script>
 
@@ -145,6 +169,14 @@ export default {
 }
 .subline.r{
     margin-left: -0.6px;
+}
+.payMessage{
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--on-color);
+    padding: 15px 0 15px 55px;
+    background: url(../assets/check.png) no-repeat 0 center;
+    background-size: 15%;
 }
 .releaseBody >>>.el-collapse-item__header{
     font-size: 16px;

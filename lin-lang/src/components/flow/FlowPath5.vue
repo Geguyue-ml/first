@@ -84,7 +84,7 @@
         </el-row>
       </el-collapse-item>
     </el-collapse>
-    <llTaskModel :next="6" :prev="4"></llTaskModel>
+    <llTaskModel :next="6" :prev="4" @showFlow="showAlert"></llTaskModel>
   </div>
 </template>
 
@@ -116,6 +116,9 @@ export default {
       $(".itemPay").removeClass("active");
       $(ele.target).parent(".itemPay").addClass("active");
       $(ele.target).addClass("active");
+    },
+    showAlert(){
+      this.$emit('showTask');
     }
   }
 }
