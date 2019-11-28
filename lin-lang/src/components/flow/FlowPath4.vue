@@ -389,8 +389,7 @@
         </el-collapse-item>
       </el-collapse>
     </div>
-    <llTaskModel :next="5" :prev.sync="prev"></llTaskModel>
-    <div @click="changePrev()">按钮{{prev}}</div>
+    <llTaskModel :next="5" :prev="3"></llTaskModel>
   </div>
 </template>
 
@@ -402,7 +401,6 @@ export default {
   name: 'FlowPath4',
   data () {
     return {
-      prev: 3,
       task1: ['defaultServe', 'serve', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj'],
       task2: ['market'],
       taskType : '',
@@ -478,9 +476,6 @@ export default {
       }else{
         alert("至少设置一个关键词")
       }
-    },
-    changePrev(){
-      this.prev = 4
     }
   }
 }
