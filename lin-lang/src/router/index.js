@@ -64,5 +64,6 @@ export default new Router({
       {path: '/releaseTask/flowPath6', name: 'flowPath6', component: FlowPath6}
     ]},
   ],
-  mode: 'history'
+  mode: 'hash',
+  base: './'
 })
