@@ -6,6 +6,7 @@
           <div class="selectItem" :class="{'show': by}" @click="by = !by" :v-model="by">包邮</div>
           <el-radio v-model="goodsPost" label="1">商品本身不包邮</el-radio>
           <el-radio v-model="goodsPost" label="2">商品本身包邮</el-radio>
+          <span>温馨提示：请在发布试用推广期间，暂停淘宝客等返利设置，避免不必要的损失</span>
         </td>
       </tr>
       <tr>

@@ -33,36 +33,23 @@
         </td>
       </tr>
       <tr>
-        <td class="title">商品价格<span class="point">（直接购买价）</span>：</td>
+        <td class="title">试客每单拍：</td>
+        <td><el-input v-model="num" placeholder="请输入每单拍的件数"></el-input></td>
+        <td colspan="2" class="infoPoint">说明</td>
+      </tr>
+      <tr>
+        <td class="title">商品价格：</td>
         <td>
           <el-input v-model="buyPrice" placeholder="请输入商品直接购买价格"></el-input>
         </td>
-        <td class="title">商品价格<span class="point">（拼团价）</span>：</td>
-        <td>
-          <el-input v-model="teamPrice" placeholder="请输入商品拼团购买价格"></el-input>
-        </td>
+        <td colspan="2" class="infoPoint">说明</td>
       </tr>
       <tr>
-        <td class="title">试客每单拍<span class="point">（件）</span>：</td>
-        <td>
-          <el-input v-model="num" placeholder="请输入每单拍的件数"></el-input>
-        </td>
         <td class="title">商品规格：</td>
         <td>
           <el-input type="textarea" autosize placeholder="任意规格（按试用价格下单）" v-model="textarea1"></el-input>
         </td>
-      </tr>
-      <tr>
-        <td colspan="4">选择付款方式<span class="point">允许试客使用花呗和信用卡支付，会使下单付款更加真实（产生的手续费由商家自行承担）</span>：</td>
-      </tr>
-      <tr>
-        <td colspan="4">
-          <div class="modelBox">
-            <div class="modelItem" :class="{'active': active1}" @click="active1 = !active1" onselectstart="{return false}">允许试客使用花呗付款</div>
-            <div class="modelItem" :class="{'active': active2}" @click="active2 = !active2" onselectstart="{return false}">允许试客使用信用卡付款</div>
-            <div class="modelItem" :class="{'active': active3}" @click="active3 = !active3" onselectstart="{return false}">允许试客使用优惠券付款</div>
-          </div>
-        </td>
+        <td colspan="2" class="infoPoint">说明</td>
       </tr>
     </table>
   </div>
@@ -83,10 +70,7 @@ export default {
       teamPrice: '',
       num: 1,
       textarea1: '',
-      radio: '',
-      active1: false,
-      active2: false,
-      active3: false
+      radio: ''
     }
   },
   mounted(){
@@ -137,5 +121,9 @@ export default {
 .modelItem.active{
   background-color: var(--on-color);
   color: #fff;
+}
+.infoPoint{
+  padding-left: 15px;
+  color: var(--off-color);
 }
 </style>

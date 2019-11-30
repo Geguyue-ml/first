@@ -188,7 +188,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  padding-top: 25px;
+  padding-top: 10px;
 }
 #releaseTask >>>.modelBox.Btn{
   justify-content: center;
@@ -233,7 +233,6 @@ export default {
 /**单选框样式 */
 #releaseTask >>>.el-radio{
   margin-right: 0;
-  width: 50%;
   text-align: center;
   padding: 15px 0;
 }
