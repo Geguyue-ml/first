@@ -1,26 +1,41 @@
 <template>
   <div id="transportInfo">
+    <div>
+      <span>是否包邮：</span>
+      <div class="tabRadio">
+        <el-radio v-model="post" label="1">包邮</el-radio>
+        <el-radio v-model="post" label="2">不包邮</el-radio>
+      </div>
+      <span class="point">(需要试客支付运费)</span>
+      <span class="point">温馨提示：当商品价格小于100元时，必须选择“包邮试用”</span>
+      <div class="postFrm" :class="{show:  post == '1'}">
+        <div>
+            <div class="tabRadio">
+              <el-radio v-model="goodsPost" label="1">商品本身不包邮</el-radio>
+            </div>
+            <span class="point">试客无需联系客服，商家额外支付10元/单作为运费余额，任务完成后剩余的运费余额将返还给商家</span>
+        </div>
+        <div>
+          <div class="tabRadio">
+            <el-radio v-model="goodsPost" label="2">商品本身包邮</el-radio>
+          </div>
+          <span class="point">试客直接按商品实际金额下单</span>
+        </div>
+      </div>
+    </div>
     <table>
-      <tr>
-        <td colspan="6">
-          <div class="selectItem" :class="{'show': by}" @click="by = !by" :v-model="by">包邮</div>
-          <el-radio v-model="goodsPost" label="1">商品本身不包邮</el-radio>
-          <el-radio v-model="goodsPost" label="2">商品本身包邮</el-radio>
-          <span>温馨提示：请在发布试用推广期间，暂停淘宝客等返利设置，避免不必要的损失</span>
-        </td>
-      </tr>
       <tr>
         <td class="title">手机：</td>
         <td>
           <el-input placeholder="请输入您的手机联系方式" v-model="phone"></el-input>
         </td>
-        <td class="title">QQ：</td>
-        <td>
-           <el-input placeholder="请输入您的QQ联系方式" v-model="QQ"></el-input>
-        </td>
         <td class="title">微信：</td>
         <td>
            <el-input placeholder="请输入您的微信联系方式" v-model="weChart"></el-input>
+        </td>
+        <td class="title">QQ：</td>
+        <td>
+           <el-input placeholder="请输入您的QQ联系方式" v-model="QQ"></el-input>
         </td>
       </tr>
       <tr>
@@ -38,8 +53,8 @@ export default {
   name: 'TransportInfo',
   data () {
     return {
-      by: true,
-      goodsPost: '',
+      post: "1",
+      goodsPost: '1',
       phone: '',
       QQ: '',
       weChart: '',
@@ -63,16 +78,19 @@ td{
   width: auto;
   margin-left: 20px;
 }
-.selectItem{
-  display: inline-block;
-  padding: 5px 15px;
-  margin: 5px;
-  border-radius: 5px;
-  border: 1px solid var(--on-color);
-  cursor: pointer;
+.point{
+  font-size: 12px;
+  padding-left: 25px;
+  color: var(--off-color);
 }
-.selectItem.show{
-  background-color: var(--on-color);
-  color: #fff;
+.tabRadio{
+  display: inline-block;
+}
+.postFrm{
+  display: none;
+  margin-left: 100px;
+}
+.postFrm.show{
+  display: block;
 }
 </style>

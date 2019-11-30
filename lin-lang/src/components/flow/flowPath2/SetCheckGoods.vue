@@ -16,12 +16,12 @@
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
-              <span>选择一张宝贝图片作为试客在拼多多APP搜索查看到宝贝主图（需要和拼多多搜索结果主图一致）</span>
+              <span class="point">选择一张宝贝图片作为试客在拼多多APP搜索查看到宝贝主图（需要和拼多多搜索结果主图一致）</span>
             </td>
           </tr>
           <tr>
             <td class="title">设置关键词：</td>
-            <td colspan="3">设置试客搜索关键词，试客将以该关键词完成搜索进店（搜索关键词进店量总数之和必须为100%）</td>
+            <td colspan="3" class="point">设置试客搜索关键词，试客将以该关键词完成搜索进店（搜索关键词进店量总数之和必须为100%）</td>
           </tr>
         </table>
         <div v-for="(item, key) in wordVal" :key="key" class="wordLine">
@@ -51,7 +51,7 @@
                   </el-select>
                 </td>
                 <td>价格区间：</td>
-                <td>
+                <td class="twoInput">
                   <el-input placeholder="最低价格" v-model="wordVal[key].start"></el-input>
                   <el-input placeholder="最高价格" v-model="wordVal[key].end"></el-input>
                 </td>
@@ -69,7 +69,6 @@ export default {
   name: 'SetCheckGoods',
   data () {
     return {
-      checkedPC: true,
       checkedMo: true,
       imageUrl: '',
       wordVal: [
@@ -78,21 +77,10 @@ export default {
         {word: '', sort: "1", start: 56, end:77, isShow: false},
         {word: '', sort: "4", start: 56, end:77, isShow: false}
       ],
-      PCH: '',
       MoH: '',
-      by: true,
-      yfx: false,
-      hdfk: false,
-      hwsp: false,
-      es: false,
-      zpbz: false,
-      selectFhd: '',
-      textarea1: '',
     }
   },
   mounted(){
-    this.PCH = $('#PC').height();
-    this.isSow(this.checkedPC, '#PC', this.PCH);
     this.MoH = $('#Mo').height();
     this.isSow(this.checkedMo, '#Mo', this.MoH);
   },
@@ -104,7 +92,6 @@ export default {
           $(ele).css("height", "auto")
         }, 300)
       }else{
-        console.log($(ele).height());
         $(ele).css("height", $(ele).height());
         setTimeout(function(){
           $(ele).css("height", "0");
@@ -125,7 +112,7 @@ export default {
     },
     addLine(){
       if(this.wordVal.length < 10){
-        this.wordVal.push("")
+        this.wordVal.push({word: '', sort: "1", start: '', end:'', isShow: false})
       }else{
         alert("最多只能添加十个关键词")
       }
@@ -160,7 +147,7 @@ table .point{
   color: var(--off-color);
 }
 table td{
-  padding: 20px 0 20px 20px;
+  padding: 10px 0 10px 10px;
 }
 table .title{
   text-align: right;
@@ -175,7 +162,6 @@ table .title{
 }
 .modelFrm{
   font-size: 13px;
-  margin-bottom: 15px;
 }
 .modelFrm::-webkit-scrollbar{
   width: 0;
@@ -202,8 +188,7 @@ table .title{
   margin-left: 15px;
 }
 .wordLine{
-  margin-bottom: 25px;
-  margin-left: 90px;
+  margin: 25px 0 25px 90px;
 }
 .wordInfoFrm{
   display: none;
@@ -213,5 +198,8 @@ table .title{
 }
 .wordInfoFrm.active{
   display: block;
+}
+.twoInput .el-input:first-child{
+  margin-right: 15px;
 }
 </style>

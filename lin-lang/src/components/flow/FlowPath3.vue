@@ -1,7 +1,7 @@
 <template>
   <div id="path3">
-    <el-collapse :value="['1']">
-      <el-collapse-item title="1、设置上线时间及投放计划" name="1" class="pathTitle">
+    <el-collapse :value="['top1', 'top2', 'top3']">
+      <el-collapse-item title="1、设置上线时间" name="top1">
         <table class="dateInput">
           <tr>
             <td style="width:120px;">任务上线的日期：</td>
@@ -24,9 +24,43 @@
               </el-date-picker>
               <span class="errorInfo">设置计划日期不可在当前日期之前</span>
             </td>
-            <td colspan="2"></td>
           </tr>
         </table>
+      </el-collapse-item>
+      <el-collapse-item title="2、设置投放计划" name="top2">
+        <table class="pushTaskTable">
+          <tr>
+            <td style="width:120px;">本次投放总量：</td>
+            <td style="width:150px;"><el-input placeholder="多少件？" v-model="pushNum"></el-input></td>
+            <td class="unit" style="width:60px;">件</td>
+            <td class="point">建议投放5件</td>
+          </tr>
+          <tr>
+            <td style="width:120px;">进店转化率：</td>
+            <td><el-input placeholder="百分之多少？" v-model="percentage"></el-input></td>
+            <td class="unit">%</td>
+            <td class="point">不填写则不限制进店人数</td>
+          </tr>
+          <tr>
+            <td>本次投放时长：</td>
+            <td colspan="3">
+              <el-radio v-model="dayNum" label="1">1天</el-radio>
+              <el-radio v-model="dayNum" label="2">3天</el-radio>
+              <el-radio v-model="dayNum" label="3">5天</el-radio>
+              <el-radio v-model="dayNum" label="4">7天</el-radio>
+              <el-radio v-model="dayNum" label="5">9天</el-radio>
+              <el-radio v-model="dayNum" label="6">自定义</el-radio>
+              <div class="lineInputFrm" :class="{show: dayNum == '6'}">
+                <div class="lineInput">
+                  <el-input placeholder="多少天？" v-model="taskDay"></el-input>
+                </div>
+                <span class="unit">天</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </el-collapse-item>
+      <el-collapse-item title="3、计划表展示" name="top3">
         <table class="dateInfo">
             <thead>
               <tr>
@@ -72,6 +106,10 @@ export default {
       nowDate: new Date(),
       upDateStr: '',
       arrangeDate: [],
+      pushNum: '',
+      percentage: '',
+      dayNum: '1',
+      taskDay: '',
       dateData: [
         {"date": '2019-11-29', "num": 10, "percent": 10},
         {"date": '2019-11-30', "num": 20, "percent": 50},
@@ -314,5 +352,27 @@ tbody p{
 .el-input--mini{
   width: 70px;
   margin: 0 8px;
+}
+.pushTaskTable td{
+  padding: 10px 0;
+}
+.pushTaskTable .unit{
+  padding-left: 10px;
+}
+.point{
+  font-size: 12px;
+  color: var(--off-color);
+}
+#path3 .pushTaskTable .el-radio{
+  margin-right: 15px;
+}
+.lineInputFrm{
+  display: none;
+}
+.lineInputFrm.show{
+  display: inline-block;
+}
+.lineInput{
+  display: inline-block;
 }
 </style>
