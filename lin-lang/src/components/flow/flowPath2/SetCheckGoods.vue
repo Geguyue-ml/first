@@ -51,8 +51,9 @@
                   </el-select>
                 </td>
                 <td>价格区间：</td>
-                <td class="twoInput">
+                <td>
                   <el-input placeholder="最低价格" v-model="wordVal[key].start"></el-input>
+                  <span>--</span>
                   <el-input placeholder="最高价格" v-model="wordVal[key].end"></el-input>
                 </td>
               </tr>
@@ -195,6 +196,7 @@ table .title{
   border: 1px solid var(--on-color);
   border-radius: 5px;
   margin: 15px;
+  padding: 15px;
 }
 .wordInfoFrm.active{
   display: block;

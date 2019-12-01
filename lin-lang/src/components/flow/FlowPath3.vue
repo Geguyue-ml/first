@@ -1,7 +1,7 @@
 <template>
   <div id="path3">
-    <el-collapse :value="['top1', 'top2', 'top3']">
-      <el-collapse-item title="1、设置上线时间" name="top1">
+    <el-collapse :value="['top1', 'top2']">
+      <el-collapse-item title="1、设置上线时间及投放计划" name="top1">
         <table class="dateInput">
           <tr>
             <td style="width:120px;">任务上线的日期：</td>
@@ -11,7 +11,7 @@
                 v-model="upDate"
                 type="date"
                 placeholder="请选择任务上线的日期"
-                format="yyyy 年 MM 月 dd 日"
+                format="yyyy-MM-dd"
                 value-format="yyyy-MM-dd"
                 @change="getTime">
               </el-date-picker>
@@ -24,43 +24,43 @@
               </el-date-picker>
               <span class="errorInfo">设置计划日期不可在当前日期之前</span>
             </td>
+            <td colspan="2"></td>
           </tr>
-        </table>
-      </el-collapse-item>
-      <el-collapse-item title="2、设置投放计划" name="top2">
-        <table class="pushTaskTable">
           <tr>
             <td style="width:120px;">本次投放总量：</td>
-            <td style="width:150px;"><el-input placeholder="多少件？" v-model="pushNum"></el-input></td>
+            <td style="width:150px;"><el-input placeholder="多少件？" v-model="taskData.pushNum"></el-input></td>
             <td class="unit" style="width:60px;">件</td>
             <td class="point">建议投放5件</td>
           </tr>
           <tr>
             <td style="width:120px;">进店转化率：</td>
-            <td><el-input placeholder="百分之多少？" v-model="percentage"></el-input></td>
+            <td><el-input placeholder="百分之多少？" v-model="taskData.percentage"></el-input></td>
             <td class="unit">%</td>
             <td class="point">不填写则不限制进店人数</td>
           </tr>
           <tr>
             <td>本次投放时长：</td>
-            <td colspan="3">
-              <el-radio v-model="dayNum" label="1">1天</el-radio>
-              <el-radio v-model="dayNum" label="2">3天</el-radio>
-              <el-radio v-model="dayNum" label="3">5天</el-radio>
-              <el-radio v-model="dayNum" label="4">7天</el-radio>
-              <el-radio v-model="dayNum" label="5">9天</el-radio>
-              <el-radio v-model="dayNum" label="6">自定义</el-radio>
-              <div class="lineInputFrm" :class="{show: dayNum == '6'}">
+            <td colspan="3" style="width:680px;">
+              <el-radio v-model="taskData.dayNum" label="1">1天</el-radio>
+              <el-radio v-model="taskData.dayNum" label="2">3天</el-radio>
+              <el-radio v-model="taskData.dayNum" label="3">5天</el-radio>
+              <el-radio v-model="taskData.dayNum" label="4">7天</el-radio>
+              <el-radio v-model="taskData.dayNum" label="5">9天</el-radio>
+              <el-radio v-model="taskData.dayNum" label="6">自定义</el-radio>
+              <div class="lineInputFrm" :class="{show: taskData.dayNum == '6'}">
                 <div class="lineInput">
-                  <el-input placeholder="多少天？" v-model="taskDay"></el-input>
+                  <el-input placeholder="最多30天" v-model="taskData.taskDay"></el-input>
                 </div>
                 <span class="unit">天</span>
               </div>
             </td>
+            <td>
+              <div class="creatTable">生成投放计划表</div>
+            </td>
           </tr>
         </table>
       </el-collapse-item>
-      <el-collapse-item title="3、计划表展示" name="top3">
+      <el-collapse-item title="2、计划表展示" name="top2">
         <table class="dateInfo">
             <thead>
               <tr>
@@ -96,20 +96,22 @@
 </template>
 
 <script>
-import TaskModel from '../TaskModel'
+import TaskModel from '../TaskModel' 
 
 export default {
   name: 'FlowPath3',
   data () {
     return {
-      upDate: new Date(),
-      nowDate: new Date(),
-      upDateStr: '',
-      arrangeDate: [],
-      pushNum: '',
-      percentage: '',
-      dayNum: '1',
-      taskDay: '',
+      arrangeDate: [],        //整理后的数据
+      upDate: new Date(),     //日期
+      nowDate: new Date(),    //当前日期
+      upDateStr: '',          //日期字符串
+      taskData: {
+        pushNum: '',            //投放件数
+        percentage: '',         //转化率总数
+        dayNum: '1',            //投放时长设置
+        taskDay: '' ,           //投放时长自定义
+      },
       dateData: [
         {"date": '2019-11-29', "num": 10, "percent": 10},
         {"date": '2019-11-30', "num": 20, "percent": 50},
@@ -133,7 +135,7 @@ export default {
   },
   mounted(){
     this.getTimeStr();
-    this.arrangeFunc(this.dateData[0].date, false);
+    this.arrangeFunc(this.dateData[0].date);
   },
   methods: {
     getTimeStr(){
@@ -141,6 +143,7 @@ export default {
       this.nowDate = $('#hideDate').val()
       $('#hideDate').parent().hide()
     },
+    //当改变日期时，判断日期格式是否正确
     getTime(val){
       if(this.nowDate > val){
         $(".errorInfo").show();
@@ -149,77 +152,75 @@ export default {
         this.upDateStr = val;
         $(".errorInfo").hide();
 
+        //根据输入的设置收集dateData数据
+        this.defaultVal(this.taskData);
+
         //当用户改变日期后，根据选择的日期，整理arrangeDate数据，所有num及precent默认都为0
-        this.arrangeFunc(val, true);
+        this.arrangeFunc(val);
       }
     },
-    arrangeFunc(val, isChange){
+
+    //整理数据的方法
+    arrangeFunc(val){
       //获取数据中起始日期是星期几
       let weekDay = new Date(val).getDay();
+      let firstWeekArr = [];
+      let secondWeekArr = [];
+      let thirdWeekArr = [];
+      let dateData = this.dateData;
       
       //整理三周的数据
       let num = 0;
       switch (weekDay) {
-        case 0:
-          num = 7
+        case 0: num = 7;
           break;
-        case 1:
-          num = 6
+        case 1: num = 6;
           break;
-        case 2:
-          num = 5
+        case 2: num = 5;
           break;
-        case 3:
-          num = 4
+        case 3: num = 4;
           break;
-        case 4:
-          num = 3
+        case 4: num = 3;
           break;
-        case 5:
-          num = 2
+        case 5: num = 2;
           break;
-        case 6:
-          num = 1
+        case 6: num = 1;
           break;
         default:
           break;
       }
-      let firstWeekArr = [];
-      let secondWeekArr = [];
-      let thirdWeekArr = [];
-      let dateData = [];
-      if(isChange){
-        let now = val;
-        for(let i = 0; i < 14; i++){
-          dateData.push({"date": now, "num": 0, "percent": 10});
-          now = this.addDate(now);
-        }
-      }else{
-        dateData = this.dateData;
-      }
+
       for(let i = 0; i < weekDay; i++){
         firstWeekArr.push("");
       }
+
       for(let i = 0; i < num; i++){
         firstWeekArr.push(dateData[i]);
       }
+
       for(let i = num; i < num+7; i++){
         secondWeekArr.push(dateData[i]);
       }
+
       for(let i = num+7; i < dateData.length; i++){
         thirdWeekArr.push(dateData[i]);
       }
+
       for(let i = 0; i < num; i++){
         thirdWeekArr.push("");
       }
+
       this.$set(this.arrangeDate, 0, firstWeekArr);
       this.arrangeDate[1] = secondWeekArr;
+
       if(thirdWeekArr[0] == ""){
         this.arrangeDate[2] = ""
       }else{
         this.arrangeDate[2] = thirdWeekArr;
       }
     },
+
+    //整理数据时用的：返回当前天+1天
     addDate(date){
       let newDay = new Date(new Date(date).getTime() + 1*24*60*60*1000);
       let year = newDay.getFullYear();
@@ -233,12 +234,21 @@ export default {
       }
       return year + '-' + month + '-' + day;
     },
+
+    //表格中的投放数量，修改后触发，传入被修改元素的下标及子下标，并修改数据
     beforeData(val, key, subKey){
       var arrangeDate = this.arrangeDate;
+
+      //arrangeDate数组中，子下标中num的值不为0时
       if(arrangeDate[key][subKey].num != 0){
+
+        //传入子下标的位置，执行该函数
         changeData(key, subKey);
       }
+
       this.arrangeDate = arrangeDate;
+
+      //得到下标位置，时该位置之前所有天的投放数量至少为1
       function changeData(key, subKey){
         if(key == 0){
           for(let index in arrangeDate[0]){
@@ -275,6 +285,50 @@ export default {
           }
         }
       }
+    },
+
+    //根据传入的数据，决定设置项的值
+    defaultVal(val){
+      let wNum = val.pushNum || 0;
+      let wPercentage = val.percentage || 0;
+      let wTime = '';
+      if(val.dayNum == '6'){
+        wTime = val.taskDay
+      }else if(val.dayNum == '5'){
+        wTime = 9
+      }else if(val.dayNum == '4'){
+        wTime = 7
+      }else if(val.dayNum == '3'){
+        wTime = 5
+      }else if(val.dayNum == '2'){
+        wTime = 3
+      }else if(val.dayNum == '1'){
+        wTime = 1
+      }
+      
+      //根据设置项的值，整理dateData中的值
+      let today = this.upDateStr;
+      for(let i = 0; i < wTime; i++){
+        this.dateData.push(
+          {"date": today, "num": 10, "percent": 10},
+        );
+        today = this.addDate(today);
+      }
+      const result = this.randomDivide(60, 5 );
+      console.log(result.join(","));
+    },
+    randomDivide: function(total, nums){
+      let rest = total;
+
+      const result = Array.apply(null, { length: nums })
+      .map((n, i) => nums - i)
+      .map(n => {
+        const v = 1 + Math.floor(Math.random() * (rest / n * 2 - 1));
+        rest -= v;
+        return v;
+      });
+      result[nums - 1] += rest;
+      return result;
     }
   },
   watch: {
@@ -296,6 +350,12 @@ export default {
         }
       },
       deep: true
+    },
+    taskData: {
+      handler(newVal){
+        this.defaultVal(newVal);
+      },
+      deep: true
     }
   }
 }
@@ -304,6 +364,17 @@ export default {
 <style scoped>
 .dateInput{
   width: 100%;
+}
+.creatTable{
+  display: inline;
+  border: 1px solid var(--on-color);
+  border-radius: 5px;
+  background: var(--on-color);
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 20px;
 }
 .dateInfo{
   border-collapse:collapse;
@@ -353,17 +424,17 @@ tbody p{
   width: 70px;
   margin: 0 8px;
 }
-.pushTaskTable td{
+.dateInput td{
   padding: 10px 0;
 }
-.pushTaskTable .unit{
+.dateInput .unit{
   padding-left: 10px;
 }
 .point{
   font-size: 12px;
   color: var(--off-color);
 }
-#path3 .pushTaskTable .el-radio{
+#path3 .dateInput .el-radio{
   margin-right: 15px;
 }
 .lineInputFrm{
