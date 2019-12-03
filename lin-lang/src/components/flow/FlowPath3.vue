@@ -61,34 +61,15 @@
         </table>
       </el-collapse-item>
       <el-collapse-item title="2、计划表展示" name="top2">
-        <table class="dateInfo">
-            <thead>
-              <tr>
-                <td colspan="7" class="title">{{ upDateStr }}</td>
-              </tr>
-              <tr class="week">
-                <td>日</td>
-                <td>一</td>
-                <td>二</td>
-                <td>三</td>
-                <td>四</td>
-                <td>五</td>
-                <td>六</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, key) in arrangeDate" :key="key">
-                <td v-for="(subItem, subKey) in item" :key="subKey">
-                  <template v-if="subItem != ''">
-                    <em>{{ subItem.date.substring(subItem.date.length, subItem.date.length-2) }}</em>
-                    <p><span>投放数量<el-input-number v-model="subItem.num" :min="0" :max="999" size='mini' @change="val => beforeData(val, key, subKey)"></el-input-number></span></p>
-                    <p><span>进店比列<el-input size="mini" placeholder="进店率" v-model="subItem.percent"></el-input>%</span></p>
-                    <p><span>限制进店人数{{ Math.ceil(subItem.num / subItem.percent) || '最大化' }}</span></p>
-                  </template>
-                </td>
-              </tr>
-            </tbody>
-        </table>
+        <div class="weekTable">
+          <div class="tableTitle">{{ upDateStr }}</div>
+          <div class="subItem" v-for="(item, key) in dateData" :key="key">
+            <div class="day">{{ item.date.substring(item.date.length, item.date.length - 2) }} <span class="week">/&nbsp;周{{ showWeek(item.date) }}</span></div>
+            <p><span>投放数量<el-input-number v-model="item.num" :min="0" :max="999" size='mini' @change="val => beforeData(val, key, subKey)"></el-input-number></span></p>
+            <p><span>日进店人数<el-input size="mini" placeholder="进店率" v-model="item.percent"></el-input></span></p>
+            <p><span>日转化率为{{ taskData.percentage }}%</span></p>
+          </div>
+        </div>
       </el-collapse-item>
     </el-collapse>
     <llTaskModel :next="4" :prev="2"></llTaskModel>
@@ -113,29 +94,30 @@ export default {
         taskDay: '' ,           //投放时长自定义
       },
       dateData: [
-        {"date": '2019-11-29', "num": 10, "percent": 10},
-        {"date": '2019-11-30', "num": 20, "percent": 50},
-        {"date": '2019-12-01', "num": 60, "percent": 80},
-        {"date": '2019-12-02', "num": 70, "percent": 90},
-        {"date": '2019-12-03', "num": 80, "percent": 100},
-        {"date": '2019-12-04', "num": 90, "percent": 60},
-        {"date": '2019-12-05', "num": 95, "percent": 55},
-        {"date": '2019-12-06', "num": 85, "percent": 15},
-        {"date": '2019-12-07', "num": 75, "percent": 25},
-        {"date": '2019-12-08', "num": 65, "percent": 30},
-        {"date": '2019-12-09', "num": 55, "percent": 88},
-        {"date": '2019-12-10', "num": 55, "percent": 88},
-        {"date": '2019-12-11', "num": 55, "percent": 88},
-        {"date": '2019-12-12', "num": 55, "percent": 88}
+        {"date": '2019-11-29', "num": 0, "percent": 0},
+        {"date": '2019-11-30', "num": 0, "percent": 0},
+        {"date": '2019-12-01', "num": 0, "percent": 0},
+        {"date": '2019-12-02', "num": 0, "percent": 0},
+        {"date": '2019-12-03', "num": 0, "percent": 0},
+        {"date": '2019-12-04', "num": 0, "percent": 0},
+        {"date": '2019-12-05', "num": 0, "percent": 0},
+        {"date": '2019-12-06', "num": 0, "percent": 0},
       ]
     }
   },
   components: {
     "llTaskModel": TaskModel,
   },
+  computed: {
+    showWeek(){
+      return function(val){
+        return this.getWeek(val);
+      }
+    }
+  },
   mounted(){
     this.getTimeStr();
-    this.arrangeFunc(this.dateData[0].date);
+    this.arrangeFunc(this.dateData);
   },
   methods: {
     getTimeStr(){
@@ -158,59 +140,123 @@ export default {
       }
     },
 
-    //整理数据的方法
-    arrangeFunc(val, taskDay){
-      //获取数据中起始日期是星期几
+    //根据传入的日期，计算周几
+    getWeek(val){
       let weekDay = new Date(val).getDay();
-      let firstWeekArr = [];
-      let secondWeekArr = [];
-      let thirdWeekArr = [];
-      let fourthWeekArr = [];
-      let fifthWeekArr = [];
-      let sixthWeekArr = [];
-      let dateData = this.dateData;
-      
-      //整理三周的数据
-      let num = 0;
+      let weekDayStr = '';
       switch (weekDay) {
-        case 0: num = 7;
+        case 0: weekDayStr = '天';
           break;
-        case 1: num = 6;
+        case 1: weekDayStr = '一';
           break;
-        case 2: num = 5;
+        case 2: weekDayStr = '二';
           break;
-        case 3: num = 4;
+        case 3: weekDayStr = '三';
           break;
-        case 4: num = 3;
+        case 4: weekDayStr = '四';
           break;
-        case 5: num = 2;
+        case 5: weekDayStr = '五';
           break;
-        case 6: num = 1;
+        case 6: weekDayStr = '六';
           break;
         default:
           break;
       }
-
-      for(let i = 0; i < weekDay; i++){
-        firstWeekArr.push("");
+      return weekDayStr;
+    },
+    //整理数据的方法
+    arrangeFunc(data){
+      if(data){
+        let weekDay = new Date(data[0].date).getDay();
+      }else{
+        console.log("dateData数据未整理！");
       }
 
-      for(let i = 0; i < taskDay; i++){
-        if(i < num){
-          firstWeekArr.push(dateData[i]);
-        }else if(i < num + 7){
-          secondWeekArr.push(dateData[i]);
-        }else if(i < num + 14){
-          thirdWeekArr.push(dateData[i]);
-        }else if(i < num + 21){
-          fourthWeekArr.push(dateData[i]);
-        }else if(i < num + 28){
-          fifthWeekArr.push(dateData[i]);
-        }else if(i < num + 35){
-          sixthWeekArr.push(dateData[i]);
-        }
-      }
-      console.log(firstWeekArr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //获取数据中起始日期是星期几
+      // let weekDay = new Date(val).getDay();
+      // let firstWeekArr = [];
+      // let secondWeekArr = [];
+      // let thirdWeekArr = [];
+      // let fourthWeekArr = [];
+      // let fifthWeekArr = [];
+      // let sixthWeekArr = [];
+      // let weekArr = [];
+      // let dateData = this.dateData;
+      // console.log(dateData);
+      
+      // //整理三周的数据
+      // let num = 0;
+      // switch (weekDay) {
+      //   case 0: num = 7;
+      //     break;
+      //   case 1: num = 6;
+      //     break;
+      //   case 2: num = 5;
+      //     break;
+      //   case 3: num = 4;
+      //     break;
+      //   case 4: num = 3;
+      //     break;
+      //   case 5: num = 2;
+      //     break;
+      //   case 6: num = 1;
+      //     break;
+      //   default:
+      //     break;
+      // }
+
+      // for(let i = 0; i < weekDay; i++){
+      //   firstWeekArr.push("");
+      // }
+
+      // for(let i = 0; i < taskDay; i++){
+      //   if(i < num){
+      //     firstWeekArr.push(dateData[i]);
+      //   }else if(i < num + 7){
+      //     secondWeekArr.push(dateData[i]);
+      //   }else if(i < num + 14){
+      //     thirdWeekArr.push(dateData[i]);
+      //   }else if(i < num + 21){
+      //     fourthWeekArr.push(dateData[i]);
+      //   }else if(i < num + 28){
+      //     fifthWeekArr.push(dateData[i]);
+      //   }else if(i < num + 35){
+      //     sixthWeekArr.push(dateData[i]);
+      //   }
+      // }
+
+      // this.arrangeDate.push(firstWeekArr);
+      // if(secondWeekArr.length != 0){
+      //   this.arrangeDate.push(secondWeekArr);
+      // }
+      // if(secondWeekArr.length != 0){
+      //   this.arrangeDate.push(secondWeekArr);
+      // }
+      // if(thirdWeekArr.length != 0){
+      //   this.arrangeDate.push(thirdWeekArr);
+      // }
+      // if(fourthWeekArr.length != 0){
+      //   this.arrangeDate.push(fourthWeekArr);
+      // }
+      // if(fifthWeekArr.length != 0){
+      //   this.arrangeDate.push(fifthWeekArr);
+      // }
+      // if(sixthWeekArr.length != 0){
+      //   this.arrangeDate.push(sixthWeekArr);
+      // }
     },
 
     //整理数据时用的：返回当前天+1天
@@ -374,20 +420,6 @@ export default {
   cursor: pointer;
   padding: 10px 20px;
 }
-.dateInfo{
-  border-collapse:collapse;
-  width: 99.9%;
-}
-.dateInfo thead .title{
-  font-size: 16px;
-  font-weight: bold;
-  padding: 15px 0;
-}
-.dateInfo thead td{
-  text-align: center;
-  font-size: 15px;
-  padding: 10px 0;
-}
 .week td, tbody td{
   border: 1px solid #DCDFE6;
   text-align: center;
@@ -400,19 +432,39 @@ export default {
   background: url(../../assets/close.png) no-repeat 0 0;
   background-size: 9%;
 }
-tbody em{
-  font-size: 20px;
+.tableTitle{
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 15px;
+}
+.subItem .day{
+  font-size: 16px;
   font-weight: bold;
   color: var(--on-color);
+  margin-bottom: 8px;
+}
+.subItem p{
+  padding-bottom: 10px;
+  text-align: center;
+}
+.weekTable{
+  font-size: 0;
+}
+.subItem{
+  width: calc(100% / 7);
+  display: inline-block;
+  text-align: center;
+  font-size: 12px;
+  padding: 10px 0;
+  border: 1px solid #DCDFE6;
+  margin-right: -1px;
+  margin-bottom: -1px;
 }
 tbody td{
   padding-left: 10px;
   width: 14.2%;
   height: 145px;
-}
-tbody p{
-  padding-bottom: 10px;
-  text-align: left;
 }
 .el-input-number--mini{
   width: 93px;
