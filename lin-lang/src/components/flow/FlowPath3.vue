@@ -153,20 +153,21 @@ export default {
         $(".errorInfo").hide();
 
         //根据输入的设置收集dateData数据
+        this.dateData.length = 0
         this.defaultVal(this.taskData);
-
-        //当用户改变日期后，根据选择的日期，整理arrangeDate数据，所有num及precent默认都为0
-        this.arrangeFunc(val);
       }
     },
 
     //整理数据的方法
-    arrangeFunc(val){
+    arrangeFunc(val, taskDay){
       //获取数据中起始日期是星期几
       let weekDay = new Date(val).getDay();
       let firstWeekArr = [];
       let secondWeekArr = [];
       let thirdWeekArr = [];
+      let fourthWeekArr = [];
+      let fifthWeekArr = [];
+      let sixthWeekArr = [];
       let dateData = this.dateData;
       
       //整理三周的数据
@@ -194,30 +195,22 @@ export default {
         firstWeekArr.push("");
       }
 
-      for(let i = 0; i < num; i++){
-        firstWeekArr.push(dateData[i]);
+      for(let i = 0; i < taskDay; i++){
+        if(i < num){
+          firstWeekArr.push(dateData[i]);
+        }else if(i < num + 7){
+          secondWeekArr.push(dateData[i]);
+        }else if(i < num + 14){
+          thirdWeekArr.push(dateData[i]);
+        }else if(i < num + 21){
+          fourthWeekArr.push(dateData[i]);
+        }else if(i < num + 28){
+          fifthWeekArr.push(dateData[i]);
+        }else if(i < num + 35){
+          sixthWeekArr.push(dateData[i]);
+        }
       }
-
-      for(let i = num; i < num+7; i++){
-        secondWeekArr.push(dateData[i]);
-      }
-
-      for(let i = num+7; i < dateData.length; i++){
-        thirdWeekArr.push(dateData[i]);
-      }
-
-      for(let i = 0; i < num; i++){
-        thirdWeekArr.push("");
-      }
-
-      this.$set(this.arrangeDate, 0, firstWeekArr);
-      this.arrangeDate[1] = secondWeekArr;
-
-      if(thirdWeekArr[0] == ""){
-        this.arrangeDate[2] = ""
-      }else{
-        this.arrangeDate[2] = thirdWeekArr;
-      }
+      console.log(firstWeekArr);
     },
 
     //整理数据时用的：返回当前天+1天
@@ -289,6 +282,7 @@ export default {
 
     //根据传入的数据，决定设置项的值
     defaultVal(val){
+      //整理设置项的值及它们的默认值
       let wNum = val.pushNum || 0;
       let wPercentage = val.percentage || 0;
       let wTime = '';
@@ -308,18 +302,18 @@ export default {
       
       //根据设置项的值，整理dateData中的值
       let today = this.upDateStr;
+      const result = this.randomDivide(wNum, wTime);
       for(let i = 0; i < wTime; i++){
-        this.dateData.push(
-          {"date": today, "num": 10, "percent": 10},
-        );
+        this.dateData.push({"date": today, "num": result[i], "percent": 10});
         today = this.addDate(today);
       }
-      const result = this.randomDivide(60, 5 );
-      console.log(result.join(","));
+
+      //根据dateData的值，整理arrangeDate的值
+      this.arrangeFunc(val, wTime);
     },
     randomDivide: function(total, nums){
       let rest = total;
-
+      let arr = [];
       const result = Array.apply(null, { length: nums })
       .map((n, i) => nums - i)
       .map(n => {
@@ -328,7 +322,11 @@ export default {
         return v;
       });
       result[nums - 1] += rest;
-      return result;
+      return result.sort(function(a, b){
+        if(a > b) return 1;
+        if(a < b) return -1;
+        if(a = b) return 0;
+      });
     }
   },
   watch: {
