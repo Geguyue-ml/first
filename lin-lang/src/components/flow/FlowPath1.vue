@@ -40,23 +40,15 @@
             <div class="txtFrm">
               <p class="txtLine">
                 <span class="txtPoint"></span>
-                <span class="txt">任务流程：适店提交申请，平台根据商家设置的每日投放数量从申请试客中，抽取符合中奖条件的试客完成下单；</span>
+                <span class="txt">商家可自定义每日投放数量、商品转化率，平台平均分布试客在每个时段进店申请；</span>
               </p>
               <p class="txtLine">
                 <span class="txtPoint"></span>
-                <span class="txt">商家可自定个时段平均进店申请试用商品；</span>
+                <span class="txt">琳琅智能AI人群标签系统自动推送符合商品标签试客，精准控制进店人群；</span>
               </p>
               <p class="txtLine">
                 <span class="txtPoint"></span>
-                <span class="txt">琳琅智能AI人准控制进店人群；</span>
-              </p>
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">该任务类型可以排队；</span>
-              </p>
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">试客1-3天进店通过购，下单，评价，追评等操作优化整个uv价值链条；</span>
+                <span class="txt">试客1-3天进店通过关键词或淘口令搜索进店，点击，浏览，收藏，加购，下单，评价，追评等操作优化整个uv价值链条。</span>
               </p>
             </div>
           </div>
@@ -65,15 +57,7 @@
             <div class="txtFrm">
               <p class="txtLine">
                 <span class="txtPoint"></span>
-                <span class="txt">任务流程：适店提交申请，平台根据商家设置中奖条件的试客完成下单；</span>
-              </p>
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">商家可自定个时段平均进店申请试用商品；</span>
-              </p>
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">琳琅智能AI人准控制进店人群；</span>
+                <span class="txt">下单返现解析语句没有；</span>
               </p>
             </div>
           </div>

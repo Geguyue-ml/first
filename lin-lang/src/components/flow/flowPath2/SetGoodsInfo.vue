@@ -1,57 +1,58 @@
 <template>
   <div id="setGoodsInfo">
-    <table>
-      <tr>
-        <td class="title" style="width:240px;">商品名称：</td>
-        <td style="width:260px;">
-          <el-input v-model="name" maxlength="12" placeholder="请输入商品名称" show-word-limit></el-input>
-          <!-- https://mobile.yangkeduo.com/goods.html?goods_id=2784921172&_x_link_id=5ef64ed0-405e-4f9c-a486-efe1d4612e31&refer_share_uid=6941554729&share_uin=LBA2FSYC6OLWNWKVBWIB5ISB7M_GEXDA&page_from=39&_wv=41729&refer_share_channel=copy_link&refer_share_id=c51e06WsObu9jibuMqhftba4CjVOhecX&share_uid=6941554729&_wvx=10 -->
-        </td>
-        <td class="title" style="width:180px;">商品链接：</td>
-        <td><el-input v-model="link" placeholder="请输入商品链接"></el-input></td>
-      </tr>
-      <tr>
-        <td class="title">商品分类：</td>
-        <td>
+    <div class="goodsBtn"><el-button type="primary" @click="showGoods">从商品库中选择宝贝</el-button></div>
+    <div class="modelBox">
+      <div class="itemBox">
+        <span class="title">商品名称：</span>
+        <div class="lengthType short"><el-input v-model="name" maxlength="12" placeholder="请输入商品名称" show-word-limit></el-input></div>
+      </div>
+      <div class="itemBox">
+        <span class="title" title="商品在平台展示的名称，不要和淘宝商品名称相同，防止试客通过淘宝商品名称购买">商品链接：</span>
+        <div class="lengthType long"><el-input v-model="link" placeholder="商品在平台展示的名称，不要和淘宝商品名称相同，防止试客通过淘宝商品名称购买"></el-input></div>
+      </div>
+      <div class="itemBox">
+        <span class="title">商品分类：</span>
+        <div class="lengthType short">
           <el-select v-model="select" slot="prepend" placeholder="请选择商品分类">
             <el-option label="潮流女装" value="1"></el-option>
             <el-option label="时尚男装" value="2"></el-option>
             <el-option label="鞋子箱包" value="3"></el-option>
           </el-select>
-        </td>
-        <td class="title">平台展示图：</td>
-        <td>
+        </div>
+      </div>
+      <div class="itemBox">
+        <span class="title">平台展示图：</span>
+        <div class="lengthType long">
           <el-upload
-            class="avatar-uploader"
+            class="upload-demo"
             action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            :before-remove="beforeRemove"
+            multiple
+            :limit="1"
+            :file-list="imageList">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
-        </td>
-      </tr>
-      <tr>
-        <td class="title">试客每单拍：</td>
-        <td><el-input v-model="num" placeholder="请输入每单拍的件数"></el-input></td>
-        <td colspan="2" class="infoPoint">说明</td>
-      </tr>
-      <tr>
-        <td class="title">商品价格：</td>
-        <td>
+        </div>
+      </div>
+      <div class="itemBox">
+        <span class="title">商品价格：</span>
+        <div class="lengthType short">
           <el-input v-model="buyPrice" placeholder="请输入商品直接购买价格"></el-input>
-        </td>
-        <td colspan="2" class="infoPoint">说明</td>
-      </tr>
-      <tr>
-        <td class="title">商品规格：</td>
-        <td>
+        </div>
+      </div>
+      <div class="itemBox">
+        <span class="title">试客每单拍：</span>
+        <div class="lengthType short"><el-input v-model="num" placeholder="请输入每单拍的件数"></el-input></div>
+      </div>
+      <div class="itemBox line">
+        <span class="title">商品规格：</span>
+        <div class="lengthType short">
           <el-input type="textarea" autosize placeholder="任意规格（按试用价格下单）" v-model="textarea1"></el-input>
-        </td>
-        <td colspan="2" class="infoPoint">说明</td>
-      </tr>
-    </table>
+        </div>
+        <span class="point">如需试客拍下指定规格，请务必填写具体规格;若有阶梯价商品，需要试客拍下任意规格，商品的价格请设置为阶梯价的最高价格，并填写不限规格；鞋子服装类商品，不可限制产品的尺码，如有疑问请联系在线客服</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -65,7 +66,9 @@ export default {
       name: '',
       link: '',
       select: '',
-      imageUrl: '',
+      imageList: [
+        {name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
+      ],
       buyPrice: '',
       teamPrice: '',
       num: 1,
@@ -89,6 +92,12 @@ export default {
         this.$message.error('上传头像图片只能是 JPG 格式!');
       }
       return isJPG && isLt2M;
+    },
+    showGoods(){
+      console.log("123")
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${ file.name }？`);
     }
   }
 }
@@ -105,11 +114,46 @@ export default {
 #setGoodsInfo .modelBox{
   padding-top: 0;
 }
+.goodsBtn{
+  padding: 25px 0;
+}
+.itemBox{
+  width: 50%;
+  margin: 10px 0;
+}
+.itemBox.line{
+  width: 100%;
+}
+.lengthType{
+  display: inline-block;
+  vertical-align: middle;
+}
+.lengthType.short{
+  width: 40%;
+}
+.lengthType.long{
+  width: 80%;
+}
+.lengthType.center{
+  width: 60%;
+}
+.el-upload__tip{
+  display: inline-block;
+  margin-left: 15px;
+  color: var(--off-color);
+}
+.el-button--primary{
+  background-color: var(--on-color);
+  border-color: var(--on-color);
+}
 .title{
-  padding-right: 20px;
-  text-align: right;
+  vertical-align: middle;
 }
 .point{
+  padding-left: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
   color: var(--off-color);
 }
 .modelItem{

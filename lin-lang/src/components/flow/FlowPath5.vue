@@ -11,28 +11,7 @@
           </table>
         </div>
       </el-collapse-item>
-      <el-collapse-item title="2、支付方式" name="payType">
-        <el-row>
-          <el-col :span="24">
-            <div class="grid-content bg-purple">
-              <div class="itemPay active" @click="payTypeFunc($event)">
-                <img class="payImg" src="../../assets/gold_icon.png">
-                <span class="payTxt">金豆支付</span>
-                <span class="rightTxt" title="金豆充值">（可用金豆个）</span>
-              </div>
-              <div class="itemPay" @click="payTypeFunc($event)">
-                <img class="payImg" src="../../assets/vxin_icon.jpg">
-                <span class="payTxt">微信支付</span>
-              </div>
-              <div class="itemPay" @click="payTypeFunc($event)">
-                <img class="payImg" src="../../assets/alipay_icon.jpg">
-                <span class="payTxt">支付宝支付</span>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-      </el-collapse-item>
-      <el-collapse-item title="3、技术服务" name="artServe">
+      <el-collapse-item title="2、平台服务" name="artServe">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -78,6 +57,27 @@
                   <p class="cost">5200元</p>
                   <p class="itemPoint">赠7000个金豆，适合新手卖家短期使用</p>
                 </div>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-collapse-item>
+      <el-collapse-item title="3、支付方式" name="payType">
+        <el-row>
+          <el-col :span="24">
+            <div class="grid-content bg-purple">
+              <div class="itemPay active" @click="payTypeFunc($event)">
+                <img class="payImg" src="../../assets/gold_icon.png">
+                <span class="payTxt">金豆支付</span>
+                <span class="rightTxt" title="金豆充值">（可用金豆个）</span>
+              </div>
+              <div class="itemPay" @click="payTypeFunc($event)">
+                <img class="payImg" src="../../assets/vxin_icon.jpg">
+                <span class="payTxt">微信支付</span>
+              </div>
+              <div class="itemPay" @click="payTypeFunc($event)">
+                <img class="payImg" src="../../assets/alipay_icon.jpg">
+                <span class="payTxt">支付宝支付</span>
               </div>
             </div>
           </el-col>

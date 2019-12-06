@@ -57,7 +57,7 @@
           <div class="subItem" v-for="(item, key) in dateData" :key="key">
             <div class="day">{{ item.date.substring(item.date.length, item.date.length - 2) }} <span class="week">/&nbsp;周{{ showWeek(item.date) }}</span></div>
             <p><span>投放数量<el-input-number v-model="item.num" :min="0" :max="999" size='mini' @change="val => beforeData(val, key, subKey)"></el-input-number></span></p>
-            <p><span>日进店人数<el-input size="mini" placeholder="进店率" v-model="dateData.npVal"></el-input></span></p>
+            <p><span>日进店人数<el-input size="mini" placeholder="进店率" v-model="item.person"></el-input></span></p>
             <p><span>{{ taskData.percentage ? '日转化率为'+taskData.percentage+'%' : '不限制当日进店人数' }}</span></p>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default {
       nowDate: null,          //当前日期
       upDateStr: '',          //日期字符串
       taskData: {
-        pushNum: '',            //投放件数
+        pushNum: 20,            //投放件数
         percentage: '',         //转化率总数
         dayNum: null,            //投放时长设置
         taskDay: '' ,           //投放时长自定义
@@ -102,11 +102,11 @@ export default {
   },
   created(){
     this.dateData = [
-      {"date": '2019-11-29', "num": 0, "percent": 0},
-      {"date": '2019-11-30', "num": 0, "percent": 0},
-      {"date": '2019-12-01', "num": 0, "percent": 0},
-      {"date": '2019-12-02', "num": 0, "percent": 0},
-      {"date": '2019-12-03', "num": 0, "percent": 0}
+      {"date": '2019-11-29', "num": 1, "percentage": 0, "person": 0},
+      {"date": '2019-11-30', "num": 1, "percentage": 0, "person": 0},
+      {"date": '2019-12-01', "num": 3, "percentage": 0, "person": 0},
+      {"date": '2019-12-02', "num": 6, "percentage": 0, "person": 0},
+      {"date": '2019-12-03', "num": 9, "percentage": 0, "person": 0}
     ]
   },
   mounted(){
@@ -133,6 +133,7 @@ export default {
         //切换正确的日期后对每天的投放数量及进店比例计算赋值
         this.changePushNum(this.taskData.pushNum);
         this.changePercentage(this.taskData.percentage || 0);
+        this.changePerson();
       }
     },
 
@@ -220,6 +221,7 @@ export default {
       for(let i = 0; i < this.dateData.length; i++){
         this.dateData[i].num = numArr[i];
       }
+      this.changePerson();
     },
 
     /**
@@ -228,7 +230,20 @@ export default {
      */
     changePercentage(val){
       for(let i = 0; i < this.dateData.length; i++){
-        this.dateData[i].percent = val;
+        this.dateData[i].percentage = val;
+      }
+      this.changePerson();
+    },
+
+    /**
+     * 循环计算每天的进店人数
+     */
+    changePerson(){
+      for(let i = 0; i < this.dateData.length; i++){
+        let num = this.dateData[i].num
+        let percentage = this.dateData[i].percentage / 100
+        let personNum = Math.floor(num / percentage)
+        this.dateData[i].person = personNum == 'Infinity' ? 0 : personNum;
       }
     },
 
@@ -305,7 +320,7 @@ export default {
     pushData: function(company, date){
       let today = date;
       for(let i = 0; i < company; i++){
-        this.dateData.push({"date": today, "num": 0, "percent": 0});
+        this.dateData.push({"date": today, "num": 0, "percentage": 0, "person": 0});
         today = this.getFormatDate(today, true);
       }
     },
@@ -347,6 +362,7 @@ export default {
       }
       this.changePushNum(this.taskData.pushNum);
       this.changePercentage(this.taskData.percentage || 0);
+      this.changePerson();
     },
 
     /**
@@ -360,6 +376,7 @@ export default {
       }
       this.changePushNum(this.taskData.pushNum);
       this.changePercentage(this.taskData.percentage || 0);
+      this.changePerson();
     }
   }
 }

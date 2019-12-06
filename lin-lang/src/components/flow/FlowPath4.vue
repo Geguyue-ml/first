@@ -2,11 +2,11 @@
   <div id="path4">
     <div v-if="taskType == 'task1'">
       <el-collapse :value="task1">
-        <el-collapse-item title="1、系统默认（必选）" name="defaultServe">
+        <el-collapse-item title="1、系统默认" name="defaultServe">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.jztf">精准投放（20金豆）</el-checkbox>
+                <span class="pointTitle">精准投放（20金豆）</span>
                 <div class="infoFrm">
                   <p class="point">选择此服务后，琳琅将根据地区、性别、年龄段、收入、职业筛选准确的人群通过试用审核</p>
                 </div>
@@ -16,19 +16,27 @@
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.rwsh">试用任务审核（2金豆）</el-checkbox>
+                <span class="pointTitle">试用任务审核（2金豆）</span>
                 <div class="infoFrm">
                   <p>9-24点发布的试用任务，琳琅会在30分钟内审核完毕，若任务发布有问题，系统会驳回让您修改，客服会第一时间与您联系。</p>
                 </div>
               </div>
             </el-col>
           </el-row>
-        </el-collapse-item>
-        <el-collapse-item title="2、免费增值服务" name="serve">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
-                <el-checkbox v-model="addServe.sydbj">试用担保金</el-checkbox>
+                <span class="pointTitle">短信通知（1金豆）</span>
+                <div class="infoFrm">
+                  <p class="point">选择此服务后，系统将推送中奖短信给试客，提示试客将在指定时间内完成进店下单</p>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <span class="pointTitle">试用担保金（商品金额大于250时，多少钱？）</span>
                 <div class="infoFrm">
                   <p class="point">选择此服务，需支付试用商品金额的10%作为试用担保金，任务完成后退还</p>
                   <p class="pointTitle">注：有以下行为者，试用担保金不予以退还</p>
@@ -40,8 +48,30 @@
               </div>
             </el-col>
           </el-row>
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <span class="pointTitle">搜索关键词截图 （免费）</span>
+                <div class="infoFrm">
+                  <p class="point">选择此服务后，所有做第一天任务流程的试客，需要按照任务关键词搜索进店，并上传搜索截图便于商家审核</p>
+                  <p class="pointTitle">温馨提示：系统默认试客做任务不用上传关键词截图，若需要试客上传关键词截图可以勾选。强制设置试客上传截图，可能会影响试客积极性。</p>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <div class="grid-content bg-purple">
+                <span class="pointTitle">试客中奖2小时内下单（免费）</span>
+                <div class="infoFrm">
+                  <p class="point">选择此服务后，试客要在中奖后2小时内完成领奖下单，试客超时未下单平台将自动取消中奖资格，推送给其他试客完成</p>
+                  <p class="pointTitle">未设置此选项的任务，系统默认试客最晚在21:30前下单，超时未下单将自动取消。</p>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
         </el-collapse-item>
-        <el-collapse-item title="3、提升试客积极性" name="upPositive">
+        <el-collapse-item title="2、提升试客积极性" name="upPositive">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -81,7 +111,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="4、广告位投放" name="adsense">
+        <el-collapse-item title="3、广告位投放" name="adsense">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -96,7 +126,7 @@
             </el-col>
           </el-row>
         </el-collapse-item>
-        <el-collapse-item title="5、安全优化" name="safe">
+        <el-collapse-item title="4、安全优化" name="safe">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -114,30 +144,8 @@
               </div>
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="safe.isWord">搜索关键词截图 （20金豆）</el-checkbox>
-                <div class="infoFrm">
-                  <p class="point">选择此服务后，所有做第一天任务流程的试客，需要按照任务关键词搜索进店，并上传搜索截图便于商家审核</p>
-                  <p class="pointTitle">温馨提示：系统默认试客做任务不用上传关键词截图，若需要试客上传关键词截图可以勾选。强制设置试客上传截图，可能会影响试客积极性。</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="safe.isMessage">短信催付（0.1金豆/每单）</el-checkbox>
-                <div class="infoFrm">
-                  <p class="point">选择此服务后，系统将推送中奖短信给试客，提示试客将在指定时间内完成进店下单</p>
-                  <p>共计：10人*0.1金豆=1金豆</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
         </el-collapse-item>
-        <el-collapse-item title="6、试客进店控制" name="intoControl">
+        <el-collapse-item title="5、试客进店控制" name="intoControl">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -163,19 +171,8 @@
               </div>
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple">
-                <el-checkbox v-model="intoControl.isHours">试客中奖2小时内下单（免费）</el-checkbox>
-                <div class="infoFrm">
-                  <p class="point">选择此服务后，试客要在中奖后2小时内完成领奖下单，试客超时未下单平台将自动取消中奖资格，推送给其他试客完成</p>
-                  <p class="pointTitle">未设置此选项的任务，系统默认试客最晚在21:30前下单，超时未下单将自动取消。</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
         </el-collapse-item>
-        <el-collapse-item title="7、细化中奖人群标签" name="labelObj">
+        <el-collapse-item title="6、细化中奖人群标签" name="labelObj">
           <el-row>
             <el-col :span="24">
               <div class="grid-content bg-purple">
@@ -401,15 +398,13 @@ export default {
   name: 'FlowPath4',
   data () {
     return {
-      task1: ['defaultServe', 'serve', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj'],
+      task1: ['defaultServe', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj', 'costCount'],
       task2: ['market'],
       taskType : '',
       addServe: {
         sydbj: true,
         yjfh: true,
-        xtcj: true,
-        rwsh: true,
-        jztf: true
+        xtcj: true
       },
       upPositive: {
         uphfd: true,
@@ -530,13 +525,13 @@ export default {
 }
 .radioItem{
   display: inline-block;
+  margin-right: 15px;
 }
 .radioItem:not(:first-child){
   margin-right: 15px;
 }
 .el-input--mini{
   display: inline-block;
-  width: 90px;
 }
 .costTable{
   width: 100%;

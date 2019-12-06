@@ -39,9 +39,8 @@
         </td>
       </tr>
       <tr>
-        <td class="title">说明：</td>
-        <td colspan="3">
-          123
+        <td colspan="4">
+          <span class="pointTitle">温馨提示：请在发布试用推广期间，暂停淘宝客等返利设置，避免不必要的损失</span>
         </td>
       </tr>
     </table>
@@ -82,6 +81,9 @@ td{
   font-size: 12px;
   padding-left: 25px;
   color: var(--off-color);
+}
+.pointTitle{
+  color: var(--on-color);
 }
 .tabRadio{
   display: inline-block;
