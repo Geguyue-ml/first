@@ -36,7 +36,7 @@
       <el-collapse-item title="2、选择任务类型" name="2">
         <div class="modelBox">
           <div class="clickBox">
-            <el-radio v-model="taskTypeRadio" label="1">人气权重爆款试用</el-radio>
+            <el-radio v-model="taskTypeRadio" label="task1">人气权重爆款试用</el-radio>
             <div class="txtFrm">
               <p class="txtLine">
                 <span class="txtPoint"></span>
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="clickBox">
-            <el-radio v-model="taskTypeRadio" label="1">下单返现</el-radio>
+            <el-radio v-model="taskTypeRadio" label="task2">下单返现</el-radio>
             <div class="txtFrm">
               <p class="txtLine">
                 <span class="txtPoint"></span>
@@ -76,14 +76,14 @@ export default {
   data () {
     return {
       radio: '1',
-      taskTypeRadio: '1'
+      taskTypeRadio: 'task1'
     }
   },
   components: {
     "llTaskModel": TaskModel,
   },
   beforeRouteLeave(to, from, next){
-    this.$store.commit("changeTask", $(".clickBox.active").attr("name"));
+    this.$store.commit("changeTask", this.taskTypeRadio);
     next();
   }
 }

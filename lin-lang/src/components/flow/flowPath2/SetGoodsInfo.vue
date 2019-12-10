@@ -52,6 +52,12 @@
         </div>
         <span class="point">如需试客拍下指定规格，请务必填写具体规格;若有阶梯价商品，需要试客拍下任意规格，商品的价格请设置为阶梯价的最高价格，并填写不限规格；鞋子服装类商品，不可限制产品的尺码，如有疑问请联系在线客服</span>
       </div>
+      <div class="itemBox" v-if="taskType == 'task2'">
+        <span class="title">返给用户佣金：</span>
+        <div class="lengthType short">
+          <el-input v-model="giveGold" placeholder="佣金的价格不能低于商品价格的10%" size="mini"></el-input>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +69,7 @@ export default {
   name: 'SetGoodsInfo',
   data () {
     return {
+      taskType: '',
       name: '',
       link: '',
       select: '',
@@ -71,6 +78,7 @@ export default {
       ],
       buyPrice: '',
       teamPrice: '',
+      giveGold: '',
       num: 1,
       textarea1: '',
       radio: ''
@@ -78,6 +86,7 @@ export default {
   },
   mounted(){
     this.taskOk(2)
+    this.taskType = this.$store.state.taskType
   },
   methods: {
     ...mapMutations(["taskOk"]),
@@ -169,5 +178,8 @@ export default {
 .infoPoint{
   padding-left: 15px;
   color: var(--off-color);
+}
+#setGoodsInfo >>>.modelBox{
+  justify-content: flex-start;
 }
 </style>

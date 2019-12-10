@@ -10,10 +10,10 @@
         router
         mode="horizontal"
         @select="handleSelect">
-          <el-menu-item v-for="item in unChildTab" :key="item.path" :index="item.path">{{ item.name }}</el-menu-item>
+          <el-menu-item v-for="item in unChildTab" :key="item.path" :index="item.path" class="navItem" onselectstart="return false">{{ item.name }}</el-menu-item>
           <el-submenu v-for="(item, key) in childTab" :key="key" :index="String(key)">
             <template slot="title">{{ item.name }}</template>
-            <el-menu-item v-for="(subItem, subKey) in item.child" :key="subKey" :index="subItem.path" class="nav-subItem-width">{{ subItem.name }}</el-menu-item>
+            <el-menu-item v-for="(subItem, subKey) in item.child" :key="subKey" :index="subItem.path" class="nav-subItem-width" onselectstart="return false">{{ subItem.name }}</el-menu-item>
           </el-submenu>  
         </el-menu>
       </div>
@@ -39,6 +39,7 @@ export default {
         {path:'/storeReader', name:'商家必读'},
         {path:'/betterNum', name:'提高申请人数'},
         {path:'/advertisement', name:'广告位服务'},
+        {path:'/taskList', name:'任务列表'},
         {name:'热门试用分类', child: [
           {path:'/a', name:'潮流女装'},
           {path:'/b', name:'时尚男装'},
@@ -180,6 +181,12 @@ ul{
   margin-right: 20px;
 }
 
+/**由于element-ui组件中的下拉框是全局的，所以放在这里 */
+.el-select-dropdown__item.selected{
+  color: var(--on-color);
+}
+</style>
+<style scoped>
 .nav-index{
   display: inline-block;
   vertical-align: middle;
@@ -205,9 +212,14 @@ ul{
     color: #303133 !important;
     border-bottom-color: transparent !important;
 }
-
-/**由于element-ui组件中的下拉框是全局的，所以放在这里 */
-.el-select-dropdown__item.selected{
-  color: var(--on-color);
+.navItem:hover{
+  color: var(--on-color) !important;
+}
+.el-menu--horizontal>.el-menu-item, #app >>>.el-menu--horizontal>.el-submenu .el-submenu__title{
+  height: 40px;
+  line-height: 40px;
+}
+.el-menu-item{
+  font-size: 16px;
 }
 </style>

@@ -25,6 +25,7 @@ import FlowPath3 from '../components/flow/FlowPath3'
 import FlowPath4 from '../components/flow/FlowPath4'
 import FlowPath5 from '../components/flow/FlowPath5'
 import FlowPath6 from '../components/flow/FlowPath6'
+import TaskList from '../components/TaskList'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -42,6 +43,7 @@ export default new Router({
       {path: '/goodsDetails/tryAppraise', name: 'tryAppraise', component: TryAppraise},
       {path: '/goodsDetails/tryPoint', name: 'tryPoint', component: TryPoint},
     ]},
+    {path: '/taskList', name: 'taskList', component: TaskList},
     {path: '/betterNum', name: 'betterNum', component: BetterNum},
     {path: '/advertisement', name: 'advertisement', component: Advertisement},
     {path: '/personal', name: 'personal', component: Personal, redirect: "/personal/basicInfo", children: [
