@@ -117,7 +117,7 @@ export default {
   clear: both;
 }
 body{
-  font-family: "microsoft yahei";
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #666;
 }

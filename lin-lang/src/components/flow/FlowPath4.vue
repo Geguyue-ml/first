@@ -1,7 +1,7 @@
 <template>
   <div id="path4">
     <el-collapse :value="taskAll">
-      <el-collapse-item title="1、系统默认" name="defaultServe">
+      <el-collapse-item title="系统默认" name="defaultServe">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -32,7 +32,7 @@
             </div>
           </el-col>
         </el-row>
-        <el-row>
+        <el-row v-if="taskType == 'task1'">
           <el-col :span="24">
             <div class="grid-content bg-purple">
               <span class="pointTitle">试用担保金（商品金额大于250时，多少钱？）</span>
@@ -47,7 +47,7 @@
             </div>
           </el-col>
         </el-row>
-        <el-row>
+        <el-row v-if="taskType == 'task1'">
           <el-col :span="24">
             <div class="grid-content bg-purple">
               <span class="pointTitle">搜索关键词截图 （免费）</span>
@@ -70,7 +70,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="2、提升试客积极性" name="upPositive">
+      <el-collapse-item title="提升试客积极性" name="upPositive" v-if="taskType == 'task1'">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -110,7 +110,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="3、广告位投放" name="adsense">
+      <el-collapse-item title="广告位投放" name="adsense" v-if="taskType == 'task1'">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -125,7 +125,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="4、安全优化" name="safe">
+      <el-collapse-item title="安全优化" name="safe">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -144,7 +144,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="5、试客进店控制" name="intoControl">
+      <el-collapse-item title="试客进店控制" name="intoControl">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -171,7 +171,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="6、细化中奖人群标签" name="labelObj">
+      <el-collapse-item title="细化中奖人群标签" name="labelObj">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -237,7 +237,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="7、口碑营销" name="market">
+      <el-collapse-item title="口碑营销" name="market">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -373,6 +373,7 @@ export default {
   data () {
     return {
       taskAll: ['defaultServe', 'upPositive', 'adsense', 'safe', 'intoControl', 'labelObj', 'market', 'costCount'],
+      showList: {},
       taskType : '',
       addServe: {
         sydbj: true,
@@ -430,7 +431,9 @@ export default {
   },
   mounted(){
     this.taskType = this.$store.state.taskType
-    console.log(this.$store.state.taskType);
+    if(this.$store.state.taskType == "task1"){
+      this.showList
+    }
   },
   methods: {
     addLine(){
