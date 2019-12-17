@@ -5,7 +5,7 @@
     <llSearch />
     <div class="rowMenu">
       <div class="nav_center">
-        <el-menu class="el-menu-demo" text-color="#000" :active-text-color="onColor"
+        <el-menu class="el-menu-demo" text-color="#666" :active-text-color="onColor"
         :default-active="activeIndex"
         router
         mode="horizontal"
@@ -117,7 +117,7 @@ export default {
   clear: both;
 }
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-size: 14px;
   color: #666;
 }
@@ -141,9 +141,12 @@ a{
 ul{
   list-style: none;
 }
+#app{
+  background: #f7f7f7;
+}
 .el-col {
-    border-radius: 4px;
-    padding: 0 15px 15px;
+  border-radius: 4px;
+  padding: 0 15px 15px;
 }
 .bg-purple-light {
   background: #fafafa;
@@ -187,6 +190,9 @@ ul{
 }
 </style>
 <style scoped>
+#app .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover, #app .el-menu-item.is-active, #app .el-menu{
+  background: #f7f7f7;
+}
 .nav-index{
   display: inline-block;
   vertical-align: middle;
@@ -204,9 +210,6 @@ ul{
 .nav-index li:hover, .nav-index .router-link-exact-active{
   color: var(--on-color);
   border-bottom: 2px solid #ff366f !important;
-}
-.rowMenu{
-  background-color: #fff;
 }
 .unActive{
     color: #303133 !important;

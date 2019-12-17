@@ -13,7 +13,7 @@
                 <a href="#">帮助中心</a>
             </div>
             <div class="myfr">
-                <a href="#" class="">登录</a>
+                <router-link tag="a" :to="{name: 'login'}">登录</router-link>
                 <i>|</i>
                 <a href="/register/first/valid?memberType=1&amp;loginToken=&amp;source=&amp;inviteCode=">用户注册</a>
                 <i>|</i>
@@ -41,7 +41,6 @@ export default {
 
 <style scoped>
 .web_nav{
-    background: #F7F7F7;
     width: 100%;
     min-width: 1100px;
     height: 40px;

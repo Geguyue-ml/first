@@ -26,7 +26,6 @@ export default {
     width: 300px;
     font-size: 14px;
     vertical-align: top;
-    border: 1px solid #f7f7f7;
 }
 .guessTitle{
     padding: 10px 25px;

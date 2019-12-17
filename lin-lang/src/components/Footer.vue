@@ -80,7 +80,6 @@ export default {
 <style scoped>
 #footer{
     margin-top: 60px;
-    background: #F7F7F7;
 }
 .pointModle {
     width: 100%;

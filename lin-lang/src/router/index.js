@@ -26,6 +26,7 @@ import FlowPath4 from '../components/flow/FlowPath4'
 import FlowPath5 from '../components/flow/FlowPath5'
 import FlowPath6 from '../components/flow/FlowPath6'
 import TaskList from '../components/TaskList'
+import Login from '../components/Login'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -37,6 +38,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {path: '/', name: 'home', component: Home},
+    {path: '/login', name: 'login', component: Login},
     {path: '/storeReader', name: 'storeReader', component: StoreReader},
     {path: '/goodsDetails', name: 'goodsDetails', component: GoodsDetails, redirect: "/goodsDetails/tryDetails", children: [
       {path: '/goodsDetails/tryDetails', name: 'tryDetails', component: TryDetails},

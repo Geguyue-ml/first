@@ -31,7 +31,6 @@ export default {
 }
 .onLink{
   cursor: pointer;
-  color: #000;
   font-weight: 500;
 }
 .unfirst{
