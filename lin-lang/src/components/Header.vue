@@ -15,9 +15,7 @@
             <div class="myfr">
                 <router-link tag="a" :to="{name: 'login'}">登录</router-link>
                 <i>|</i>
-                <a href="/register/first/valid?memberType=1&amp;loginToken=&amp;source=&amp;inviteCode=">用户注册</a>
-                <i>|</i>
-                <a href="/register/first/valid?memberType=2&amp;loginToken=&amp;source=&amp;inviteCode=">商家注册</a>
+                <router-link tag="a" :to="{name: 'register'}">商家注册</router-link>
             </div>
         </div>
     </header>

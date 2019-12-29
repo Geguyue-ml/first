@@ -4,7 +4,7 @@
     <llHeader @unActiveEmit="unActive"/>
     <llSearch />
     <div class="rowMenu">
-      <div class="nav_center">
+      <div class="menuFrm center">
         <el-menu class="el-menu-demo" text-color="#666" :active-text-color="onColor"
         :default-active="activeIndex"
         router
@@ -141,9 +141,6 @@ a{
 ul{
   list-style: none;
 }
-#app{
-  background: #f7f7f7;
-}
 .el-col {
   border-radius: 4px;
   padding: 0 15px 15px;
@@ -183,6 +180,9 @@ ul{
   background-size: 100%;
   margin-right: 20px;
 }
+.center{
+  text-align: center;
+}
 
 /**由于element-ui组件中的下拉框是全局的，所以放在这里 */
 .el-select-dropdown__item.selected{
@@ -190,8 +190,12 @@ ul{
 }
 </style>
 <style scoped>
-#app .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover, #app .el-menu-item.is-active, #app .el-menu{
-  background: #f7f7f7;
+.menuFrm{
+  border-bottom: solid 1px #e6e6e6;
+}
+.el-menu.el-menu--horizontal{
+  display: inline-block;
+  border-bottom: 0;
 }
 .nav-index{
   display: inline-block;

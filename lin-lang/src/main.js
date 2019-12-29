@@ -6,12 +6,11 @@ import router from './router'
 import './css/swiper.min.css'
 import store from './store'
 import ElementUI from 'element-ui'
-import $ from 'jquery'
 import  'element-ui/lib/theme-chalk/index.css'
-import axios from 'axios'
+import api from './axios'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios
+Vue.prototype.$api = api
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */

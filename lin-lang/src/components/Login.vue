@@ -14,10 +14,13 @@
                 </el-input>
                 <div class="lineFrm">
                     <span class="assistBtn">忘记密码？</span>
-                    <span class="changeBtn rightBtn">使用手机号登录</span>
+                    <router-link tag="span" :to="{name: 'loginPhone'}" class="changeBtn rightBtn">使用手机号登录</router-link>
                 </div>
                 <div class="lineFrm">
                     <div class="importantBtn" @click="loginBtn">登录</div>
+                </div>
+                <div class="lineFrm">
+                    <router-link tag="div" :to="{name: 'register'}" class="assistBtn center">商家注册</router-link>
                 </div>
             </div>
         </div>
@@ -25,8 +28,6 @@
 </template>
 
 <script>
-import { loginAddress } from '@/axios/api'
-
 export default {
   name: 'LoginFrm',
   data () {
@@ -39,11 +40,13 @@ export default {
   },
   methods: {
       loginBtn(){
-          loginAddress(this.param).then( res => {
-              console.log(res);
-          } ).catch( err => {
-              console.log(err);
-          } )
+            this.$api.article.loginAddress(this.param).then( res => {
+                utils.handlRes(res.code)
+                localStorage.setItem("token", res.token);
+                this.$router.push({ path:'/'})
+                let hostName = this.$route.query.redirect;
+                console.log(hostName);
+            })
       }
   }
 }

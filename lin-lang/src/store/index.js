@@ -15,6 +15,9 @@ const store = new Vuex.Store({
         },
         changeTask(state, val){
             state.taskType = val;
+        },
+        changeNetwork(state, val){
+            console.log(val);
         }
     }
 })
