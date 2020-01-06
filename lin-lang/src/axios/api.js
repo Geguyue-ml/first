@@ -1,7 +1,7 @@
 import axios from './http'
 import base from './base'
 
-const article = {
+const loginAbout = {
     //账户密码登录
     loginAddress(param){
         return axios.post(`${base.sc}/auth/login`, param)
@@ -9,7 +9,9 @@ const article = {
 
     //手机号登录
     toLogin(param){
-        return axios.post(`${base.sc}/auth/captchaLogin`, param)
+        return axios.post(`${base.sc}/auth/captchaLogin`, param, {
+            isLoading: true
+        })
     },
 
     //刷新token
@@ -28,6 +30,26 @@ const article = {
     //发送短信验证码
     sendCode(param){
         return axios.post(`${base.sc}/common/sms/send_mobile`, param)
+    },
+
+    //注册时的验证码
+    sendCodeRegister(param){
+        return axios.post(`${base.sc}/member/common/sms/send_mobile`, param)
+    },
+
+    //商家注册
+    registerAccount(param){
+        return axios.post(`${base.sc}/register/register`, param)
     }
 }
-export default article
+const flowPath = {
+    //发布任务第一步，获取店铺接口
+    getStore(){
+        return axios.post(`${base.sc}/member/store/groupList`, )
+    }
+}
+
+export default {
+    loginAbout,
+    flowPath
+}

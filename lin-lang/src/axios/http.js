@@ -15,6 +15,7 @@ Service.interceptors.request.use(config => {
     if(config.url == "/auth/refreshToken"){
         config.headers.refreshToken = "authRefreshToken"
     }
+    config.headers['authToken'] = localStorage.getItem("token")
     if(config.isLoading){
         openLoading()
     }
@@ -26,7 +27,17 @@ Service.interceptors.request.use(config => {
  */
 Service.interceptors.response.use(response => {
     closeLoading()
-    response.status === 200 ? Promise.resolve(response) : Promise.reject(response)
+    if(response.status === 200){
+        if(response.data.code && response.data.code != 0){
+            Message({
+                message: response.data.message + "!",
+                type: 'error',
+                duration: 3 * 1000
+            })
+        }
+    }else{
+        Promise.reject(response)
+    }
     return response
 }, error => {
     const { response } = error;
@@ -39,7 +50,7 @@ Service.interceptors.response.use(response => {
         // eg:请求超时或断网时，更新state的network状态
         // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
         // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
-        store.commit('changeNetwork', false);
+        store.commit('changeLoginStatus', false);
     }
     closeLoading()
 })

@@ -6,19 +6,22 @@
             </div>
             <div class="modelItem centerFrm">
                 <p class="loginTitle">商家注册</p>
-                <el-input placeholder="请输入图片中的内容" v-model="registerInfo.imgCode" class="inputFrm imgCode">
+                <el-input placeholder="请输入图片中的内容" v-model="imgCode" class="inputFrm imgCode">
                     <template slot="prepend"><i class="el-icon-cpu inputIcon"></i></template>
                     <template slot="append"><img :src="codeImg" @click="getImgCode()"></template>
                 </el-input>
                 <el-input placeholder="请输入您的手机号" v-model="registerInfo.phoneNum" class="inputFrm">
                     <template slot="prepend"><i class="el-icon-mobile-phone inputIcon"></i></template>
-                    <el-button slot="append" @click="checkoutPhone()">发送验证码</el-button>
+                    <el-button slot="append" @click="sendCodeNum()">发送验证码</el-button>
+                </el-input>
+                <el-input placeholder="请输入短信中的验证码" v-model="registerInfo.checkNum" class="inputFrm">
+                    <template slot="prepend"><i class="el-icon-cpu inputIcon"></i></template>
                 </el-input>
                 <el-input placeholder="请输入您的密码" v-model="registerInfo.password" show-password class="inputFrm">
                     <template slot="prepend"><i class="el-icon-key inputIcon"></i></template>
                 </el-input>
                 <el-input placeholder="请再次输入您的密码" v-model="registerInfo.passwordDB" show-password class="inputFrm">
-                    <template slot="prepend"><i class="el-icon-key inputIcon"></i></template>
+                    <template slot="prepend"><i class="el-icon-aim inputIcon"></i></template>
                 </el-input>
                 <div class="lineFrm">
                     <router-link tag="span" :to="{name: 'login'}" class="changeBtn">去使用密码登录</router-link>
@@ -39,40 +42,66 @@ export default {
     return {
         registerInfo: {
             phoneNum: null,
-            imgCode: null,
+            checkNum: null,
             password: null,
             passwordDB: null,
         },
+        imgCode: null,
         codeImg: null,
         timeStamp: null,
     }
   },
   methods: {
-    checkoutPhone(){
-        let param = {
-            imageCode: this.registerInfo.imgCode,
-            kind: 'register',
-            phone: this.registerInfo.phoneNum,
-            randCode: this.timeStamp
+    checkPhoneNum(){
+        //一些列的手机号校验
+        if(!this.registerInfo.phoneNum){
+            Message({
+                message: '请填写手机号',
+                type: 'error',
+                duration: 3 * 1000
+            })
+        }else if(this.registerInfo.phoneNum.length != 11){
+            Message({
+                message: '请校验手机号是否正确',
+                type: 'error',
+                duration: 3 * 1000
+            })
+        }else{
+            this.checkPhone = true
         }
-        this.$api.article.sendCode(param).then(res => {
+    },
+    sendCodeNum(){
+        this.checkPhoneNum();
+        if(this.checkPhone){
+            //手机号登录发送验证码时：需要手机号，图形码，才能发送验证码
+            let param = {
+                imageCode: this.imgCode,
+                kind: 'register',
+                phone: this.registerInfo.phoneNum,
+                randCode: this.timeStamp
+            }
+            this.$api.loginAbout.sendCode(param).then(res => {
+                console.log(res.data);
+            })
+        }
+    },
+    registerBtn(){
+        let param = {
+            phone: this.registerInfo.phoneNum,
+            password: this.registerInfo.password,
+            captcha: this.registerInfo.checkNum
+        }
+        console.log(param);
+        this.$api.loginAbout.registerAccount().then(res => {
             console.log(res);
         })
     },
-    registerBtn(){
-        console.log("走注册接口");
-    },
-    imgOnload(){
-        window.URL.revokeObjectURL(this.codeImg)
-    },
-
-    //获取图形验证码
     getImgCode(){
         this.timeStamp = String(new Date().getTime())
         let param = {
             randCode: this.timeStamp
         }
-        this.$api.article.getCheckImg(JSON.stringify(param)).then(res => {
+        this.$api.loginAbout.getCheckImg(JSON.stringify(param)).then(res => {
             const myBlob = new window.Blob([res.data], {type: 'image/jpeg'})
             this.codeImg = window.URL.createObjectURL(myBlob)
         })

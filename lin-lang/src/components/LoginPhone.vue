@@ -12,10 +12,13 @@
                 </el-input>
                 <el-input placeholder="请输入您的手机号" v-model="loginInfo.phoneNum" class="inputFrm">
                     <template slot="prepend"><i class="el-icon-user inputIcon"></i></template>
-                    <el-button slot="append" @click="checkoutPhone()">发送验证码</el-button>
+                    <el-button slot="append" @click="sendCodeNum()">发送验证码</el-button>
                 </el-input>
                 <el-input placeholder="请输入短信中的验证码" v-model="loginInfo.password" show-password class="inputFrm">
                     <template slot="prepend"><i class="el-icon-key inputIcon"></i></template>
+                </el-input>
+                <el-input placeholder="请输入邀请码" v-model="loginInfo.inviteCode" class="inputFrm imgCode">
+                    <template slot="prepend"><i class="el-icon-attract inputIcon"></i></template>
                 </el-input>
                 <div class="lineFrm">
                     <router-link tag="span" :to="{name: 'login'}" class="changeBtn">使用账号密码登录</router-link>
@@ -32,6 +35,8 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
+
 export default {
   name: 'LoginFrm',
   data () {
@@ -39,31 +44,54 @@ export default {
         loginInfo: {
             imgCode: null,
             phoneNum: null,
-            password: null
+            password: null,
+            inviteCode: null
         },
         codeImg: null,
         timeStamp: null,
+        checkPhone: false,
     }
   },
   methods: {
-    checkoutPhone(){
-        //手机号登录发送验证码时：需要手机号，图形码，才能发送验证码
-        let param = {
-            imageCode: this.loginInfo.imgCode,
-            kind: 'login',
-            phone: this.loginInfo.phoneNum,
-            randCode: this.timeStamp
+    checkPhoneNum(){
+        //一些列的手机号校验
+        if(!this.loginInfo.phoneNum){
+            Message({
+                message: '请填写手机号',
+                type: 'error',
+                duration: 3 * 1000
+            })
+        }else if(this.loginInfo.phoneNum.length != 11){
+            Message({
+                message: '请校验手机号是否正确',
+                type: 'error',
+                duration: 3 * 1000
+            })
+        }else{
+            this.checkPhone = true
         }
-        this.$api.article.sendCode(param).then(res => {
-            console.log(res.data);
-        })
+    },
+    sendCodeNum(){
+        this.checkPhoneNum();
+        if(this.checkPhone){
+            //手机号登录发送验证码时：需要手机号，图形码，才能发送验证码
+            let param = {
+                imageCode: this.loginInfo.imgCode,
+                kind: 'login',
+                phone: this.loginInfo.phoneNum,
+                randCode: this.timeStamp
+            }
+            this.$api.loginAbout.sendCode(param).then(res => {
+                console.log(res.data);
+            })
+        }
     },
     getImgCode(){
         this.timeStamp = String(new Date().getTime())
         let param = {
             randCode: this.timeStamp
         }
-        this.$api.article.getCheckImg(JSON.stringify(param)).then(res => {
+        this.$api.loginAbout.getCheckImg(JSON.stringify(param)).then(res => {
             const myBlob = new window.Blob([res.data], {type: 'image/jpeg'})
             this.codeImg = window.URL.createObjectURL(myBlob)
         })
@@ -73,9 +101,9 @@ export default {
         let param = {
             captcha: this.loginInfo.password,
             phone: this.loginInfo.phoneNum,
-            inviteCode: ""
+            inviteCode: this.loginInfo.inviteCode
         }
-        this.$api.article.toLogin(param).then(res => {
+        this.$api.loginAbout.toLogin(param).then(res => {
             console.log(res);
         })
     }

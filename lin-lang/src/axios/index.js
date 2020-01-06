@@ -1,2 +1,2 @@
 import article from './api'
-export default {article}
+export default article

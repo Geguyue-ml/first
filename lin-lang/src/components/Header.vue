@@ -12,10 +12,19 @@
                 <i>|</i>
                 <a href="#">帮助中心</a>
             </div>
-            <div class="myfr">
+            <div v-if="!this.$store.getters.getLoginStatus" class="myfr">
                 <router-link tag="a" :to="{name: 'login'}">登录</router-link>
                 <i>|</i>
                 <router-link tag="a" :to="{name: 'register'}">商家注册</router-link>
+            </div>
+            <div v-else class="myfr">
+                <el-popover
+                    placement="bottom"
+                    width="80"
+                    trigger="click">
+                    <div class="infoBtn" @click="getOut">退出</div>
+                    <el-button slot="reference">欢迎：{{ this.$store.getters.getUserName }}</el-button>
+                </el-popover>
             </div>
         </div>
     </header>
@@ -31,7 +40,13 @@ export default {
   },
   methods: {
       unActive: function(){
-          this.$emit('unActiveEmit');
+        this.$emit('unActiveEmit');
+      },
+      getOut: function(){
+        localStorage.removeItem("token")
+        this.$router.push({ path:'/login'})
+        this.$store.commit("changeLoginStatus", false)
+        this.$store.commit("changeUserName", null)
       }
   }
 }
@@ -55,5 +70,11 @@ export default {
 #llHeader i{
     color: rgb(199, 199, 199);
     vertical-align: top;
+}
+.myfr .el-button{
+    border: 0;
+}
+.infoBtn{
+    cursor: pointer;
 }
 </style>

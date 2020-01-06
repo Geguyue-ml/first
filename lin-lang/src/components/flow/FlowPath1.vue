@@ -2,34 +2,12 @@
   <div id="path1">
     <el-collapse :value="['1', '2']">
       <el-collapse-item title="1、选择平台和店铺" name="1" class="pathTitle">
-        <div class="modelBox">
-          <div class="modelItem">
-            <div class="modelPage">
-              <img src="../../assets/taobao.png" alt="选择淘宝网的店铺">
-            </div>
-            <div class="modelbody">
-              <el-radio v-model="radio" label="1">梨花带雨</el-radio>
-              <el-radio v-model="radio" label="2">KK机械</el-radio>
-              <el-radio v-model="radio" label="3">MOTU-X</el-radio>
-            </div>
+        <div class="modelItem" v-for="(item, i) in storeList" :key="i">
+          <div class="modelPage">
+            <img :src="storeImg[item.name]">
           </div>
-          <div class="modelItem">
-            <div class="modelPage">
-              <img src="../../assets/tmall.png" alt="选择淘宝网的店铺">
-            </div>
-            <div class="modelbody">
-              <el-radio v-model="radio" label="4">梨花带雨</el-radio>
-              <el-radio v-model="radio" label="5">KK机械</el-radio>
-            </div>
-          </div>
-          <div class="modelItem">
-            <div class="modelPage">
-              <img src="../../assets/jd.png" alt="选择淘宝网的店铺">
-            </div>
-            <div class="modelbody">
-              <el-radio v-model="radio" label="6">梨花带雨</el-radio>
-              <el-radio v-model="radio" label="7">MOTU-X</el-radio>
-            </div>
+          <div class="modelbody">
+            <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" v-model="radio" label="1">{{subItem.name}}</el-radio>
           </div>
         </div>
       </el-collapse-item>
@@ -76,11 +54,30 @@ export default {
   data () {
     return {
       radio: '1',
-      taskTypeRadio: 'task1'
+      taskTypeRadio: 'task1',
+      storeList: null,
+      storeImg: {
+        "taobao": require('../../assets/taobao.png'),
+        "tmall": require('../../assets/tmall.png'),
+        "jindong": require('../../assets/jd.png'),
+        "pingduoduo": require('../../assets/tmall.png'),
+      }
     }
   },
   components: {
     "llTaskModel": TaskModel,
+  },
+  methods: {
+    getData(){
+      this.$api.flowPath.getStore()
+      .then(res => {
+        res.data.data.filter(item => item.shop.length != 0)
+        this.storeList = res.data.data;
+      })
+    }
+  },
+  created(){
+    this.getData();
   },
   beforeRouteLeave(to, from, next){
     this.$store.commit("changeTask", this.taskTypeRadio);
@@ -90,22 +87,15 @@ export default {
 </script>
 
 <style scoped>
-.modelBox{
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-}
-.modelBox.Btn{
-  justify-content: center;
-}
 .modelItem{
+  display: inline-block;
   cursor: pointer;
   border-radius: 5px;
   padding: 15px;
   border: 1px solid var(--on-color);
-  min-width: 312px;
+  vertical-align: top;
+  margin: 0 35px;
+  min-width: 220px;
 }
 .modelPage{
   text-align: center;

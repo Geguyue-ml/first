@@ -40,12 +40,11 @@ export default {
   },
   methods: {
       loginBtn(){
-            this.$api.article.loginAddress(this.param).then( res => {
-                utils.handlRes(res.code)
-                localStorage.setItem("token", res.token);
+            this.$api.loginAbout.loginAddress(this.param).then( res => {
+                localStorage.setItem("token", res.data.data.token);
                 this.$router.push({ path:'/'})
-                let hostName = this.$route.query.redirect;
-                console.log(hostName);
+                this.$store.commit("changeLoginStatus", true)
+                this.$store.commit("changeUserName", this.param.username)
             })
       }
   }
