@@ -73,5 +73,8 @@ export default new Router({
     ]},
   ],
   mode: 'hash',
+  scrollBehavior: () => {
+    y: 0
+  },
   base: './'
 })

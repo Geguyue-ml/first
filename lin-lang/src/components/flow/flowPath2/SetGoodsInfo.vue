@@ -48,7 +48,7 @@
       <div class="itemBox line">
         <span class="title">商品规格：</span>
         <div class="lengthType short">
-          <el-input type="textarea" autosize placeholder="任意规格（按试用价格下单）" v-model="textarea1"></el-input>
+          <el-input type="textarea" autosize placeholder="任意规格（按试用价格下单）" v-model="goodsSpecification"></el-input>
         </div>
         <span class="point">如需试客拍下指定规格，请务必填写具体规格;若有阶梯价商品，需要试客拍下任意规格，商品的价格请设置为阶梯价的最高价格，并填写不限规格；鞋子服装类商品，不可限制产品的尺码，如有疑问请联系在线客服</span>
       </div>
@@ -80,16 +80,16 @@ export default {
       teamPrice: '',
       giveGold: '',
       num: 1,
-      textarea1: '',
+      goodsSpecification: '',
       radio: ''
     }
   },
   mounted(){
-    this.taskOk(2)
+    this.taskChange(2)
     this.taskType = this.$store.state.taskType
   },
   methods: {
-    ...mapMutations(["taskOk"]),
+    ...mapMutations(["taskChange"]),
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },

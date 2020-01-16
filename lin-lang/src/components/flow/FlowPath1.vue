@@ -1,49 +1,51 @@
 <template>
-  <div id="path1">
-    <el-collapse :value="['1', '2']">
-      <el-collapse-item title="1、选择平台和店铺" name="1" class="pathTitle">
-        <div class="modelItem" v-for="(item, i) in storeList" :key="i">
-          <div class="modelPage">
-            <img :src="storeImg[item.name]">
-          </div>
-          <div class="modelbody">
-            <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" v-model="radio" label="1">{{subItem.name}}</el-radio>
-          </div>
-        </div>
-      </el-collapse-item>
-      <el-collapse-item title="2、选择任务类型" name="2">
-        <div class="modelBox">
-          <div class="clickBox">
-            <el-radio v-model="taskTypeRadio" label="task1">人气权重爆款试用</el-radio>
-            <div class="txtFrm">
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">商家可自定义每日投放数量、商品转化率，平台平均分布试客在每个时段进店申请；</span>
-              </p>
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">琳琅智能AI人群标签系统自动推送符合商品标签试客，精准控制进店人群；</span>
-              </p>
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">试客1-3天进店通过关键词或淘口令搜索进店，点击，浏览，收藏，加购，下单，评价，追评等操作优化整个uv价值链条。</span>
-              </p>
+    <keep-alive>
+      <div id="path1">
+        <el-collapse :value="['1', '2']">
+          <el-collapse-item title="1、选择平台和店铺" name="1" class="pathTitle">
+            <div class="modelItem" v-for="(item, i) in filterStoreList" :key="i">
+              <div class="modelPage">
+                <img :src="storeImg[item.name]">
+              </div>
+              <div class="modelbody">
+                <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" v-model="activeStore" @change="activeTypeVal(subItem.storeType)" :label="String(subItem.storeId)">{{subItem.name}}</el-radio>
+              </div>
             </div>
-          </div>
-          <div class="clickBox">
-            <el-radio v-model="taskTypeRadio" label="task2">下单返现</el-radio>
-            <div class="txtFrm">
-              <p class="txtLine">
-                <span class="txtPoint"></span>
-                <span class="txt">下单返现解析语句没有；</span>
-              </p>
+          </el-collapse-item>
+          <el-collapse-item title="2、选择任务类型" name="2">
+            <div class="modelBox">
+              <div class="clickBox">
+                <el-radio v-model="taskType" label="0">人气权重爆款试用</el-radio>
+                <div class="txtFrm">
+                  <p class="txtLine">
+                    <span class="txtPoint"></span>
+                    <span class="txt">商家可自定义每日投放数量、商品转化率，平台平均分布试客在每个时段进店申请；</span>
+                  </p>
+                  <p class="txtLine">
+                    <span class="txtPoint"></span>
+                    <span class="txt">琳琅智能AI人群标签系统自动推送符合商品标签试客，精准控制进店人群；</span>
+                  </p>
+                  <p class="txtLine">
+                    <span class="txtPoint"></span>
+                    <span class="txt">试客1-3天进店通过关键词或淘口令搜索进店，点击，浏览，收藏，加购，下单，评价，追评等操作优化整个uv价值链条。</span>
+                  </p>
+                </div>
+              </div>
+              <div class="clickBox">
+                <el-radio v-model="taskType" label="1">下单返现</el-radio>
+                <div class="txtFrm">
+                  <p class="txtLine">
+                    <span class="txtPoint"></span>
+                    <span class="txt">下单返现解析语句没有；</span>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </el-collapse-item>
-    </el-collapse>
-    <llTaskModel :next="2"></llTaskModel>
-  </div>
+          </el-collapse-item>
+        </el-collapse>
+        <llTaskModel :next="2" @click="saveData()"></llTaskModel>
+      </div>
+    </keep-alive>
 </template>
 
 <script>
@@ -53,8 +55,9 @@ export default {
   name: 'FlowPath1',
   data () {
     return {
-      radio: '1',
-      taskTypeRadio: 'task1',
+      activeStore: null,
+      activeStoreType: null,
+      taskType: null,
       storeList: null,
       storeImg: {
         "taobao": require('../../assets/taobao.png'),
@@ -71,13 +74,39 @@ export default {
     getData(){
       this.$api.flowPath.getStore()
       .then(res => {
-        res.data.data.filter(item => item.shop.length != 0)
         this.storeList = res.data.data;
+      })
+    },
+    activeTypeVal(val){
+      this.activeStoreType = val
+    },
+    saveData(){
+      let param = {
+        proStoreId: this.activeStore,
+        taskType: this.taskType,
+        storeType: this.activeStoreType
+      }
+      this.$api.flowPath.savePath1(param).then(res => {
+        if(res.data.code == 0){
+          this.$message({
+            message: "保存成功!",
+            type: 'success',
+            duration: 3 * 1000
+          })
+        }
       })
     }
   },
   created(){
     this.getData();
+  },
+  computed: {
+    filterStoreList(){
+      if(this.storeList){
+        return this.storeList.filter(item => item.shop.length != 0)
+      }
+      return this.storeList
+    }
   },
   beforeRouteLeave(to, from, next){
     this.$store.commit("changeTask", this.taskTypeRadio);

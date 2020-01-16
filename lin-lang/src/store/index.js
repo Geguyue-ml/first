@@ -11,7 +11,7 @@ const store = new Vuex.Store({
         userName: null
     },
     mutations:{
-        taskOk(state, val){
+        taskChange(state, val){
             state.taskVal = val;
             // console.log(state.taskVal);
         },

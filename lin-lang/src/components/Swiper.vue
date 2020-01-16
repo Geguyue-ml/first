@@ -28,24 +28,7 @@
       <div class="infoTitle">商家公告</div>
       <div class="infoFrm">
         <ul>
-          <li>
-            <span>111</span>
-          </li>
-          <li>
-            <span>safwefsd</span>
-          </li>
-          <li>
-            <span>试点范围发士大夫试点范围发展的无法</span>
-          </li>
-          <li>
-            <span>现场服务热吻日常消费v的氛围</span>
-          </li>
-          <li>
-            <span>12312撒旦士大夫士大夫34人体4rt</span>
-          </li>
-          <li>
-            <span>23为人法2 额外分4法4热无法613264  8463</span>
-          </li>
+          <li></li>
         </ul>
       </div>
     </div>

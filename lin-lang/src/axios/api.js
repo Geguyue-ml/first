@@ -46,6 +46,12 @@ const flowPath = {
     //发布任务第一步，获取店铺接口
     getStore(){
         return axios.post(`${base.sc}/member/store/groupList`, )
+    },
+    savePath1(param){
+        return axios.post(`${base.sc}/member/task/addTaskPlatform`, param)
+    },
+    savePath2(param){
+        return axios.post(`${base.sc}/member/task/addAndUpdateTaskProduct`, param)
     }
 }
 
