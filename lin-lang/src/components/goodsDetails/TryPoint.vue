@@ -1,6 +1,6 @@
 <template>
   <div id="tryPoint">
-    试用需知
+    任务需知
   </div>
 </template>
 

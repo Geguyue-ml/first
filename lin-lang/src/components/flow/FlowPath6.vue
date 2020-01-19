@@ -1,6 +1,6 @@
 <template>
   <div id="path6">
-    试用任务发布成功
+    任务发布成功
   </div>
 </template>
 

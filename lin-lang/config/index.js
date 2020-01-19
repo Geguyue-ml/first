@@ -6,7 +6,6 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -37,12 +36,19 @@ module.exports = {
   },
 
   build: {
-    // Template for index.html
+    //域名
+    // host: 'www.huikeling.com',
+
+    // 告诉webpack，打包后的html文件名及目录位置
     index: path.resolve(__dirname, '../dist/index.html'),
 
-    // Paths
+    // webpack编译后的静态资源的根目录放在assetsRoot指定的目录下
     assetsRoot: path.resolve(__dirname, '../dist'),
+
+    // 静态资源的根目录为assetsSubDirectory指定的目录名
     assetsSubDirectory: 'static',
+
+    // 这个是通过http服务器运行的url路径,如果你的后台框架对静态资源url前缀要求，你仅需要改变这个参数
     assetsPublicPath: './',
 
     /**

@@ -23,7 +23,7 @@
 
     <div class="navigation">
       <div class="btnFrm">
-        <router-link tag="a" :to="{name: 'releaseTask'}" class="goBtn">发布试用任务</router-link>
+        <router-link tag="a" :to="{name: 'releaseTask'}" class="goBtn">发布任务</router-link>
       </div>
       <div class="infoTitle">商家公告</div>
       <div class="infoFrm">

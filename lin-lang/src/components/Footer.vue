@@ -37,9 +37,9 @@
                     <div class="contact">
                         <div class="contact-info">
                             <img src="../assets/customer_service.png">
-                            <span class="on">0571-28120772</span>
+                            <span class="on">13585686861</span>
                             <img src="../assets/email.png">
-                            <span class="off">kefu@laqu.com</span>
+                            <span class="off">1215464610@qq.com</span>
                         </div>
                         <p class="contactTime">客服工作时间：周一到周五 9:00-12:00；13:00-18:00（法定节假日除外）</p>
                     </div>
@@ -57,10 +57,7 @@
         </div>
         <div class="recordModel">
             <div class="nav_center">
-                <span>Copyright</span>
-                <span>©&nbsp;2017杭州拉趣科技有限公司</span>
-                <span>浙ICP17003883号-1</span>
-                <span>版权所有</span>
+                <span>网站ICP备案号: 沪ICP备19043476号</span>
             </div>
         </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div id="checkOrder">
-    查询试客订单
+    查询用户订单
   </div>
 </template>
 

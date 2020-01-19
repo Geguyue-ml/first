@@ -15,19 +15,19 @@
           <el-collapse-item title="2、选择任务类型" name="2">
             <div class="modelBox">
               <div class="clickBox">
-                <el-radio v-model="taskType" label="0">人气权重爆款试用</el-radio>
+                <el-radio v-model="taskType" label="0">人气权重爆商品</el-radio>
                 <div class="txtFrm">
                   <p class="txtLine">
                     <span class="txtPoint"></span>
-                    <span class="txt">商家可自定义每日投放数量、商品转化率，平台平均分布试客在每个时段进店申请；</span>
+                    <span class="txt">商家可自定义每日投放数量、商品转化率，平台平均分布用户在每个时段进店申请；</span>
                   </p>
                   <p class="txtLine">
                     <span class="txtPoint"></span>
-                    <span class="txt">琳琅智能AI人群标签系统自动推送符合商品标签试客，精准控制进店人群；</span>
+                    <span class="txt">琳琅智能AI人群标签系统自动推送符合商品标签用户，精准控制进店人群；</span>
                   </p>
                   <p class="txtLine">
                     <span class="txtPoint"></span>
-                    <span class="txt">试客1-3天进店通过关键词或淘口令搜索进店，点击，浏览，收藏，加购，下单，评价，追评等操作优化整个uv价值链条。</span>
+                    <span class="txt">用户1-3天进店通过关键词或淘口令搜索进店，点击，浏览，收藏，加购，下单，评价，追评等操作优化整个uv价值链条。</span>
                   </p>
                 </div>
               </div>
@@ -60,10 +60,10 @@ export default {
       taskType: null,
       storeList: null,
       storeImg: {
-        "taobao": require('../../assets/taobao.png'),
-        "tmall": require('../../assets/tmall.png'),
-        "jindong": require('../../assets/jd.png'),
-        "pingduoduo": require('../../assets/tmall.png'),
+        "taobao": '店铺',
+        "tmall": '店铺',
+        "jindong": '店铺',
+        "pingduoduo": '店铺',
       }
     }
   },

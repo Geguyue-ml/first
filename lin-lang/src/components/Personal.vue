@@ -41,8 +41,8 @@ export default {
           {path: "/personal/newsManage", name: "消息管理"}
         ]},
         {name: "任务管理", classN: "el-icon-tickets", child: [
-          {path: "/personal/taskManagement", name: "试用任务进展"},
-          {path: "/personal/checkedOrder", name: "查询试客订单"}
+          {path: "/personal/taskManagement", name: "任务进展"},
+          {path: "/personal/checkedOrder", name: "查询用户订单"}
         ]},
         {name: "店铺管理", classN: "el-icon-takeaway-box", child: [
           {path: "/", name: "淘宝店铺"},

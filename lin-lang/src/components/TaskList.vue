@@ -24,9 +24,8 @@
                     <label>任务类型：</label>
                     <el-select v-model="taskType" placeholder="请选择">
                         <el-option label="所有类型" value="0"></el-option>
-                        <el-option label="免费试用" value="1"></el-option>
-                        <el-option label="折扣试用" value="2"></el-option>
-                        <el-option label="赛马任务" value="3"></el-option>
+                        <el-option label="折扣商品" value="1"></el-option>
+                        <el-option label="赛马任务" value="2"></el-option>
                     </el-select>
                 </div>
                 <div class="filterItem clearfix">
@@ -62,7 +61,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="tdLine">任务类型：折扣试用</p>
+                                <p class="tdLine">任务类型：折扣商品</p>
                                 <p class="tdLine">任务编号：lsaidfjwlefjwoief1233</p>
                                 <p class="tdLine">投放时间：2019-12-12</p>
                             </td>
@@ -105,7 +104,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="tdLine">任务类型：折扣试用</p>
+                                <p class="tdLine">任务类型：折扣商品</p>
                                 <p class="tdLine">任务编号：lsaidfjwlefjwoief1233</p>
                                 <p class="tdLine">投放时间：2019-12-12</p>
                             </td>

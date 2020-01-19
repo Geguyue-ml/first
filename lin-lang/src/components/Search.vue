@@ -3,7 +3,7 @@
         <div class="nav_center clearfix box">
             <div class="myfl">
                 <a href="#">
-                    <img class="logo" src="../assets/laqu_logonew.png">
+                    <img class="logo" src="../assets/huikeling.jpg">
                 </a>
             </div>
             <div class="myfr">

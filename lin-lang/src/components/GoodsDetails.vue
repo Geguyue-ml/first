@@ -36,7 +36,7 @@
                       </tr>
                       <tr>
                         <td>规格：</td>
-                        <td class="numberVal" colspan="3">任意规格（按照试用价格下单）</td>
+                        <td class="numberVal" colspan="3">任意规格（按照商品价格下单）</td>
                       </tr>
                       <tr>
                         <td>总份数：</td>

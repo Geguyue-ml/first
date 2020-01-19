@@ -1,7 +1,7 @@
 <template>
     <el-col :span="20" id="taskManagement">
         <div class="grid-content bg-purple-light">
-            <div class="title">试用任务进展</div>
+            <div class="title">任务进展</div>
             <div class="taskNav">
                 <div class="item" v-for="(item, key) in navList" :key="key" @click="activeTab($event)">
                   <span>{{ item.name }}</span>

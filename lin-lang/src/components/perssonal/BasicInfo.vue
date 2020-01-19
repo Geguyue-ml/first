@@ -56,7 +56,7 @@
         </div>
         <div class="moneyInfo">
           <span>我的可用金豆：10293.39</span>
-          <input class="goBtn" type="button" value="发布试用任务">
+          <input class="goBtn" type="button" value="发布任务">
         </div>
       </div>
     </el-col>

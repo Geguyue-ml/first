@@ -1,6 +1,6 @@
 <template>
   <div id="tryDetails">
-    试用详情
+    商品详情
   </div>
 </template>
 

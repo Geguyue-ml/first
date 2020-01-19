@@ -1,7 +1,7 @@
 <template>
   <div id="setCheckGoods">
     <div class="modelFrm">
-      <el-checkbox v-model="checkedMo" @change="isSow(checkedMo, '#Mo', MoH)">设置试客从手机淘宝App入店</el-checkbox>
+      <el-checkbox v-model="checkedMo" @change="isSow(checkedMo, '#Mo', MoH)">设置用户从手机淘宝App入店</el-checkbox>
       <div class="model" id="Mo">
         <table>
           <tr>
@@ -16,12 +16,12 @@
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
-              <span class="point">选择一张宝贝图片作为试客在拼多多APP搜索查看到宝贝主图（需要和拼多多搜索结果主图一致）</span>
+              <span class="point">选择一张宝贝图片作为用户在拼多多APP搜索查看到宝贝主图（需要和拼多多搜索结果主图一致）</span>
             </td>
           </tr>
           <tr>
             <td class="title">设置关键词：</td>
-            <td colspan="3" class="point">设置试客搜索关键词，试客将以该关键词完成搜索进店（搜索关键词进店量总数之和必须为100%）</td>
+            <td colspan="3" class="point">设置用户搜索关键词，用户将以该关键词完成搜索进店（搜索关键词进店量总数之和必须为100%）</td>
           </tr>
         </table>
         <div v-for="(item, key) in wordVal" :key="key" class="wordLine">

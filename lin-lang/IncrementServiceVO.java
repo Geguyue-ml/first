@@ -133,7 +133,7 @@ public class IncrementServiceVO implements Serializable {
     private String viewAnswer;
 
     /**
-     * 是否试客2小时内下单:0否,1是
+     * 是否用户2小时内下单:0否,1是
      */
     private Boolean whetherFastOrder;
 

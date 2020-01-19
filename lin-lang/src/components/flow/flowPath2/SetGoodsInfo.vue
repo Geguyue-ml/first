@@ -7,8 +7,8 @@
         <div class="lengthType short"><el-input v-model="name" maxlength="12" placeholder="请输入商品名称" show-word-limit></el-input></div>
       </div>
       <div class="itemBox">
-        <span class="title" title="商品在平台展示的名称，不要和淘宝商品名称相同，防止试客通过淘宝商品名称购买">商品链接：</span>
-        <div class="lengthType long"><el-input v-model="link" placeholder="商品在平台展示的名称，不要和淘宝商品名称相同，防止试客通过淘宝商品名称购买"></el-input></div>
+        <span class="title" title="商品在平台展示的名称，不要和淘宝商品名称相同，防止用户通过淘宝商品名称购买">商品链接：</span>
+        <div class="lengthType long"><el-input v-model="link" placeholder="商品在平台展示的名称，不要和淘宝商品名称相同，防止用户通过淘宝商品名称购买"></el-input></div>
       </div>
       <div class="itemBox">
         <span class="title">商品分类：</span>
@@ -42,15 +42,15 @@
         </div>
       </div>
       <div class="itemBox">
-        <span class="title">试客每单拍：</span>
+        <span class="title">用户每单拍：</span>
         <div class="lengthType short"><el-input v-model="num" placeholder="请输入每单拍的件数"></el-input></div>
       </div>
       <div class="itemBox line">
         <span class="title">商品规格：</span>
         <div class="lengthType short">
-          <el-input type="textarea" autosize placeholder="任意规格（按试用价格下单）" v-model="goodsSpecification"></el-input>
+          <el-input type="textarea" autosize placeholder="任意规格（按商品价格下单）" v-model="goodsSpecification"></el-input>
         </div>
-        <span class="point">如需试客拍下指定规格，请务必填写具体规格;若有阶梯价商品，需要试客拍下任意规格，商品的价格请设置为阶梯价的最高价格，并填写不限规格；鞋子服装类商品，不可限制产品的尺码，如有疑问请联系在线客服</span>
+        <span class="point">如需用户拍下指定规格，请务必填写具体规格;若有阶梯价商品，需要用户拍下任意规格，商品的价格请设置为阶梯价的最高价格，并填写不限规格；鞋子服装类商品，不可限制产品的尺码，如有疑问请联系在线客服</span>
       </div>
       <div class="itemBox" v-if="taskType == 'task2'">
         <span class="title">返给用户佣金：</span>

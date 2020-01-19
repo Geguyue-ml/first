@@ -1,9 +1,9 @@
 <template>
   <div id="appraise">
     <ul class="appraiseTitle">
-        <router-link tag="li" :to="{name:'tryDetails'}">试用详情</router-link>
-        <router-link tag="li" :to="{name:'tryAppraise'}">试用评价</router-link>
-        <router-link tag="li" :to="{name:'tryPoint'}">试用需知</router-link>
+        <router-link tag="li" :to="{name:'tryDetails'}">商品详情</router-link>
+        <router-link tag="li" :to="{name:'tryAppraise'}">商品评价</router-link>
+        <router-link tag="li" :to="{name:'tryPoint'}">任务需知</router-link>
     </ul>
     <div class="appraiseFrm">
         <router-view></router-view>

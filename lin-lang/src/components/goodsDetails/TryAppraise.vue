@@ -1,6 +1,6 @@
 <template>
   <div id="tryAppraise">
-    试用评价
+    商品评价
   </div>
 </template>
 

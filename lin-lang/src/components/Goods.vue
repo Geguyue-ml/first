@@ -8,12 +8,12 @@
                         <div class="list_img_a">
                             <img src="http://cdn.static.linlang.com/upload_test/trade/20191101/c37c8f38fbb8d1b73e43d3a2dc9a8106.jpg?imageView2/2/w/300">
                         </div>
-                        <p class="goodsTitle">免费任务1免费试用免费试吃，免费品尝士大夫撒旦发射点发违法违法手段范文芳</p>
+                        <p class="goodsTitle">芬芳乳液</p>
                         <div class="price">
                             <b>¥78.00</b>
                             <span>限量14份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </router-link>
                     <router-link tag="li" :to="{name : 'goodsDetails'}" class="swiper-slide">
                         <div class="list_img_a">
@@ -24,7 +24,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </router-link>
                     <router-link tag="li" :to="{name : 'goodsDetails'}" class="swiper-slide">
                         <div class="list_img_a">
@@ -35,7 +35,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </router-link>
                     <li class="swiper-slide">
                         <div class="list_img_a">
@@ -46,7 +46,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </li>
                     <li class="swiper-slide">
                         <div class="list_img_a">
@@ -57,7 +57,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </li>
                     <li class="swiper-slide">
                         <div class="list_img_a">
@@ -68,7 +68,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </li>
                     <li class="swiper-slide">
                         <div class="list_img_a">
@@ -79,7 +79,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </li>
                     <li class="swiper-slide">
                         <div class="list_img_a">
@@ -90,7 +90,7 @@
                             <b>¥199.00</b>
                             <span>限量100份</span>
                         </div>
-                        <div class="list_a">免费试用</div>
+                        <div class="list_a">立即购买</div>
                     </li>
                 </ul>
                 <div class="swiper-button-next goodsNext"></div>

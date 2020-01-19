@@ -6,20 +6,20 @@
         <el-radio v-model="post" label="1">包邮</el-radio>
         <el-radio v-model="post" label="2">不包邮</el-radio>
       </div>
-      <span class="point">(需要试客支付运费)</span>
-      <span class="point">温馨提示：当商品价格小于100元时，必须选择“包邮试用”</span>
+      <span class="point">(需要用户支付运费)</span>
+      <span class="point">温馨提示：当商品价格小于100元时，必须选择“包邮”</span>
       <div class="postFrm" :class="{show:  post == '1'}">
         <div>
             <div class="tabRadio">
               <el-radio v-model="goodsPost" label="1">商品本身不包邮</el-radio>
             </div>
-            <span class="point">试客无需联系客服，商家额外支付10元/单作为运费余额，任务完成后剩余的运费余额将返还给商家</span>
+            <span class="point">用户无需联系客服，商家额外支付10元/单作为运费余额，任务完成后剩余的运费余额将返还给商家</span>
         </div>
         <div>
           <div class="tabRadio">
             <el-radio v-model="goodsPost" label="2">商品本身包邮</el-radio>
           </div>
-          <span class="point">试客直接按商品实际金额下单</span>
+          <span class="point">用户直接按商品实际金额下单</span>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </tr>
       <tr>
         <td colspan="4">
-          <span class="pointTitle">温馨提示：请在发布试用推广期间，暂停淘宝客等返利设置，避免不必要的损失</span>
+          <span class="pointTitle">温馨提示：请在发布商品推广期间，暂停淘宝客等返利设置，避免不必要的损失</span>
         </td>
       </tr>
     </table>

@@ -40,7 +40,7 @@ export default {
         {path:'/betterNum', name:'提高申请人数'},
         {path:'/advertisement', name:'广告位服务'},
         {path:'/taskList', name:'任务列表'},
-        {name:'热门试用分类', child: [
+        {name:'热门商品分类', child: [
           {path:'/a', name:'潮流女装'},
           {path:'/b', name:'时尚男装'},
           {path:'/c', name:'美食特产'},
