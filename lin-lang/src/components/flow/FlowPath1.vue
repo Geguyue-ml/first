@@ -8,14 +8,14 @@
                 <img :src="storeImg[item.name]">
               </div>
               <div class="modelbody">
-                <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" v-model="activeStore" @change="activeTypeVal(subItem.storeType)" :label="String(subItem.storeId)">{{subItem.name}}</el-radio>
+                <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" :v-model="subItem.storeId" @change="activeTypeVal(subItem.storeType)" :label="String(subItem.storeId)">{{subItem.name}}</el-radio>
               </div>
             </div>
           </el-collapse-item>
           <el-collapse-item title="2、选择任务类型" name="2">
             <div class="modelBox">
               <div class="clickBox">
-                <el-radio v-model="taskType" label="0">人气权重爆商品</el-radio>
+                <el-radio v-model="taskType" label="1">人气权重爆商品</el-radio>
                 <div class="txtFrm">
                   <p class="txtLine">
                     <span class="txtPoint"></span>
@@ -32,7 +32,7 @@
                 </div>
               </div>
               <div class="clickBox">
-                <el-radio v-model="taskType" label="1">下单返现</el-radio>
+                <el-radio v-model="taskType" label="2">下单返现</el-radio>
                 <div class="txtFrm">
                   <p class="txtLine">
                     <span class="txtPoint"></span>
@@ -43,13 +43,14 @@
             </div>
           </el-collapse-item>
         </el-collapse>
-        <llTaskModel :next="2" @click="saveData()"></llTaskModel>
+        <llTaskModel ref="nextBtnFrm" :next="2" @click="saveData()"></llTaskModel>
       </div>
     </keep-alive>
 </template>
 
 <script>
 import TaskModel from '../TaskModel'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'FlowPath1',
@@ -59,11 +60,13 @@ export default {
       activeStoreType: null,
       taskType: null,
       storeList: null,
+      nextVal: false,
+      taskSn: localStorage.getItem("taskSn"),
       storeImg: {
-        "taobao": '店铺',
-        "tmall": '店铺',
-        "jindong": '店铺',
-        "pingduoduo": '店铺',
+        "taobao": require('../../assets/taobao.png'),
+        "tmall": require('../../assets/tmall.png'),
+        "jindong": require('../../assets/jd.png'),
+        "pingduoduo": require('../../assets/jd.png'),
       }
     }
   },
@@ -71,7 +74,8 @@ export default {
     "llTaskModel": TaskModel,
   },
   methods: {
-    getData(){
+    ...mapMutations(["setTaskSn"]),
+    getStoreData(){
       this.$api.flowPath.getStore()
       .then(res => {
         this.storeList = res.data.data;
@@ -88,20 +92,43 @@ export default {
       }
       this.$api.flowPath.savePath1(param).then(res => {
         if(res.data.code == 0){
+          this.setTaskSn(res.data.data.taskSn)
+          localStorage.setItem("taskSn", res.data.data.taskSn);
           this.$message({
             message: "保存成功!",
             type: 'success',
             duration: 3 * 1000
           })
+          this.$refs.nextBtnFrm.nextGo()
         }
+      })
+    },
+    queryData(){
+      let param = {
+        flowStatus: 'platform',
+        taskSn: this.taskSn
+      }
+      this.$api.flowPath.viewFlowData(param)
+      .then(res => {
+        //获取到数据后指向渲染操作
+        let result = res.data.data;
+        this.activeStore = result.proStoreId
+        this.taskType = result.storeType
       })
     }
   },
   created(){
-    this.getData();
+    //获取店铺列表
+    this.getStoreData();
+
+    //更具taskSn获取已有的数据
+    if(this.taskSn){
+      this.queryData();
+    }
   },
   computed: {
     filterStoreList(){
+      console.log(storeList);
       if(this.storeList){
         return this.storeList.filter(item => item.shop.length != 0)
       }
@@ -109,7 +136,7 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next){
-    this.$store.commit("changeTask", this.taskTypeRadio);
+    this.$store.commit("changeTaskType", this.taskType);
     next();
   }
 }

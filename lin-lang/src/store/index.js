@@ -6,7 +6,9 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state:{
         taskVal: 1,     //任务进程的参数（1-6）
-        taskType: 'task1',
+        taskType: '0',  //任务类型（0-1）
+        storeType: 0,   //店铺类型
+        taskSn: null,   //任务编号
         loginStatus: false,
         userName: null
     },
@@ -15,7 +17,7 @@ const store = new Vuex.Store({
             state.taskVal = val;
             // console.log(state.taskVal);
         },
-        changeTask: (state, val) => {
+        changeTaskType: (state, val) => {
             state.taskType = val;
         },
         changeLoginStatus: (state, val) => {
@@ -23,6 +25,9 @@ const store = new Vuex.Store({
         },
         changeUserName: (state, val) => {
             state.userName = val
+        },
+        setTaskSn: (state, val) => {
+            state.taskSn = val
         }
     },
     getters:{

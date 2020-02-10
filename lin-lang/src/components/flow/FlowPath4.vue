@@ -32,7 +32,7 @@
             </div>
           </el-col>
         </el-row>
-        <el-row v-if="taskType == 'task1'">
+        <el-row v-if="taskType == '1'">
           <el-col :span="24">
             <div class="grid-content bg-purple">
               <span class="pointTitle">担保金（商品金额大于250时，多少钱？）</span>
@@ -47,7 +47,7 @@
             </div>
           </el-col>
         </el-row>
-        <el-row v-if="taskType == 'task1'">
+        <el-row v-if="taskType == '1'">
           <el-col :span="24">
             <div class="grid-content bg-purple">
               <span class="pointTitle">搜索关键词截图</span>
@@ -70,7 +70,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="提升用户积极性" name="upPositive" v-if="taskType == 'task1'">
+      <el-collapse-item title="提升用户积极性" name="upPositive" v-if="taskType == '1'">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -110,7 +110,7 @@
           </el-col>
         </el-row>
       </el-collapse-item>
-      <el-collapse-item title="广告位投放" name="adsense" v-if="taskType == 'task1'">
+      <el-collapse-item title="广告位投放" name="adsense" v-if="taskType == '1'">
         <el-row>
           <el-col :span="24">
             <div class="grid-content bg-purple">
@@ -305,7 +305,7 @@
             </div>
           </el-col>
         </el-row>
-        <el-row v-if="taskType == 'task1'">
+        <el-row v-if="taskType == '1'">
           <el-col :span="24">
             <div class="grid-content bg-purple">
               <el-checkbox v-model="goodWord.imgGood">普通图文好评(3金豆/单)</el-checkbox>
@@ -430,7 +430,7 @@ export default {
   },
   mounted(){
     this.taskType = this.$store.state.taskType
-    if(this.$store.state.taskType == "task1"){
+    if(this.$store.state.taskType == "1"){
       this.showList
     }
   },

@@ -6,5 +6,5 @@
 13000000000
 123456
 
-http://106.13.189.141:10013/swagger-ui.html
-http://106.13.189.141:10013/dist/index.html
+http://106.13.189.141/swagger-ui.html
+http://106.13.189.141/index.html#/

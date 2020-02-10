@@ -61,11 +61,6 @@ public class TaskProductViewVO implements Serializable {
     private String link;
 
     /**
-     * 商品主图
-     */
-    private String productImage;
-
-    /**
      * 商品规格:0任意规格1自定义
      */
     private Integer specKey;
@@ -76,9 +71,19 @@ public class TaskProductViewVO implements Serializable {
     private BigDecimal price;
 
     /**
+     * 客户每单限拍几件
+     */
+    private Integer limitNumber;
+
+    /**
      * 规格值
      */
     private String specValue;
+
+    /**
+     * 商品主图
+     */
+    private String productImage;
 
     /**
      * 淘口令
@@ -91,6 +96,11 @@ public class TaskProductViewVO implements Serializable {
     private String proRangeSearchId;
 
     /**
+     * 关键词搜索
+     */
+    private List<ProductKeywordsSearchListVO> productKeywordsSearchs = new ArrayList<ProductKeywordsSearchListVO>();
+
+    /**
      * APP进店比例(自然搜索进店：淘宝令进店)
      */
     private String enterStoreRate;
@@ -99,11 +109,6 @@ public class TaskProductViewVO implements Serializable {
      * 页面展示价格(商品有满减、促销、多规格等情况，请填写此项)
      */
     private BigDecimal showPrice;
-
-    /**
-     * 客户每单限拍几件
-     */
-    private Integer limitNumber;
 
     /**
      * 是否包邮  0付邮试用 1包邮试用
@@ -131,12 +136,6 @@ public class TaskProductViewVO implements Serializable {
      * 商品发布流程走向0商品1投放计划2增值服务3已支付4已审核5审核未通过
      */
     private Integer flowStatus;
-
-
-    /**
-     * 关键词搜索
-     */
-    private List<ProductKeywordsSearchListVO> productKeywordsSearchs = new ArrayList<ProductKeywordsSearchListVO>();
 
 
 

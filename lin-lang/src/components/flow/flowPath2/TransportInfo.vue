@@ -3,21 +3,21 @@
     <div>
       <span>是否包邮：</span>
       <div class="tabRadio">
-        <el-radio v-model="post" label="1">包邮</el-radio>
-        <el-radio v-model="post" label="2">不包邮</el-radio>
+        <el-radio v-model="param.whetherMail" label="1">包邮</el-radio>
+        <el-radio v-model="param.whetherMail" label="2">不包邮</el-radio>
       </div>
       <span class="point">(需要用户支付运费)</span>
       <span class="point">温馨提示：当商品价格小于100元时，必须选择“包邮”</span>
-      <div class="postFrm" :class="{show:  post == '1'}">
+      <div class="postFrm" :class="{show: param.whetherMail == '1'}">
         <div>
             <div class="tabRadio">
-              <el-radio v-model="goodsPost" label="1">商品本身不包邮</el-radio>
+              <el-radio v-model="param.mailType" label="1">商品本身不包邮</el-radio>
             </div>
             <span class="point">用户无需联系客服，商家额外支付10元/单作为运费余额，任务完成后剩余的运费余额将返还给商家</span>
         </div>
         <div>
           <div class="tabRadio">
-            <el-radio v-model="goodsPost" label="2">商品本身包邮</el-radio>
+            <el-radio v-model="param.mailType" label="2">商品本身包邮</el-radio>
           </div>
           <span class="point">用户直接按商品实际金额下单</span>
         </div>
@@ -27,15 +27,15 @@
       <tr>
         <td class="title">手机：</td>
         <td>
-          <el-input placeholder="请输入您的手机联系方式" v-model="phone"></el-input>
+          <el-input placeholder="请输入您的手机联系方式" v-model="param.phone"></el-input>
         </td>
         <td class="title">微信：</td>
         <td>
-           <el-input placeholder="请输入您的微信联系方式" v-model="weChart"></el-input>
+           <el-input placeholder="请输入您的微信联系方式" v-model="param.weixin"></el-input>
         </td>
         <td class="title">QQ：</td>
         <td>
-           <el-input placeholder="请输入您的QQ联系方式" v-model="QQ"></el-input>
+           <el-input placeholder="请输入您的QQ联系方式" v-model="param.qq"></el-input>
         </td>
       </tr>
       <tr>
@@ -52,11 +52,22 @@ export default {
   name: 'TransportInfo',
   data () {
     return {
-      post: "1",
-      goodsPost: '1',
-      phone: '',
-      QQ: '',
-      weChart: '',
+      param: {
+        whetherMail: "1",
+        mailType: '1',
+        phone: null,
+        qq: null,
+        weixin: null
+      }
+    }
+  },
+  watch: {
+    param: {
+      handler(newVal){
+        this.$parent.$parent.$parent.contactType = newVal
+      },
+      immediate: true,
+      deep: true
     }
   }
 }

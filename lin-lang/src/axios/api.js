@@ -50,6 +50,12 @@ const flowPath = {
     savePath1(param){
         return axios.post(`${base.sc}/member/task/addTaskPlatform`, param)
     },
+    viewFlowData(param){
+        return axios.post(`${base.sc}/member/task/queryByTaskFlowStatusData`, param)
+    },
+    getGoodsType(){
+        return axios.post(`${base.sc}/productCategory/roots`)
+    },
     savePath2(param){
         return axios.post(`${base.sc}/member/task/addAndUpdateTaskProduct`, param)
     }

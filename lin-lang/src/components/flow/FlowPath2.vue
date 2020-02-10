@@ -11,7 +11,7 @@
         <llTransportInfo ref="tranSport"></llTransportInfo>
       </el-collapse-item>
     </el-collapse>
-    <llTaskModel :next="3" :prev="1"></llTaskModel>
+    <llTaskModel ref="nextBtnFrm" :next="3" :prev="1"></llTaskModel>
   </div>
 </template>
 
@@ -29,46 +29,54 @@ export default {
     'llTransportInfo': TransportInfo,
     "llTaskModel": TaskModel,
   },
+  data(){
+    return {
+      setGoodsParam: null,
+      findGoodsParam: null,
+      contactType: null,
+      taskSn: localStorage.getItem("taskSn"),
+    }
+  },
   methods: {
+    queryData(){
+      let param = {
+        flowStatus: 'product',
+        taskSn: this.taskSn
+      }
+      this.$api.flowPath.viewFlowData(param)
+      .then(res => {
+        console.log(res);
+      })
+    },
     saveData(){
-      setTimeout(() => {
-        let param = {
-          name: this.$refs.setGoods.name,
-          link: this.$refs.setGoods.link,
-          proProductCategoryId: this.$refs.setGoods.select,
-          platformImage: null,
-          price: this.$refs.setGoods.buyPrice,
-          specValue: this.$refs.setGoods.goodsSpecification,
-          limitNumber: this.$refs.setGoods.num,
-
-          productImage: null,
-          proRangeSearchId: this.$refs.setCheck.wordVal.find((item) => {
-            item.word
-          }),
-
-          whetherMail: this.$refs.tranSport.post,
-          mailType: this.$refs.tranSport.goodsPost,
-          phone: this.$refs.tranSport.phone,
-          qq: this.$refs.tranSport.QQ,
-          weixin: this.$refs.tranSport.weChart,
-
-          specKey: 0,
-          taskComment: null,
-          ambush: null,
-          enterStoreRate: null,
-          showPrice: null
+      let param = {
+        ...this.setGoodsParam,
+        ...this.findGoodsParam,
+        ...this.contactType,
+        proStoreId: 1,
+        storeType: 1,
+        showPrice: 12,
+        ambush: "11",     //淘口令
+        taskSn: this.$store.state.taskSn       //任务编号
+      }
+      if(this.$store.state.taskType == 0){
+        delete param.giveGold
+      }
+      this.$api.flowPath.savePath2(param).then(res => {
+        if(res.data.code == 0){
+          this.$message({
+            message: "保存成功!",
+            type: 'success',
+            duration: 3 * 1000
+          })
+          this.$refs.nextBtnFrm.nextGo()
         }
-        console.log(param);
-        this.$api.flowPath.savePath2(param).then(res => {
-          if(res.data.code == 0){
-            Message({
-              message: "保存成功!",
-              type: 'success',
-              duration: 3 * 1000
-            })
-          }
-        })
-      }, 0)
+      })
+    }
+  },
+  created(){
+    if(this.taskSn){
+      this.queryData()
     }
   }
 }
