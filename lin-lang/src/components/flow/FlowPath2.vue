@@ -45,7 +45,29 @@ export default {
       }
       this.$api.flowPath.viewFlowData(param)
       .then(res => {
-        console.log(res);
+        let result = res.data.data
+        this.$refs.setGoods.param = {
+          name: result.name,
+          link: result.link,
+          proProductCategoryId: result.proProductCategoryId,
+          platformImage: result.platformImage,
+          price: result.price,
+          limitNumber: result.limitNumber,
+          specValue: result.specValue,
+          giveGold: result.giveGold
+        }
+        this.$refs.setCheck.param = {
+          productImage: result.productImage,
+          productKeywordsSearchs: result.productKeywordsSearchs
+        }
+        this.$refs.tranSport.whetherMail = result.whetherMail == true ? "1": "2",
+        this.$refs.tranSport.param = {
+          whetherMail: result.whetherMail == true ? "1": "2",
+          mailType: String(result.mailType),
+          phone: result.phone,
+          qq: result.qq,
+          weixin: result.weixin
+        }
       })
     },
     saveData(){
@@ -57,7 +79,7 @@ export default {
         storeType: 1,
         showPrice: 12,
         ambush: "11",     //淘口令
-        taskSn: this.$store.state.taskSn       //任务编号
+        taskSn: localStorage.getItem("taskSn"), //this.$store.state.taskSn       //任务编号
       }
       if(this.$store.state.taskType == 0){
         delete param.giveGold

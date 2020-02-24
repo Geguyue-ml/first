@@ -3,12 +3,12 @@
     <div>
       <span>是否包邮：</span>
       <div class="tabRadio">
-        <el-radio v-model="param.whetherMail" label="1">包邮</el-radio>
-        <el-radio v-model="param.whetherMail" label="2">不包邮</el-radio>
+        <el-radio v-model="whetherMail" label="1">包邮</el-radio>
+        <el-radio v-model="whetherMail" label="2">不包邮</el-radio>
       </div>
       <span class="point">(需要用户支付运费)</span>
       <span class="point">温馨提示：当商品价格小于100元时，必须选择“包邮”</span>
-      <div class="postFrm" :class="{show: param.whetherMail == '1'}">
+      <div class="postFrm" :class="{show: whetherMail == '1'}">
         <div>
             <div class="tabRadio">
               <el-radio v-model="param.mailType" label="1">商品本身不包邮</el-radio>
@@ -52,22 +52,30 @@ export default {
   name: 'TransportInfo',
   data () {
     return {
+      whetherMail: "1",
       param: {
-        whetherMail: "1",
-        mailType: '1',
+        whetherMail: null,
+        mailType: "1",
         phone: null,
         qq: null,
         weixin: null
       }
     }
   },
+  mounted(){
+    this.param.whetherMail = this.whetherMail == "1" ? true : false
+  },
   watch: {
     param: {
-      handler(newVal){
+      handler(oldVal, newVal){
+        console.log(newVal)
         this.$parent.$parent.$parent.contactType = newVal
       },
       immediate: true,
       deep: true
+    },
+    whetherMail: function(newVal){
+      this.param.whetherMail = newVal == "1" ? true : false
     }
   }
 }

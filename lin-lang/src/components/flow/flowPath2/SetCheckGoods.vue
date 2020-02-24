@@ -76,7 +76,7 @@ export default {
         productImage: "http://123.png",
         productKeywordsSearchs: [
           {keyWords: null, sortOrder: "2", startPrice: 56, endPrice:77}
-        ]
+        ] 
       }
     }
   },

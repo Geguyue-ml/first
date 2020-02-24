@@ -8,7 +8,7 @@
                 <img :src="storeImg[item.name]">
               </div>
               <div class="modelbody">
-                <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" :v-model="subItem.storeId" @change="activeTypeVal(subItem.storeType)" :label="String(subItem.storeId)">{{subItem.name}}</el-radio>
+                <el-radio v-for="(subItem, subIndex) in item.shop" :key="subIndex" v-model="activeStore" @change="activeTypeVal(subItem.storeType)" :label="String(subItem.storeId)">{{subItem.name}}</el-radio>
               </div>
             </div>
           </el-collapse-item>
@@ -82,13 +82,13 @@ export default {
       })
     },
     activeTypeVal(val){
-      this.activeStoreType = val
+      this.storeType = val
     },
     saveData(){
       let param = {
         proStoreId: this.activeStore,
         taskType: this.taskType,
-        storeType: this.activeStoreType
+        storeType: this.storeType
       }
       this.$api.flowPath.savePath1(param).then(res => {
         if(res.data.code == 0){
@@ -112,8 +112,9 @@ export default {
       .then(res => {
         //获取到数据后指向渲染操作
         let result = res.data.data;
-        this.activeStore = result.proStoreId
-        this.taskType = result.storeType
+        this.storeType = String(result.storeType)
+        this.activeStore = String(result.proStoreId)
+        this.taskType = String(result.taskType )
       })
     }
   },
@@ -128,7 +129,6 @@ export default {
   },
   computed: {
     filterStoreList(){
-      console.log(storeList);
       if(this.storeList){
         return this.storeList.filter(item => item.shop.length != 0)
       }

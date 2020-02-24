@@ -377,6 +377,15 @@ export default {
       this.changePushNum(this.taskData.pushNum);
       this.changePercentage(this.taskData.percentage || 0);
       this.changePerson();
+    },
+
+    saveData: function(){
+      let param = {
+        taskSn: localStorage.getItem("taskSn"),
+        startDate: this.upDate,
+        totalQuantitys: this.taskData.pushNum,
+        totalDays: this.taskData.dayNum || this.taskData.taskDay
+      }
     }
   }
 }
